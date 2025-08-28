@@ -42,7 +42,7 @@
       <td>{{ user.phone_number }}</td>
       <td>{{user.email}}</td>
       <td>{{ user.address }}</td>
-      <td>{{user.date_of_birth}}</td>
+<td>{{ user.date_of_birth | date:'dd/MM/yyyy' }}</td>
       <td>{{ user.is_active ? 'Active' : 'Inactive' }}</td>
       <td>{{ user.role.name }}</td>
       <td>
