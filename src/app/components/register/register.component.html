@@ -1,0 +1,129 @@
+<div class="container-fluid min-vh-100 d-flex justify-content-center align-items-center"
+     style="background-image: url('/assets/images/banner3.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+  <div class="row bg-white shadow rounded-4 overflow-hidden" style="max-width: 900px; width: 100%;">
+    <!-- Left - Sign In -->
+    <div class="col-md-6 bg-success text-white d-flex flex-column justify-content-center align-items-center p-5">
+      <h2 class="mb-3">Welcome Back!</h2>
+      <p class="text-center">To keep connected with us please login with your personal info</p>
+      <button class="btn btn-outline-light mt-3"   [routerLink]="['/login']">SIGN IN</button>
+    </div>
+
+    <!-- Right - Sign Up -->
+    <div class="col-md-6 p-5">
+      <h2 class="text-success mb-3 text-center">Create Account</h2>
+
+      <div class="d-flex justify-content-center mb-3 social-icons " >
+           <a  (click)="loginWithFacebook()" class="text-success mx-2 fs-5"><i class="fab fa-facebook-f"></i></a>
+        <a  (click)="loginWithGoogle()" class="text-success mx-2 fs-5"><i class="fab fa-google-plus-g"></i></a>
+      </div>
+      <p class="text-center mb-3">or use your email for registration:</p>
+  <form #registerForm="ngForm">
+        <div class="mb-3">
+          <input type="text" class="form-control" 
+              [(ngModel)]="phoneNumber"
+              name="phone"
+              (input)="onPhoneChage()"
+              (focus)="registerForm.form.markAllAsTouched()"
+              required id="phoneNumber"
+              id="phone"
+            placeholder="Phone" required />
+        <div class="divider-nospace"></div>
+        <p
+              class="text-danger"
+              *ngIf="phoneNumber.length < 10 && registerForm.form.touched"
+            >
+              The phone number must have 10 characters.
+            </p>
+        </div>
+             <div class="mb-3">
+          <input type="text" class="form-control"
+          placeholder="Full Name"
+           [(ngModel)]="fullName"
+              required
+              (focus)="registerForm.form.markAllAsTouched()"
+              name="fullName"
+              id="fullname"/>
+               <div class="divider-nospace"></div>
+            <p
+              class="text-danger"
+              *ngIf="fullName.length < 6 && registerForm.form.touched">
+              The full name must have 6 characters.
+            </p>
+        </div>
+        <div class="mb-3">
+          <input type="password" class="form-control" [(ngModel)]="password"
+              name="password"
+               (input)="registerForm.form.markAsTouched();
+                checkPasswordsMatch()"
+              id="password" placeholder="Password" required />
+                          <div class="divider-nospace"></div>
+                            <p
+              class="text-danger"
+              *ngIf="retypePassword.length < 6 && registerForm.form.touched">
+              The password must have 6 characters.
+            </p>
+        </div>
+        <div class="mb-3">
+          <input type="password" class="form-control"
+          [(ngModel)]="retypePassword"
+             name="retypePassword"
+              (input)="registerForm.form.markAllAsTouched(); checkPasswordsMatch()"
+              id="confirm-password"
+          placeholder="Enter Password" required />
+          <div class="divider-nospace"></div>
+          <p
+              class="text-danger"
+              *ngIf="
+                registerForm.form.controls['retypePassword'].hasError(
+                  'passwordMismatch') && registerForm.form.touched">
+              The password does not match
+            </p>
+        </div>
+        <div class="mb-3">
+            <input type="date" class="form-control" placeholder="Birth day"
+             name="dateOfBirth"
+              [(ngModel)]="dateOfBirth"
+              (input)="registerForm.form.markAllAsTouched(); checkAge()"
+              required
+              id="date-of-birth" />
+        </div>
+            <div class="divider-nospace"></div>
+            <p class="text-danger"
+              *ngIf="
+                registerForm.controls['dateOfBirth'].hasError('invalidAge') &&
+                registerForm.form.touched">
+              You are not yet 16 years old
+            </p>
+        <div class="mb-3">
+            <input type="text"  [(ngModel)]="address"
+              required
+              class="form-control"
+              id="address"
+              name="address"
+               placeholder="Address" />
+              <div class="divider-nospace"></div>
+            <p
+              class="text-danger"
+              *ngIf="address.length < 6 && registerForm.form.touched"
+            >
+              Address must have 6 characters.
+            </p>
+        </div>
+        <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox"  [(ngModel)]="isAccepted"
+                  id="agree"
+                    #accept="ngModel"
+                    name="isAccepted">
+            <label class="form-check-label text" for="agreeTerms">
+                I agree to the terms and conditions
+            </label>
+               <p class="text-danger"
+       *ngIf="accept.invalid && (accept.touched || registerForm.submitted)">
+      You need terms and conditions
+    </p>
+        </div>
+        <button type="submit" (click)="register()" class="btn btn-success w-100 mt-2">SIGN UP</button>
+      </form>
+    </div>
+  </div>
+</div>

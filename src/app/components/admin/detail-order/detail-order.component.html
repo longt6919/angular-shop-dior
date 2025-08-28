@@ -1,0 +1,86 @@
+<h1>Thông tin hóa đơn chi tiết</h1>
+<div class="container">
+  <h1>Hóa Đơn</h1>
+  
+  <div class="row">
+    <div class="col-md-6">
+      <h3>Thông tin</h3>
+      <p><strong>ID hóa đơn:</strong> {{ orderResponse.id }}</p>
+      <p><strong>ID tài khoản:</strong> {{ orderResponse.user_id }}</p>
+      <p><strong>Tên khách hàng:</strong> {{ orderResponse.fullname }}</p>
+      <p><strong>Số điện thoại:</strong> {{ orderResponse.phone_number }}</p>
+      <p><strong>Email:</strong> {{ orderResponse.email }}</p>
+      <p><strong>Địa chỉ:</strong> {{ orderResponse.address }}</p>
+      <p><strong>Ghi chú:</strong> {{ orderResponse.note }}</p>
+      <p><strong>Ngày đặt hàng:</strong> {{ orderResponse.order_date | date:'dd/MM/yyyy'}}</p>
+      <p><strong>Ngày gửi hàng:</strong> {{ orderResponse.shipping_date | date:'dd/MM/yyyy'}}</p>
+        <p><strong>Hình thức thanh toán:</strong> {{ orderResponse.payment_method }}</p>
+
+      <div class="form-group">
+        <label for="statusSelect"><strong>Status:</strong></label>
+<select class="form-control" id="statusSelect" name="status" [(ngModel)]="orderResponse.status">
+  <option value="pending">Chờ xác nhận</option>
+  <option value="processing">Đã xác nhận</option>
+
+  <option value="out_of_stock_pending">Hết hàng (chờ xác nhận)</option>
+  <option value="waiting_for_stock">Chờ sản phẩm</option>
+
+  <option value="shipped">Đang giao hàng</option>
+  <option value="refused_on_delivery">Khách không nhận hàng</option>
+  <option value="delivered">Giao hàng thành công</option>
+
+  <option value="cancelled_out_of_stock">Hủy (Do hết hàng)</option>
+  <option value="cancelled">Hủy đơn</option>
+</select>
+      </div>          
+  </div>  
+  </div>
+  <h3>Đơn hàng</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <!-- <th>Image</th> -->
+        <th>Tên sản phẩm</th>
+        <th>Giá</th>
+        <th>Kích thước</th>
+        <th>Màu sắc</th>
+        <th>Số lượng</th>
+        <th>Tổng</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order_detail of orderResponse.order_details; 
+        let i = index">
+        <!-- <td>
+  <img [src]="order_detail.product.thumbnail" alt="thumbnail" width="100" height="100">
+</td> -->
+        <td>{{ order_detail.product_name }}</td>
+        <td>{{ order_detail.price | currency:'VND':'symbol' }}</td>
+        <td>{{order_detail.size}}</td>
+        <td>{{order_detail.color}}</td>
+        <td>
+          <p>{{order_detail.number_of_products}}</p>          
+        </td>
+        <td>{{order_detail.price*order_detail.number_of_products | number}}</td>
+      </tr>
+    </tbody>
+  </table>  
+  <div class="text-end mt-1">
+<h6>
+  <strong>Tổng giá: </strong>
+  {{ totalOriginMoney | currency:'VND':'symbol' }}
+</h6>
+<h6>
+  <strong>Phí vận chuyển: </strong>
+{{ shippingFee | currency:'VND':'symbol':'1.0-0' }}
+</h6>
+<h6> <strong>Khuyến mãi: </strong>
+  {{ couponMoney | currency:'VND':'symbol' }}</h6>
+  </div>
+  <div class="text-end mt-3">
+  <h4><strong>Tổng giá (đã áp dụng voicher):</strong> 
+  {{ orderResponse.total_money | currency:'VND':'symbol' }}</h4>
+</div>
+  <button class="btn btn-primary col-md-2" 
+    (click)="saveOrder()">Save</button>
+</div>

@@ -1,0 +1,86 @@
+/* Search icon */
+.search-icon {
+  font-size: 1.2rem;
+}
+.container-custom {
+  max-width: 65%;   /* hoặc 90% tuỳ ý */
+  margin: 0 auto;   /* canh giữa */
+}
+
+
+/* Action icons (giỏ hàng, yêu thích, tài khoản) */
+.icon-action {
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.icon-action:hover {
+  color: #0d6efd;
+}
+
+/* Responsive spacing for header search */
+.header-search input {
+  width: 200px;
+}
+
+/* Responsive fix: prevent wrapping icon too early */
+  .icons {
+    margin-top: 1rem !important;
+  }
+  ::ng-deep .popover {
+  max-width: 300px;
+  border-radius: 0; /* Bỏ bo góc */
+  border: none;
+  padding: 0;
+}
+
+::ng-deep .popover {
+  min-width: 150px !important;
+  max-width: none !important;
+}
+
+/* Loại bỏ padding của popover header và body */
+::ng-deep .popover-header {
+  margin: 0;
+  padding: 10px 15px;
+  background-color: #666666; /* Xám đậm cho header */
+  color: white;
+  border-radius: 0;
+  border: none;
+}
+
+::ng-deep .popover-body {
+  padding: 0;
+  margin: 0;
+}
+
+/* Danh sách popover có nền màu xám đậm */
+.popover-list {
+  padding: 0;
+  margin: 0;
+  background-color: #050505; /* Xám đậm */
+  width: 100%;
+}
+
+/* Các mục trong popover không có khoảng cách */
+.popover-item {
+  display: block;
+  padding: 10px 15px;
+  margin: 0; /* Không có margin */
+  text-decoration: none;
+  color: white; /* Chữ trắng trên nền xám */
+  border-bottom: 1px solid #777777; /* Đường kẻ giữa các mục cùng tông màu */
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+/* Mục cuối cùng không có viền dưới */
+.popover-item:last-child {
+  border-bottom: none;
+}
+
+/* Hiệu ứng khi di chuột: nền tím, chữ trắng */
+.popover-item:hover {
+    background-color: rgb(110, 108, 114) !important;
+  color: white;
+}

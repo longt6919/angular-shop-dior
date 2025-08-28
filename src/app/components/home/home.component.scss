@@ -1,0 +1,26 @@
+.product-image {
+  width: 304px;      /* hoặc 100% nếu responsive */
+  height: 350px;     /* hoặc auto */
+  object-fit: cover; /* hoặc contain tùy nhu cầu */
+  object-position: center;
+  border-radius: 8px; /* optional */
+}
+/* Pagination custom: nền đen, chữ trắng */
+.page-link {
+  background-color: black !important;
+  color: white !important;
+  border: 1px solid #333 !important;
+}
+
+.page-item.active .page-link {
+  background-color: #444 !important; /* nền đen xám khi active */
+  color: #fff !important;
+  border-color: #444 !important;
+}
+
+.page-link:hover {
+  background-color: #222 !important; /* hover đậm hơn */
+  color: #fff !important;
+}
+
+

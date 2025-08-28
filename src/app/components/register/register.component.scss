@@ -1,0 +1,27 @@
+.social-icons {
+  gap: 30px; /* giãn khoảng cách */
+  transition: transform 0.3s, color 0.3s;
+}
+.social-icons a {
+    width: 45px;
+    height: 45px;
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color: #555;
+    text-decoration: none;
+    transition: 0.3s;
+    font-size: 16px;
+}
+
+.social-icons a:hover {
+    background: #30c3ab;
+    color: white;
+    border-color: #30c3ab;   
+}
+
+.divider-nospace{
+    border-top: 1px solid white;
+}

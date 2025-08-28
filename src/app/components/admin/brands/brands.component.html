@@ -1,0 +1,39 @@
+<div class="container">
+    <h1>Thương hiệu</h1>        
+    <div class="row">
+      <div class="col-md-8 ">
+        <button class="btn btn-success" (click)="insertBrand()">Thêm thương hiệu mới</button>
+      </div>      
+    </div>
+    <table class="table">
+      <thead class="table-light">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>       
+          <th>Description</th>             
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Use Angular's *ngFor directive to loop through brands array -->
+        <tr *ngFor="let brand of brands">
+          <td>{{ brand.id }}</td>
+          <td>{{ brand.name }}</td>     
+          <td>{{ brand.description }}</td>               
+          <td>
+            <div style="display: flex; gap: 10px;">
+              <button class="btn btn-primary" 
+                  (click)="updateBrand(brand.id)">
+                Cập nhật
+              </button>
+               <button class="btn" 
+                [ngClass]="brand.is_active ? 'btn-danger' : 'btn-success'" 
+                (click)="toggleBrandStatus(brand)">
+          {{ brand.is_active ? 'Block' : 'Unblock' }}
+        </button>            
+              </div>
+          </td>          
+        </tr>
+      </tbody>
+    </table>    
+  </div>

@@ -1,0 +1,32 @@
+/* căn giữa toàn bộ form */
+form {
+  max-width: 400px;          /* giới hạn chiều rộng form */
+  margin: 40px auto;         /* căn giữa ngang + thêm khoảng cách trên/dưới */
+  padding: 20px 30px;        /* thêm khoảng cách trong form */
+  background: #fff;          /* nền trắng */
+  border-radius: 12px;       /* bo góc mềm */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* đổ bóng nhẹ */
+}
+
+/* tiêu đề căn giữa */
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+/* khoảng cách giữa các input */
+.form-control {
+  padding: 10px 12px;
+  font-size: 15px;
+}
+
+.divider-nospace {
+  margin: 4px 0;
+}
+
+/* lỗi màu đỏ nhỏ hơn và sát input */
+.text-danger {
+  font-size: 13px;
+  margin-top: 4px;
+}

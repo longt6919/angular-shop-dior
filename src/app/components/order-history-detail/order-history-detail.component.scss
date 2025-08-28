@@ -1,0 +1,31 @@
+.order-container {
+  background-color: #ffffff;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.order-table thead th {
+  background-color: #f8f9fa;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.order-table td, .order-table th {
+  vertical-align: middle;
+}
+.row-even {
+  background-color: #ffffff;
+}
+
+.row-odd {
+  background-color: #f8f9fa;
+}
+
+.table-hover tbody tr.row-even:hover {
+  background-color: #e7f1ff;
+}
+
+.table-hover tbody tr.row-odd:hover {
+  background-color: #dceeff;
+}
+.order-table .table-active {
+  background-color: #f8f9fa;
+}

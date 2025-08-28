@@ -1,0 +1,37 @@
+<div class="container">
+    <h1>Phong cách</h1>        
+    <div class="row">
+      <div class="col-md-8 ">
+        <button class="btn btn-success" (click)="insertStyle()">Thêm mới</button>
+      </div>      
+    </div>
+    <table class="table">
+      <thead class="table-light">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>          
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Use Angular's *ngFor directive to loop through categorys array -->
+        <tr *ngFor="let style of styles">
+          <td>{{ style.id }}</td>
+          <td>{{ style.name }}</td>          
+          <td>
+            <div style="display: flex; gap: 10px;">
+              <button class="btn btn-primary" 
+                  (click)="updateStyle(style.id)">
+                Cập nhật
+              </button>
+        <button class="btn" 
+                [ngClass]="style.is_active ? 'btn-danger' : 'btn-success'" 
+                (click)="toggleStyleStatus(style)">
+          {{ style.is_active ? 'Block' : 'Unblock' }}
+        </button>
+              </div>
+          </td>          
+        </tr>
+      </tbody>
+    </table>    
+  </div>

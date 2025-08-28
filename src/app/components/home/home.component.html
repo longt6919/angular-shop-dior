@@ -1,0 +1,81 @@
+<app-header></app-header>
+<app-banner></app-banner>
+<main class="container py-5">
+  <h2 class="text-center mb-4">Danh Mục Sản Phẩm</h2>
+
+<div class="row g-4">
+  <div class="col-md-3" *ngFor="let product of products">
+    <div class="card h-100 shadow-sm position-relative">
+      
+      <!-- Icon trái tim góc trên phải -->
+      <button 
+        class="btn btn-light rounded-circle position-absolute top-0 end-0 m-2"
+      >
+        <!-- <i [ngClass]="{'bi-heart-fill text-danger': product.isFavorite, 'bi-heart': !product.isFavorite}" class="bi fs-5"></i> -->
+      </button>
+              <img [src]="product.url" alt="Product Image"
+               class="product-image" (click)="onProductClick(product.id)"/>
+      <div class="card-body">
+        <h5 class="card-title">{{ product.name }}</h5>
+        <p class="card-text text-danger fw-bold">
+          {{ product.price | currency:'VND':'symbol':'1.0-0' }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+</main>
+<!-- <div class="d-flex justify-content-center">
+    <nav aria-label="Page navigation">
+      <ul class="pagination">
+        <li class="page-item" *ngIf="currentPage > 1">
+          <a class="page-link" (click)="onPageChange(1)">First</a>
+        </li>
+        <li class="page-item" *ngIf="currentPage > 1">
+          <a class="page-link" (click)="onPageChange(currentPage - 1)"
+            >Previous</a
+          >
+        </li>
+        <ng-container *ngFor="let page of visiblePages">
+          <li class="page-item" [ngClass]="{ active: page === currentPage }">
+            <a class="page-link" (click)="onPageChange(page)">{{ page }}</a>
+          </li>
+        </ng-container>
+        <li class="page-item" *ngIf="currentPage < totalPages">
+          <a class="page-link" (click)="onPageChange(currentPage + 1)">Next</a>
+        </li>
+        <li class="page-item" *ngIf="currentPage < totalPages">
+          <a class="page-link" (click)="onPageChange(totalPages)">Last</a>
+        </li>
+      </ul>
+    </nav>
+  </div> -->
+ <div class="d-flex justify-content-center">
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+  <li class="page-item" *ngIf="currentPage > 0">
+  <a class="page-link" (click)="onPageChage(0)">First</a>
+</li>
+
+<li class="page-item" *ngIf="currentPage > 0">
+  <a class="page-link" (click)="onPageChage(currentPage - 1)">Previous</a>
+</li>
+
+<ng-container *ngFor="let page of visiblePages">
+  <li class="page-item" [ngClass]="{ active: page === currentPage }">
+    <a class="page-link" (click)="onPageChage(page)">{{ page }}</a>
+  </li>
+</ng-container>
+
+<li class="page-item" *ngIf="currentPage < totalPages - 1">
+  <a class="page-link" (click)="onPageChage(currentPage + 1)">Next</a>
+</li>
+
+<li class="page-item" *ngIf="currentPage < totalPages - 1">
+  <a class="page-link" (click)="onPageChage(totalPages - 1)">Last</a>
+</li>
+
+  </ul>
+</nav>
+</div>
+<app-footer></app-footer>

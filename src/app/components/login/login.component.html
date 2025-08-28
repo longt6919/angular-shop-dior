@@ -1,0 +1,72 @@
+<div class="container-fluid min-vh-100 d-flex justify-content-center align-items-center"
+     style="background-image: url('/assets/images/banner3.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+  <div class="row bg-white shadow rounded-4 overflow-hidden" style="max-width: 900px; width: 100%;">
+    
+    <!-- Left - Sign In -->
+    <div class="col-md-6 bg-success text-white d-flex flex-column justify-content-center align-items-center p-5">
+      <h2 class="mb-3">Welcome</h2>
+      <p class="text-center">To stay connected with us, please register with your personal information.</p>
+      <button class="btn btn-outline-light mt-3"  [routerLink]="['/register']">SIGN UP</button>
+    </div>
+
+    <!-- Right - Sign Up -->
+    <div class="col-md-6 p-5">
+      <h2 class="text-success mb-3 text-center">Login Account</h2>
+
+      <div class="d-flex justify-content-center mb-3 social-icons " >
+        <a  (click)="loginWithFacebook()" class="text-success mx-2 fs-5"><i class="fab fa-facebook-f"></i></a>
+        <a  (click)="loginWithGoogle()" class="text-success mx-2 fs-5"><i class="fab fa-google-plus-g"></i></a>
+      </div>
+      <p class="text-center mb-3">use your email or facebook to login:</p>
+
+  <form #loginForm="ngForm">
+        <div class="mb-3">
+          <input    type="text"
+          class="form-control"
+          [(ngModel)]="phoneNumber"
+          name="phone"
+          (focus)="loginForm.form.markAllAsTouched()"
+          id="phone"
+          placeholder="Phone" />
+          <div class="divider-nospace"></div>
+            <p
+              class="text-danger"
+              *ngIf="phoneNumber.length < 10 && loginForm.form.touched"
+            >
+              The phone number must have 10 characters.
+            </p>
+        </div>
+        <div class="mb-3">
+          <input    type="password"
+          class="form-control"
+          [(ngModel)]="password"
+          name="password"
+          (focus)="loginForm.form.markAllAsTouched()"
+          id="password"
+          placeholder="Password" />
+          <div class="divider-nospace"></div>
+        </div>
+              <div class="mb-3">
+          <select class="form-select w-50" id="role"
+           [(ngModel)]="selectedRole" name="role" required>
+        <option selected disabled>Quyen dang nhap</option>
+            <option *ngFor="let role of roles" [ngValue]="role">
+              {{role.name}}
+            </option>
+          </select>
+        </div>
+        <div class="form-check mb-3">
+            <input type="checkbox"
+                class="form-check-input"
+                id="remember"
+                title="check"/>
+            <label class="form-check-label text" for="agreeTerms">
+                Remember Password
+            </label>
+        </div>
+        <button type="submit" class="btn btn-success w-100 mt-2" (click)="login()">SIGN IN</button>
+                  <a href="" class="text-success text-decoration-none">Forget Password?</a>
+      </form>
+    </div>
+  </div>
+</div>

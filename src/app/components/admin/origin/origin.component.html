@@ -1,0 +1,32 @@
+<div class="container">
+    <h1>Xuất xứ</h1>        
+    <div class="row">
+      <div class="col-md-8 ">
+        <button class="btn btn-success" (click)="insertOrigin()">Thêm mới</button>
+      </div>      
+    </div>
+    <table class="table">
+      <thead class="table-light">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>          
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Use Angular's *ngFor directive to loop through categorys array -->
+        <tr *ngFor="let origin of origins">
+          <td>{{ origin.id }}</td>
+          <td>{{ origin.name }}</td>          
+          <td>
+            <div style="display: flex; gap: 10px;">
+              <button class="btn btn-primary" 
+                  (click)="updateOrigin(origin.id)">
+                Cập nhật
+              </button>
+              </div>
+          </td>          
+        </tr>
+      </tbody>
+    </table>    
+  </div>

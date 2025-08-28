@@ -1,0 +1,17 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+.angular/
+
+# IDE/editor
+.vscode/
+
+# log files
+*.log
+
+# lock‑file (chỉ giữ 1 trong 3 cái bên dưới nếu bạn chỉ dùng 1 package manager)
+yarn.lock
+pnpm-lock.yaml
+package-lock.json

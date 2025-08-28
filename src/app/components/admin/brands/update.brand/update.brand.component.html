@@ -1,0 +1,26 @@
+<div *ngIf="updatedBrand">      
+    <!-- Form cập nhật thông tin sản phẩm -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <h3>Cập nhật thương hiệu</h3>
+          <form (ngSubmit)="updateBrand()">
+            <div class="form-group mb-3">
+              <label for="name">Tên thương hiệu:</label>
+              <input type="text" id="name" 
+                [(ngModel)]="updatedBrand.name" 
+                name="name" class="form-control" required>
+            </div>    
+              <div class="form-group mb-3">
+              <label for="name">Mô tả:</label>
+              <input type="text" id="description" 
+                [(ngModel)]="updatedBrand.description" 
+                name="description" class="form-control" required>
+            </div>  
+            <a routerLink="/admin/brands" class="me-3">Trở lại</a>                            
+            <button type="submit" class="btn btn-primary">Cập nhật</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

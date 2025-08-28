@@ -1,0 +1,87 @@
+<div class="d-flex flex-column min-vh-100">
+<app-header></app-header>
+<div class="container py-5">
+  <div class="bg-white rounded-3 shadow p-5">
+    <div class="d-flex align-items-center mb-4">
+      <i class="bi bi-receipt-cutoff fs-3 text-primary me-2"></i>
+      <h4 class="mb-0 fw-semibold fs-18">Chi tiết đơn hàng</h4>
+    </div>
+    <hr>
+
+    <div class="mb-3">
+      <p class="mb-0"><strong>ID Đơn Hàng:</strong> {{orderResponse.id}}</p>
+      <p class="mb-1"><strong>Ngày Đặt Hàng:</strong> {{orderResponse.order_date |date:'dd/MM/yyyy'}}</p>
+      <p class="mb-1"><strong>Trạng Thái Đơn Hàng:</strong> 
+                                  <span class="badge"
+                     [ngClass]="{
+    'bg-secondary': orderResponse.status === 'pending',
+    'bg-primary': orderResponse.status === 'processing',
+
+    'bg-info': orderResponse.status === 'shipped' || orderResponse.status === 'shipping' || orderResponse.status === 'waiting_for_stock',
+    'bg-warning': orderResponse.status === 'out_of_stock_pending',
+    'text-dark': orderResponse.status === 'shipped' || orderResponse.status === 'shipping' || 
+                 orderResponse.status === 'waiting_for_stock' || orderResponse.status === 'out_of_stock_pending',
+
+    'bg-success': orderResponse.status === 'delivered',
+    'bg-danger': orderResponse.status === 'cancelled' || orderResponse.status === 'cancelled_out_of_stock',
+    'bg-dark': orderResponse.status === 'refused_on_delivery'
+  }">
+          {{orderResponse.status}}</span></p>
+    </div>
+
+    <div class="table-responsive rounded-2 mt-4">
+      <table class="table  border rounded-2 order-table">
+        <thead class="table-light">
+          <tr>
+            <th>#</th>
+            <th>Sản phẩm</th>
+            <th>Đơn Giá</th>
+            <th>Kích thước</th>
+            <th>Màu sắc</th>
+            <th>Số lượng</th>
+            <th>Tổng</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order_detail of orderResponse.order_details;
+           let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ order_detail.product_name }}</td>
+            <td>{{ order_detail.price | currency:'VND':'symbol'}}</td>
+            <td>{{ order_detail.size }}</td>
+            <td>{{ order_detail.color }}</td>
+            <td>{{order_detail.number_of_products}}</td>
+            <td>{{order_detail.price*order_detail.number_of_products | number}}</td>
+          </tr>
+          <tr class="fw-bold bg-white" >
+            <td colspan="6" class="text-end h6">Tổng giá:</td>
+            <td><h6>{{ totalOriginMoney | currency: 'USD':'symbol' }}</h6></td>
+          </tr>
+            <tr class="fw-bold bg-white">
+    <td colspan="6" class="text-end h6">Phí vận chuyển ({{ shippingLabel }}):</td>
+    <td><h6>{{ shippingFee | currency:'VND':'symbol':'1.0-0' }}</h6></td>
+  </tr>
+           <tr class="fw-bold bg-white">
+            <td colspan="6" class="text-end h6">Coupon:</td>
+            <td><h6>{{ couponMoney | currency:'VND':'symbol' }}</h6></td>
+          </tr>
+             <tr class="fw-bold bg-white" >
+            <td colspan="6" class="text-end h4">Tổng tiền cần thanh toán:</td>
+            <td> <h4>{{ orderResponse.total_money | currency:'VND':'symbol' }}</h4></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+<div class="mt-3 d-flex justify-content-between align-items-center">
+  <a routerLink="/orders-history" class="btn btn-primary">Trở lại</a>
+<button type="button"
+        class="btn btn-danger" 
+        (click)="cancelOrder(orderResponse)"
+        [disabled]="['CANCELLED', 'CANCELLED_OUT_OF_STOCK']
+        .includes((orderResponse.status || '').toUpperCase())">Hủy
+</button>
+</div>
+  </div>
+</div>
+<app-footer class="mt-auto"></app-footer>
+</div>

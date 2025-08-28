@@ -1,0 +1,61 @@
+<div *ngIf="updatedUser">      
+    <!-- Form cập nhật thông tin sản phẩm -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <h3>Cập nhật thông tin nhân viên</h3>
+          <form (ngSubmit)="updateUser()">
+            <div class="form-group">
+              <label for="name">Số điện thoại:</label>
+              <input type="text" id="phone_number" [(ngModel)]="updatedUser.phone_number" name="phone_number" class="form-control" disabled>
+            </div>
+      
+            <div class="form-group mb-3">
+              <label for="price">Tên:</label>
+              <input type="text" id="fullname" [(ngModel)]="updatedUser.fullname" 
+                name="fullname" class="form-control col-md-3" required>
+            </div>
+
+                       <div class="form-group mb-3">
+              <label for="price">Email:</label>
+              <input type="email" id="email" [(ngModel)]="updatedUser.email" 
+                name="email" class="form-control col-md-3" required>
+            </div>
+      
+           <div class="form-group mb-3">
+              <label for="price">Địa chỉ:</label>
+              <input type="text" id="address" [(ngModel)]="updatedUser.address" 
+                name="address" class="form-control col-md-3" required>
+            </div>
+
+            <div class="form-group mb-3">
+  <label for="date_of_birth">Ngày sinh:</label>
+<input type="date" id="date_of_birth" 
+       [ngModel]="updatedUser.date_of_birth | date:'yyyy-MM-dd'"
+       (ngModelChange)="updatedUser.date_of_birth = $event"
+       name="date_of_birth"
+       class="form-control col-md-3" required>
+</div>
+            <div class="form-group mb-3">
+  <label for="create_at">Ngày tạo:</label>
+<input type="date" id="create_at" 
+       [ngModel]="updatedUser.create_at | date:'yyyy-MM-dd'"
+       (ngModelChange)="updatedUser.create_at = $event"
+       name="create_at"
+       class="form-control col-md-3" disabled="">
+
+</div>
+            <div class="form-group mb-3">
+  <label for="update_at">Ngày cập nhật:</label>
+<input type="date" id="update_at" 
+       [ngModel]="updatedUser.update_at | date:'yyyy-MM-dd'"
+       (ngModelChange)="updatedUser.update_at = $event"
+       name="update_at"
+       class="form-control col-md-3" disabled="">
+
+</div>
+
+                   <a routerLink="/admin/employees" class="me-3">Trở lại</a>                            
+            <button type="submit" class="btn btn-primary">Cập nhật</button>
+      </form>
+  </div>

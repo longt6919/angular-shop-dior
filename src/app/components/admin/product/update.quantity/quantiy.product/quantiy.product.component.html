@@ -1,0 +1,80 @@
+<div class="container">
+    <h1>Quản lý biến thể sản phẩm</h1>
+    <!--Đoạn này có 1 ô searchbox bên trái, 1 combobox bên phải  -->
+    <div class="row mb-3">
+      <div class="col-md-8">
+        <input type="text" class="form-control search-input" placeholder="Tìm biến thể sản phẩm" [(ngModel)]="keyword">
+      </div>
+      <div class="col-md-4">
+        <button class="btn btn-primary"  (click)="searchProductDetails()"> 
+            <i class="fa-solid fa-magnifying-glass"></i> Tìm kiếm</button>
+      </div>
+    </div>    
+    <table class="table">
+      <thead class="table-light">
+        <tr>
+          <th>Kích thước</th>
+          <th>Màu sắc</th>
+          <th>Số lượng</th>
+          <th>Cập nhật</th>
+          <th>Tăng</th>
+          <th>Giảm</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Use Angular's *ngFor directive to loop through products array -->
+        <tr *ngFor="let detail of productDetails">
+          <td>{{ detail.size_name }}</td>
+          <td>{{ detail.color_name }}</td>
+          <td>{{ detail.quantity }}</td>
+          <td><input  type="number"
+      class="form-control"
+      min="1"
+      [(ngModel)]="detail.updateQuantity"
+      placeholder="Nhập thêm"
+      style="width: 100px;"></td>
+          <td>
+            <div style="display: flex; gap: 10px;">
+              <button class="btn btn-success" (click)="plusQuantity(detail.product_detail_id,detail.updateQuantity)">
+                 + Tăng
+              </button>           
+              </div>
+          </td>   
+              <td>
+            <div style="display: flex; gap: 10px;">
+              <button class="btn btn-danger" (click)="minusQuantity(detail.product_detail_id,detail.updateQuantity)">
+                 - Giảm
+              </button>           
+              </div>
+          </td>       
+        </tr>
+      </tbody>
+    </table>
+    <div class="d-flex justify-content-center">
+      <nav aria-label="Page navigation">
+        <ul class="pagination">
+          <li class="page-item" *ngIf="currentPage > 0">
+            <a class="page-link" (click)="onPageChange(0)">First</a>
+          </li>
+          <li class="page-item" *ngIf="currentPage > 0">
+            <a class="page-link" (click)="onPageChange(currentPage - 1)">
+              <i class="fa fa-chevron-left"></i>
+            </a>
+          </li>
+          <ng-container *ngFor="let page of visiblePages">
+              <li class="page-item" [ngClass]="{'active': page === currentPage + 1}">
+                <a class="page-link" (click)="onPageChange(page - 1)">{{ page }}</a>
+              </li>
+            </ng-container>
+          <li class="page-item" *ngIf="currentPage < totalPages - 1">
+            <a class="page-link" (click)="onPageChange(currentPage + 1)">
+              <i class="fa fa-chevron-right"></i>
+            </a>
+          </li>
+          <li class="page-item" *ngIf="currentPage < totalPages - 1">
+            <a class="page-link" (click)="onPageChange(totalPages - 1)">Last</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>

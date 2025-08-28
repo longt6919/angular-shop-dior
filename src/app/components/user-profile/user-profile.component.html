@@ -1,0 +1,106 @@
+<div
+  class="position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-50 d-flex justify-content-center align-items-center z-3"
+>
+  <div
+    class="bg-white p-4 rounded shadow-lg"
+    style="width: 400px; max-width: 90%"
+  >
+    <h5 class="text-center fw-bold text-primary mb-4">Thông tin người dùng</h5>
+
+    <form [formGroup]="userProfileForm">
+      <div class="mb-3">
+        <label class="form-label">Họ và tên</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Nguyen Van A"
+          formControlName="fullname"
+          id="fullname"
+          [class.is-invalid]="
+            userProfileForm.get('fullname')!.invalid &&
+            userProfileForm.get('fullname')!.touched"/>
+      </div>
+      <div
+        *ngIf="
+          userProfileForm.get('fullname')!.invalid &&
+          userProfileForm.get('fullname')!.touched"
+        class="invalid-feedback">
+        Họ và tên là trường bắt buộc.
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Địa chỉ</label>
+        <input
+          type="text"
+          formControlName="address" 
+          class="form-control"
+          placeholder="123 Đường ABC, Hà Nội"
+          id="address"
+          placeholder="địa chỉ" 
+          [class.is-invalid]="userProfileForm.get('address')!
+          .invalid && userProfileForm.get('address')!.touched">                
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Ngày sinh</label>
+        <input type="date"             
+        formControlName="date_of_birth" 
+                    class="form-control" 
+                    id="date_of_birth" >  
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Mật khẩu hiện tại</label>
+
+  <input type="password"
+          id="current_password" 
+         class="form-control"
+         formControlName="current_password"
+         placeholder="Mật khẩu hiện tại" required
+     [class.is-invalid]="userProfileForm.get('current_password')!.invalid 
+        && userProfileForm.get('current_password')!.touched" />
+  <div *ngIf="userProfileForm.get('current_password')!.invalid 
+        && userProfileForm.get('current_password')!.touched" class="invalid-feedback">
+                  Bạn phải nhập đúng thông tin
+        </div>
+     </div>
+      <div class="mb-3">
+        <label class="form-label">Mật khẩu mới</label>
+
+        <input type="password" 
+        class="form-control" 
+        formControlName="password"                         
+        placeholder="Mật khẩu mới" required
+        id="password" 
+         [class.is-invalid]="userProfileForm.get('password')!.invalid 
+        && userProfileForm.get('password')!.touched" />
+        <div *ngIf="userProfileForm.get('password')!.invalid 
+        && userProfileForm.get('password')!.touched" class="invalid-feedback">
+                  Mật khẩu ít nhất 3 ký tự.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Nhập lại mật khẩu mới</label>
+       <input type="password" 
+      class="form-control" 
+     formControlName="retype_password"                         
+     placeholder="Nhập lại mật khẩu" 
+     required
+    id="retype_password" 
+    [class.is-invalid]="userProfileForm.get('retype_password')!.invalid 
+    && userProfileForm.get('retype_password')!.touched">
+    <div *ngIf="userProfileForm.hasError('passwordMismatch')" 
+       class="invalid-feedback">
+                 Mật khẩu không khớp.
+    </div>
+      </div>
+
+      <div class="d-flex justify-content-between">
+        <button type="button" routerLink="/" class="btn btn-secondary float-start">Hủy</button>
+        <button class="btn btn-primary float-end"(click)="save()">
+          Lưu thay đổi
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
