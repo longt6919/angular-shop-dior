@@ -24,14 +24,14 @@ token:string ='';
     private toastService: ToastService
   ) { 
         this.userProfileForm = this.formBuilder.group({
-        fullname:[''],
+        fullname:['', Validators.required],
         address:['',[Validators.minLength(3)]],
-        current_password :['',[Validators.minLength(3)]],
+current_password: ['', [Validators.required, Validators.minLength(3)]],
         password:['',[Validators.minLength(3)]],
         retype_password:['',[Validators.minLength(3)]],
-        date_of_birth:[Date.now()],
+        date_of_birth:['',Validators.required],
       },{
-        validators : this.passwordMatchValidator //kiem tra pass nhap lai co khop k
+        validators : this.passwordMatchValidator() //kiem tra pass nhap lai co khop k
       });
   }
   
@@ -61,6 +61,7 @@ error: (error: any) =>{
 }
     })
   }
+  
   passwordMatchValidator():ValidatorFn{
 return (formGroup: AbstractControl): ValidationErrors | null =>{
   const password = formGroup.get('password')?.value;
@@ -71,35 +72,42 @@ return (formGroup: AbstractControl): ValidationErrors | null =>{
   return null;
 }
   };
-    save(): void {
-if(this.userProfileForm.valid){
-  const updateUserDTO: UpdateUserDTO ={
-    fullname: this.userProfileForm.get('fullname')?.value,
-    address: this.userProfileForm.get('address')?.value,
-    current_password: this.userProfileForm.get('current_password')?.value,
-    password: this.userProfileForm.get('password')?.value,
-    retype_password: this.userProfileForm.get('retype_password')?.value,
-    date_of_birth: this.userProfileForm.get('date_of_birth')?.value,
-  };
-  this.userService.updateUserDetail(this.token, updateUserDTO).subscribe({
-    next: (response: any) =>{
-      this.userService.removeUserFromLocalStorage();
-      this.tokenService.removeToken();
-          alert("Cập nhật thông tin thành công đang chuyển hướng đăng nhập")
-      this.router.navigate(['/login']);
-    },
-    error:(error: any) =>{
-   this.toastService.showToast({
-                 error: error,
-                 defaultMsg: 'Cập nhật thất bại',
-                 title: 'Lỗi'
-               });
+save(): void {
+  // Trigger tất cả validators và hiển thị lỗi ngay cả khi input chưa touch
+  this.userProfileForm.markAllAsTouched();
+
+  if (this.userProfileForm.valid) {
+    const updateUserDTO: UpdateUserDTO = {
+      fullname: this.userProfileForm.get('fullname')?.value,
+      address: this.userProfileForm.get('address')?.value,
+      current_password: this.userProfileForm.get('current_password')?.value,
+      password: this.userProfileForm.get('password')?.value,
+      retype_password: this.userProfileForm.get('retype_password')?.value,
+      date_of_birth: this.userProfileForm.get('date_of_birth')?.value,
+    };
+    
+    this.userService.updateUserDetail(this.token, updateUserDTO).subscribe({
+      next: (response: any) => {
+        this.userService.removeUserFromLocalStorage();
+        this.tokenService.removeToken();
+        alert("Cập nhật thông tin thành công, đang chuyển hướng đăng nhập");
+        this.router.navigate(['/login']);
+      },
+      error: (error: any) => {
+        this.toastService.showToast({
+          error: error,
+          defaultMsg: 'Bạn phải nhập đúng mật khẩu hiện tại',
+          title: 'Lỗi'
+        });
+      }
+    });
+
+  } else {
+    // Nếu form invalid, lỗi mismatch sẽ hiển thị dưới input
+    if (this.userProfileForm.hasError('passwordMismatch')) {
+      // Không cần alert nữa, HTML sẽ hiển thị feedback
     }
-  });
-}else{
-  if(this.userProfileForm.hasError('passwordMismatch')){
-    alert("Mật khẩu và xác nhận mật khẩu chưa chính xác")
   }
 }
-  }
+
 }
