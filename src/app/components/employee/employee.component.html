@@ -9,18 +9,21 @@
         <div class="position-sticky">
           <ul class="nav flex-column">
             <li class="nav-item">
-              <a class="nav-link" >
+              <a class="nav-link" 
+                (click)="showEmployeeComponent('list-orders')">
                 <i class="fab fa-first-order icon"></i>Hóa đơn
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link">
+              <a class="nav-link"
+                (click)="showEmployeeComponent('products')">
                 <i class="fa-solid fa-list icon"></i>Sản phẩm
               </a>
             </li>
                <li class="nav-item">
-              <a class="nav-link">
-                <i class="fa-solid fa-b icon"></i>Bán hàng
+              <a class="nav-link"
+                (click)="showEmployeeComponent('orders')">
+                <i class="fa-solid fa-cart-shopping icon"></i>Bán hàng
               </a>
             </li>
           </ul>

@@ -1,0 +1,24 @@
+.container-fluid {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 cột */
+  gap: 1rem;
+  max-width: 1000px; /* giới hạn ngang */
+  margin: 0 auto;
+}
+
+
+.product-card {
+  width: 100%;
+}
+
+.product-image {
+  width: 100%;
+  height: 220px;   /* tăng chiều dọc */
+  object-fit: cover;
+  object-position: center;
+  border-radius: 8px;
+}

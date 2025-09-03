@@ -22,7 +22,7 @@ export class EmployeeComponent implements OnInit {
       const url = this.router.url;
   const isEmployeeRoot = url === '/employee' || url === '/employee/';
   if (isEmployeeRoot) {
-    this.router.navigate(['/employee/orders']);
+    this.router.navigate(['/employee/products']);
   }}
   
   logout() {
@@ -31,4 +31,13 @@ this.tokenService.removeToken();
 this.userResponse = this.userService.getUserResponseFromLocalStorage();
 this.router.navigate(['/'])
 }
+
+showEmployeeComponent(componentName: string):void {
+if(componentName =='products'){
+  this.router.navigate(['/employee/products']);
+}else if(componentName=='orders'){
+  this.router.navigate(['/employee/orders']);
+}else if(componentName=='list-orders'){
+  this.router.navigate(['/employee/list-orders']);
 }
+}}

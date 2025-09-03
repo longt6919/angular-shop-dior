@@ -1,0 +1,117 @@
+<div class="container">
+  <div class="intro-section">
+    <h1>Thông tin sản phẩm</h1>
+  </div>
+  <div class="row">
+    <!-- <div class="col-md-6"></div> -->
+    <div class="col-md-6">
+      <div id="carouselExample" class="carousel-slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div
+            *ngFor="let image of product?.product_images; let i = index"
+            class="carousel-item"
+            [ngClass]="{ active: i === currentImageIndex }"
+          >
+            <div class="square-image">
+              <img
+                [src]="image.image_url"
+                class="product-image"
+                alt="Product Image"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="thumbnail-container">
+          <div
+            *ngFor="let image of product?.product_images; let i = index"
+            class="thumbnail-item"
+            [ngClass]="{ active: i === currentImageIndex }"
+            (click)="thumbnailClick(i)"
+          >
+            <img
+              [src]="image.image_url"
+              class="thumbnail-image"
+              alt="Thumbnail Image"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 ps-md-5">
+      <h1 class="product-name">{{ product?.name }}</h1>
+      <p class="product-price">
+        Giá: <span class="text-danger fw-bold">đ {{ product?.price }}</span>
+      </p>
+      <div class="mb-3">
+        <div class="row">
+          <!-- Cột 1: SIZE -->
+          <div class="col-2">
+            <label for="sizeSelect" class="form-label"
+              ><strong>SIZE:</strong></label>
+            <select
+              id="sizeSelect"
+              class="form-select"
+              [(ngModel)]="selectedSizeId"
+              (ngModelChange)="onSizeChange()"
+              name="sizeSelect"
+              #sizeSelect="ngModel">
+                  <option [ngValue]="0">Tất cả</option>
+              <option *ngFor="let size of sizes" [ngValue]="size.id">
+                {{ size.name }}
+              </option>
+            </select>
+          </div>
+
+          <!-- Cột 2: COLOR -->
+          <div class="col-2">
+            <label for="colorSelect" class="form-label"
+              ><strong>Color:</strong></label
+            >
+            <select
+              id="colorSelect"
+              name="colorSelect"
+              class="form-select"
+              [(ngModel)]="selectedColorId"
+                #colorSelect="ngModel"
+            >
+            <option [ngValue]="null">Chọn màu sắc</option>
+              <option *ngFor="let color of colors" [ngValue]="color.id">
+                {{ color.name }}
+              </option>
+            </select>
+            <p class="text-danger" *ngIf="colorError">Vui lòng chọn màu sắc!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="quantity"><strong>Số lượng:</strong></label>
+        <div class="product-quantity">
+          <div class="border-wapper">
+            <button (click)="decreaseQuantity()">-</button>
+            <input type="text" [value]="quantity" />
+            <button (click)="increaseQuantity()">+</button>
+          </div>
+        </div>
+      </div>
+      <div class="mb-3 d-flex gap-3 flex-wrap">
+        <button class="btn btn-outline-dark" (click)="addToCart()">
+          <i class="bi bi-cart"></i> Thêm vào giỏ hàng
+        </button>
+        <button class="btn btn-outline-success px-3" (click)="buyNow()">MUA NGAY</button>
+      </div>
+
+      <p class="text-muted small">Mô tả: {{ product?.description }}</p>
+      <p class="text-muted small">Thương hiệu: <strong>{{ product?.brand_name }}</strong></p>
+      <p class="text-muted small">Danh mục: <strong>{{ product?.category_name }}</strong></p>
+      <p class="text-muted small">Xuất xử: <strong>{{ product?.origin_name }}</strong></p>
+      <p class="text-muted small">Phong cách: <strong>{{ product?.style_name }}</strong></p>
+      <p class="text-muted small">Chất liệu: <strong>{{ product?.material_name }}</strong></p>
+
+
+    </div>
+  </div>
+  
+</div>

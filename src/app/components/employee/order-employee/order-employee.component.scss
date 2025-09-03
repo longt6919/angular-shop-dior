@@ -1,0 +1,60 @@
+.container-custom {
+  max-width: 90%;   /* hoặc 90% tuỳ ý */
+  margin: 0 auto;   /* canh giữa */
+}
+
+.order-page {
+  background: url('/assets/images/order-bg.jpg') no-repeat center center / cover;
+  min-height: 100vh;
+  padding: 3rem 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #212529;
+  h2, h5 {
+    color: #212529;
+    font-weight: 600;
+  }
+
+  .form-label {
+    font-weight: 500;
+  }
+
+  .form-control, .form-select {
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    color: #212529;
+  }
+
+  .form-control:focus, .form-select:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+  }
+
+  .btn-primary, .btn-pink {
+    font-weight: 500;
+    border: none;
+    border-radius: 6px;
+  }
+
+  .btn-primary {
+    background-color: #0d6efd;
+    &:hover {
+      background-color: #0b5ed7;
+    }
+  }
+
+  .btn-pink {
+    background-color: #ff4da6;
+    color: #fff;
+    &:hover {
+      background-color: #e64490;
+    }
+  }
+
+  .card {
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  }
+}
