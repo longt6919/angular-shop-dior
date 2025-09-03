@@ -30,7 +30,6 @@ cartItems: CartItemView[] = [];  preDiscountTotal: number = 0;
   couponDiscount: number = 0;
   couponApplied: boolean = false;
    cart: Map<string, CartItemView> = new Map(); 
-   readonly FREESHIP_THRESHOLD = 999999;
 shippingFee: number = 0;
 
   orderData: OrderDTO = {
@@ -340,4 +339,5 @@ private updateCartFromCartItems(): void {
       this.orderForm.markAllAsTouched();
     }
   }
+  
 }

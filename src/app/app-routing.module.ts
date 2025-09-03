@@ -17,6 +17,8 @@ import { OrderHistoryComponent } from "./components/order-history/order-history.
 import { OrderHistoryDetailComponent } from "./components/order-history-detail/order-history-detail.component";
 import { ContacComponent } from "./components/contac/contac.component";
 import { IntroducesComponent } from "./components/introduces/introduces.component";
+import { EmployeeComponent } from "./components/employee/employee.component";
+import { EmployeeGuardFn } from "./guards/employee.guard";
 
 const routes: Routes =[
     {path: '', component: HomeComponent},
@@ -29,6 +31,7 @@ const routes: Routes =[
                 { path: 'payments/payment-callback', component: PaymentCallbackComponent },
     {path:'user-profile', component: UserProfileComponent,canActivate:[AuthGuardFn]},// bảo mật chỉ đăng nhập mới order được
     {path:'admin', component: AdminComponent,canActivate:[AdminGuardFn]},
+        {path:'employee', component: EmployeeComponent,canActivate:[EmployeeGuardFn]},
     {path:'orders-history', component: OrderHistoryComponent,canActivate:[AuthGuardFn]},
         {path:'orders-detail-history/:id', component: OrderHistoryDetailComponent,canActivate:[AuthGuardFn]},
             {path:'contact', component: ContacComponent},

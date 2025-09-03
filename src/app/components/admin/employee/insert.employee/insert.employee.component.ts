@@ -106,7 +106,7 @@ checkAge(){
       age--;
     }
 
-    if (age < 16) {
+    if (age < 18) {
       control.setErrors({ invalidAge: true });
     } else {
       control.setErrors(null);

@@ -18,6 +18,10 @@ export class OrderService {
     //gui yc dat hang
     return this.http.post(this.apiUrl,orderData);
   }
+    placeOrderEmployee(orderData:OrderDTO): Observable<any>{
+    //gui yc dat hang
+    return this.http.post(`${this.apiUrl}/employee`,orderData);
+  }
   getOrderById(orderId:number):Observable<any>{
     const url =`${this.apiUrl}/${orderId}`;
     return this.http.get(url);

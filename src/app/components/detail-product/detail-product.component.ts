@@ -16,6 +16,7 @@ import { ToastService } from 'src/app/service/toast.service';
   styleUrls: ['./detail-product.component.scss']
 })
 export class DetailProductComponent implements OnInit {
+  
   product?: Product;
   productId: number = 0;
   currentImageIndex: number = 0;
@@ -116,48 +117,7 @@ onSizeChange() {
     this.showImage(this.currentImageIndex - 1);
   }
 
-//  addToCart(): void {
-//   if (!this.selectedColorId) {
-//     this.colorError = true;
-//     return;
-//   }
-//   this.colorError = false;
 
-//   if (this.product) {
-//     // Tìm đúng biến thể product_detail theo bộ 3 id
-//     const detail = this.productDetail.find(
-//       d => d.size_id === this.selectedSizeId && d.color_id === this.selectedColorId
-//     );
-//       this.toastService.showToast({
-//       error: null,
-//       defaultMsg: 'Thêm vào giỏ hàng thành công',
-//       title: 'ThÀNH CÔNG',
-//     });
-//     if (!detail) {
-//       console.error('Không tìm thấy biến thể này!');
-//       return;
-//     }
-
-//     // Chuẩn bị object đầy đủ info cho giỏ hàng
-//     const cartItem: CartItemView = {
-//       product_detail_id: detail.product_detail_id, // hoặc detail.product_detail_id
-//       product_id: this.product.id,
-//       product_name: this.product.name,
-//       image_url: this.product.product_images?.[0]?.image_url || '',
-//       size_id: this.selectedSizeId,
-//       size_name: detail.size_name,
-//       color_id: this.selectedColorId,
-//       color_name: detail.color_name,
-//       price: this.product.price, // hoặc detail.price nếu mỗi biến thể có giá riêng
-//       quantity: this.quantity
-//     };
-
-//     this.cartService.addToCart(cartItem);
-//     // Có thể show toast thông báo thành công
-//   } else {
-//     console.error('Cannot add to cart, product invalid');
-//   }
-// }
 addToCart(): void {
   // BẮT BUỘC chọn màu
   if (!this.selectedColorId) {

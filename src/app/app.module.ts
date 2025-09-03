@@ -13,13 +13,13 @@ import { OrderComponent } from './components/order/order.component';
 import { PaymentCallbackComponent } from './components/payment-callback/payment-callback.component';
 import { RegisterComponent } from './components/register/register.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
-import { AdminComponent } from './components/admin/admin.component';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthCallbackComponent } from './components/auth-callback/auth-callback.component';
 import { BannerComponent } from './components/banner/banner.component';
 import { AdminModule } from './components/admin/admin.module';
+import { EmployeeModule } from './components/employee/employee.module';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { OrderHistoryComponent } from './components/order-history/order-history.component';
 import { OrderHistoryDetailComponent } from './components/order-history-detail/order-history-detail.component';
@@ -56,7 +56,8 @@ import { IntroducesComponent } from './components/introduces/introduces.componen
     ReactiveFormsModule,
     AppRoutingModule,
     NgbModule,
-    AdminModule
+    AdminModule,
+    EmployeeModule
   ],
   providers: [
     {

@@ -29,6 +29,7 @@ import { UserComponent } from "./user/user.component";
 import { EmployeeComponent } from "./employee/employee.component";
 import { UpdateEmployeeComponent } from "./employee/update.employee/update.employee.component";
 import { InsertEmployeeComponent } from "./employee/insert.employee/insert.employee.component";
+import { AdminGuardFn } from "src/app/guards/admin.guard";
 
 const routes: Routes =[
     {
@@ -37,112 +38,113 @@ const routes: Routes =[
         children: [
     {
                 path: 'products',
-                component: ProductAdminComponent
-    },    {
+                component: ProductAdminComponent,canActivate:[AdminGuardFn]
+    },    
+    {
                 path: 'orders',
-                component: OrderAdminComponent
+                component: OrderAdminComponent,canActivate:[AdminGuardFn]
             },
                 {
                 path: 'orders/:id',
-                component: DetailOrderComponent
+                component: DetailOrderComponent,canActivate:[AdminGuardFn]
             },
               {
                 path:'products/insert',
-                component: InsertProductAdminComponent
+                component: InsertProductAdminComponent,canActivate:[AdminGuardFn]
             },
                   {
                 path:'products/update/:id',
-                component: UpdateProductAdminComponent
+                component: UpdateProductAdminComponent,canActivate:[AdminGuardFn]
             },
               {
                 path:'products/detail/:id',
-                component: QuantiyProductComponent
+                component: QuantiyProductComponent,canActivate:[AdminGuardFn]
             },
                      {
                 path:'categories',
-                component: CategoriesComponent
+                component: CategoriesComponent,canActivate:[AdminGuardFn]
             },
             {
                 path: 'categories/update/:id',
-                component: UpdateCategoriesComponent
+                component: UpdateCategoriesComponent,canActivate:[AdminGuardFn]
             },
             {
                   path:'categories/insert',
-                component: InsertCategoriesComponent
+                component: InsertCategoriesComponent,canActivate:[AdminGuardFn]
             },
                       {
                 path:'brands',
-                component: BrandsComponent
+                component: BrandsComponent,canActivate:[AdminGuardFn]
             },
              {
                 path: 'brand/update/:id',
-                component: UpdateBrandComponent
+                component: UpdateBrandComponent,canActivate:[AdminGuardFn]
             },
                     {
                 path: 'brand/insert',
-                component: InsertBrandComponent
+                component: InsertBrandComponent,canActivate:[AdminGuardFn]
             },
                        {
                 path:'styles',
-                component: StyleComponent
+                component: StyleComponent,canActivate:[AdminGuardFn]
             },    
             {
                 path: 'styles/update/:id',
-                component: UpdateStyleComponent
+                component: UpdateStyleComponent,canActivate:[AdminGuardFn]
             },
                     {
                 path: 'styles/insert',
-                component: InsertStyleComponent
+                component: InsertStyleComponent,canActivate:[AdminGuardFn]
             },
                          {
                 path:'materials',
-                component: MaterialComponent
+                component: MaterialComponent,canActivate:[AdminGuardFn]
             },  
                   {
                 path: 'materials/update/:id',
-                component: UpdateMaterialComponent
+                component: UpdateMaterialComponent,canActivate:[AdminGuardFn]
             },
                     {
                 path: 'materials/insert',
-                component: InsertMaterialComponent
+                component: InsertMaterialComponent,canActivate:[AdminGuardFn]
             },
                              {
                 path:'origins',
-                component: OriginComponent
+                component: OriginComponent,canActivate:[AdminGuardFn]
             },  
                   {
                 path: 'origins/update/:id',
-                component: UpdateOriginComponent
+                component: UpdateOriginComponent,canActivate:[AdminGuardFn]
             },
                     {
                 path: 'origins/insert',
-                component: InsertOriginComponent
+                component: InsertOriginComponent,canActivate:[AdminGuardFn]
             },
                                 {
                 path:'colors',
-                component: ColorComponent
+                component: ColorComponent,canActivate:[AdminGuardFn]
             },  
                   {
                 path: 'colors/update/:id',
-                component: UpdateColorComponent
+                component: UpdateColorComponent,canActivate:[AdminGuardFn]
             },
                     {
                 path: 'colors/insert',
-                component: InsertColorComponent
+                component: InsertColorComponent,canActivate:[AdminGuardFn]
             },{
                 path: 'users',
-                component: UserComponent
-            },                                  {
+                component: UserComponent,canActivate:[AdminGuardFn]
+            },{
                 path:'employees',
-                component: EmployeeComponent
+                component: EmployeeComponent,canActivate:[AdminGuardFn]
             },  
                   {
                 path: 'employees/update/:id',
-                component: UpdateEmployeeComponent
+                component: UpdateEmployeeComponent,canActivate:[AdminGuardFn]
             },
                     {
                 path: 'employees/insert',
-                component: InsertEmployeeComponent
+                component: InsertEmployeeComponent,canActivate:[AdminGuardFn]
             },
             
         ]

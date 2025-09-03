@@ -102,7 +102,7 @@ loginWithGoogle() {
               }else if(this.userResponse?.role.name =='user'){
                 this.router.navigate(['/']);
               }else if(this.userResponse?.role.name =='employee'){
-                this.router.navigate(['/']);
+                this.router.navigate(['/employee']);
               }
             },
             complete: () => {

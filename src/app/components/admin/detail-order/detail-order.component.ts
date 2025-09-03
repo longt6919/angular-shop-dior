@@ -10,6 +10,7 @@ import { ToastService } from 'src/app/service/toast.service';
   styleUrls: ['./detail-order.component.scss']
 })
 export class DetailOrderComponent implements OnInit {
+
 orderId: number =0;
 orderResponse: OrderResponse ={
   id: 0,
@@ -45,7 +46,7 @@ orderResponse: OrderResponse ={
     private calcShipping(method?: string): { fee: number; label: string } {
     const m = (method || '').toLowerCase();
     if (m === 'express') return { fee: 70_000, label: 'Giao hàng Nhanh' };
-    return { fee: 35_000, label: 'Giao hàng Tiết Kiệm' }; // default
+    return { fee: 0, label: 'Thanh toán tại quầy' }; // default
   }
   
 
