@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UpdateProductDetailDTO } from 'src/app/dtos/update.product.detail.dto';
@@ -29,6 +30,7 @@ productId: number = 0;
   ) { }
 
   ngOnInit(): void {
+        this.currentPage =Number(localStorage.getItem('currentProductDetailAdminPage')) || 0;
    this.route.paramMap.subscribe(params => {
       this.productId = Number(params.get('id'));
       this.getProductDetailsByIdProduct();
@@ -39,6 +41,7 @@ productId: number = 0;
 
 onPageChange(page: number){
       this.currentPage = page < 0?0:page;
+          localStorage.setItem('currentProductDetailAdminPage',String(this.currentPage));
 this.getProductDetailsByIdProduct();
   }
 
@@ -109,7 +112,15 @@ minusQuantity(productDetailId: number, quantity: number) {
         title: 'Thành Công',
       });
       this.searchProductDetails();
-    }
+    },
+    complete:() =>{},
+        error: (error: HttpErrorResponse) => {
+                this.toastService.showToast({
+                  error: error,
+                  defaultMsg: 'Tổng lượng sản phẩm trong kho không đưọc âm',
+                  title: 'Lỗi Xóa'
+                });
+              }
   });
 }
 
@@ -118,7 +129,8 @@ minusQuantity(productDetailId: number, quantity: number) {
 
 searchProductDetails(page: number = 0) {
   this.currentPage = 0;
-    this.itemsPerpage =8;
+    this.itemsPerpage =9;
+        this.currentPage =Number(localStorage.getItem('currentProductDetailAdminPage')) || 0;
 this.getProductDetailsByIdProduct();
 }
   

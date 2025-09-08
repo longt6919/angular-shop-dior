@@ -11,6 +11,7 @@ export class OrderDTO{
     shipping_address: string
     shipping_method: string;
     shipping_date?: Date;
+        delivery_date?: Date;
     order_date?:Date;
     payment_method: string;
     coupon_code:string;
@@ -25,6 +26,7 @@ export class OrderDTO{
     this.note = data.note;
     this.status = data.status;
     this.order_date = data.order_date;
+        this.delivery_date = data.delivery_date;
     this.total_money = data.total_money;
     this.shipping_address = data.shipping_address;
     this.shipping_method = data.shipping_method;

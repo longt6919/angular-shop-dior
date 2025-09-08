@@ -11,6 +11,8 @@
     <div class="mb-3">
       <p class="mb-0"><strong>ID Đơn Hàng:</strong> {{orderResponse.id}}</p>
       <p class="mb-1"><strong>Ngày Đặt Hàng:</strong> {{orderResponse.order_date |date:'dd/MM/yyyy'}}</p>
+      <p class="mb-1"><strong>Ngày Gửi Hàng:</strong> {{orderResponse.shipping_date |date:'dd/MM/yyyy'}}</p>
+      <p class="mb-1"><strong>Ngày Nhận Hàng:</strong> {{orderResponse.delivery_date |date:'dd/MM/yyyy'}}</p>
       <p class="mb-1"><strong>Trạng Thái Đơn Hàng:</strong> 
                                   <span class="badge"
                      [ngClass]="{

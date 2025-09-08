@@ -31,6 +31,7 @@ import { UserComponent } from './user/user.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { InsertEmployeeComponent } from './employee/insert.employee/insert.employee.component';
 import { UpdateEmployeeComponent } from './employee/update.employee/update.employee.component';
+import { StatisticsComponent } from './statistics/statistics.component';
 
 @NgModule({
     declarations: [
@@ -63,6 +64,7 @@ import { UpdateEmployeeComponent } from './employee/update.employee/update.emplo
         EmployeeComponent,
         InsertEmployeeComponent,
         UpdateEmployeeComponent,
+        StatisticsComponent,
     ],
     imports:[
         AdminRoutingModule,

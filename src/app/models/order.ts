@@ -14,6 +14,7 @@ export interface Order{
     shipping_method: string;
     shipping_address: string;
     shipping_date: Date;
+    delivery_date: Date;
     // tracking_number: string;
     payment_method: string;
     active: boolean;

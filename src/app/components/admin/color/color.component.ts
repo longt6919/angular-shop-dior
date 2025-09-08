@@ -12,7 +12,7 @@ import { ToastService } from 'src/app/service/toast.service';
 export class ColorComponent implements OnInit {
 colors:Color[]=[];
   currentPage: number =0;
-  itemsPerpage: number =5;
+  itemsPerpage: number =12;
   pages: number[] =[];
   totalPages: number =0;
   visiblePages: number[]=[];
@@ -27,20 +27,26 @@ colors:Color[]=[];
         this.currentPage =Number(localStorage.getItem('currentColorAdminPage')) || 0;
   this.getColors(this.currentPage, this.itemsPerpage);
    }
-   getColors(page:number,limit:number){
-     this.colorService.getAdminColors(page,limit).subscribe({
-       next:(colors:Color[])=>{
-         this.colors = colors;
-       },
-       complete:()=>{},
-       error:(error: any)=>{
-    this.toastService.showToast({
-               error: error,
-               defaultMsg: 'Load dữ liệu thất bại',
-               title: 'Fail'
-             });       }
-     });
-   }
+   
+getColors(page: number, limit: number) {
+  this.colorService.getAdminColors(page, limit).subscribe({
+    next: (response: any) => {
+      this.colors = response.content;            
+      this.totalPages = response.totalPages;     
+      this.currentPage = response.number;       
+      this.visiblePages = this.generateVisiblePageArray(this.currentPage, this.totalPages);
+    },
+    complete: () => {},
+    error: (error: any) => {
+      this.toastService.showToast({
+        error: error,
+        defaultMsg: 'Load dữ liệu thất bại',
+        title: 'Fail'
+      });
+    }
+  });
+}
+
      generateVisiblePageArray(curentPage: number, totalPages: number):number[]{
     const maxVisiblePages = 5;
     const halfVisiblePages = Math.floor(maxVisiblePages/2);

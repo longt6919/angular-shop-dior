@@ -10,7 +10,7 @@ import _ from 'underscore';
   styleUrls: ['./order.admin.component.scss']
 })
 export class OrderAdminComponent implements OnInit {
-  
+
   orders: OrderResponse[]=[];
   currentPage: number =0;
   itemsPerPage: number =10;
@@ -28,14 +28,15 @@ export class OrderAdminComponent implements OnInit {
 ) { }
 
   ngOnInit(): void {
+        this.currentPage =Number(localStorage.getItem('currentOrdersAdminPage')) || 0;
     this.getAllOrders(this.keyword,this.currentPage,this.itemsPerPage);
-    this.onProductClick;
   }
   searchOrders() {
   this.currentPage =0;
     this.itemsPerPage =10;
       this.getAllOrders(this.keyword.trim(),this.currentPage,this.itemsPerPage);
 }
+
   
    getAllOrders(keyword: string, page: number, limit: number){
       this.orderService.getAllOrders(keyword,page,limit).subscribe({
@@ -71,8 +72,9 @@ if(confirmation){
 }
     }
 onPageChange(page: number) {
-this.currentPage = page;
-  this.getAllOrders(this.keyword, page - 1, this.itemsPerPage); 
+this.currentPage = page<0?0:page;
+    localStorage.setItem('currentOrdersAdminPage',String(this.currentPage));
+  this.getAllOrders(this.keyword, this.currentPage, this.itemsPerPage); 
 }
 
 
@@ -94,8 +96,6 @@ this.currentPage = page;
   viewDetails(order: OrderResponse) {
 this.router.navigate(['/admin/orders',order.id]);
 }
-  onProductClick(productId: number){
-    this.router.navigate(['products',productId]);
-  }
+
 
 }

@@ -28,6 +28,7 @@ export class ListOrdersEmployeeComponent implements OnInit {
 ) { }
 
   ngOnInit(): void {
+    this.currentPage =Number(localStorage.getItem('currentOrdersEmployeePage')) || 0;
     this.getAllOrders(this.keyword,this.currentPage,this.itemsPerPage);
     this.onProductClick;
   }
@@ -71,8 +72,9 @@ if(confirmation){
 }
     }
 onPageChange(page: number) {
-this.currentPage = page;
-  this.getAllOrders(this.keyword, page - 1, this.itemsPerPage); 
+this.currentPage = page<0?0:page;
+    localStorage.setItem('currentOrdersEmployeePage',String(this.currentPage));
+  this.getAllOrders(this.keyword, page, this.itemsPerPage); 
 }
 
 
@@ -97,6 +99,4 @@ this.router.navigate(['/employee/orders',order.id]);
   onProductClick(productId: number){
     this.router.navigate(['products',productId]);
   }
-
-
 }

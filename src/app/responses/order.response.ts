@@ -13,6 +13,7 @@ export interface OrderResponse{
     shipping_method: string;
     shipping_address: string;
     shipping_date: Date | null;
+    delivery_date: Date | null;
     payment_method: string;
     order_details: OrderDetail[];//Dam bao co 1 interface OrderDetail tuong ung
 }

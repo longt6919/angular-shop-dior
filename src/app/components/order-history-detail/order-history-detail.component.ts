@@ -27,6 +27,7 @@ export class OrderHistoryDetailComponent implements OnInit {
    shipping_method: '',
    shipping_address: '',
    shipping_date: null,
+      delivery_date: null,
    payment_method: '',
    order_details: [] = [],
  }
@@ -80,7 +81,14 @@ export class OrderHistoryDetailComponent implements OnInit {
         } else {
           this.orderResponse.shipping_date = null;
         }
-
+        // delivery
+        //         if (response.delivery_date) {
+        //   const [y, m, d] = String(response.delivery_date).split('-').map(Number);
+        //   this.orderResponse.delivery_date = new Date(y, m - 1, d);
+        // } else {
+        //   this.orderResponse.delivery_date = null;
+        // }
+        this.orderResponse.delivery_date = response.delivery_date ? new Date(response.delivery_date) : null;
         // 3) Chi tiết đơn
         this.orderResponse.order_details = response.order_details || [];
 

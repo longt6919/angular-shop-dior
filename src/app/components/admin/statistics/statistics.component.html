@@ -1,0 +1,88 @@
+<div class="container-fluid">
+<div class="toolbar">
+  <label>Năm</label>
+  <select [(ngModel)]="selectedYear" >
+    <option *ngFor="let y of years" [value]="y">{{ y }}</option>
+  </select>
+  <button (click)="loadAll()" class="btn btn-primary">Làm mới</button>
+</div>
+
+<div *ngIf="loading" class="notice">Đang tải…</div>
+<div *ngIf="error" class="notice error">{{ error }}</div>
+
+<!-- KPI -->
+<div class="kpi-grid" *ngIf="!loading && !error">
+  <div class="kpi">
+    <div class="kpi-title">Tổng doanh thu {{ selectedYear }}</div>
+    <div class="kpi-value">{{ money(totalYear) }}</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-title">Doanh thu tháng này</div>
+    <div class="kpi-value">{{ money(totalThisMonth) }}</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-title">Tổng người dùng</div>
+    <div class="kpi-value">{{ totalUsers | number }}</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-title">% Nhân viên</div>
+    <div class="kpi-value">{{ employeePct }}%</div>
+  </div>
+</div>
+
+<!-- Panels -->
+<div class="panel two-cols" *ngIf="!loading && !error">
+  <!-- Doanh thu 12 tháng -->
+  <div class="panel-section">
+    <div class="panel-title">Doanh thu theo tháng</div>
+    <div class="bars">
+      <div class="bar-row" *ngFor="let t of totals; let i = index">
+        <div class="bar-label">{{ monthLabels[i] }}</div>
+        <div class="bar-track">
+          <div class="bar-fill" [style.width]="widthPercent(t)"></div>
+        </div>
+        <div class="bar-value">{{ money(t) }}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cơ cấu user -->
+  <div class="panel-section">
+    <div class="panel-title">Cơ cấu người dùng</div>
+
+    <div class="role-row">
+      <span>Khách hàng</span>
+      <div class="role-track">
+        <div class="role-fill user" [style.width]="userPct + '%'"></div>
+      </div>
+      <span>{{ userCount | number }} ({{ userPct }}%)</span>
+    </div>
+
+    <div class="role-row">
+      <span>Nhân viên : </span>
+      <div class="role-track">
+        <div class="role-fill emp" [style.width]="employeePct + '%'"></div>
+      </div>
+      <span>{{ employeeCount | number }} ({{ employeePct }}%)</span>
+    </div>
+  </div>
+</div>
+
+<!-- Bảng chi tiết -->
+<table class="table" *ngIf="!loading && !error">
+  <thead>
+    <tr>
+      <th>Tháng</th>
+      <th>Doanh thu</th>
+      <th>Lũy kế</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let t of totals; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ money(t) }}</td>
+      <td>{{ money(cumTotals[i]) }}</td>
+    </tr>
+  </tbody>
+</table>
+</div>

@@ -1,0 +1,48 @@
+/* src/app/components/dashboard-statistics/dashboard-statistics.component.scss */
+:host { display: block; }
+
+.toolbar { display: flex; gap: 12px; align-items: center; margin-bottom: 16px; margin-top:10px;
+  select, button { padding: 6px 10px; }
+}
+.notice { padding: 10px 12px; border-radius: 8px; background: #fff3cd; border: 1px solid #ffeeba; margin-bottom: 12px; }
+.notice.error { background: #fdecea; border-color: #f5c2c7; }
+
+.kpi-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px;
+  .kpi { background: #fff; border-radius: 12px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+  .kpi-title { color: #666; font-size: 12px; margin-bottom: 6px; }
+  .kpi-value { font-weight: 700; font-size: 18px; }
+}
+
+.panel { background: transparent; margin-bottom: 16px; }
+.two-cols { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; }
+.panel-section { background: #fff; border-radius: 12px; padding: 14px; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+.panel-title { font-weight: 600; margin-bottom: 10px; }
+
+.bars { display: grid; gap: 8px; }
+.bar-row { display: grid; grid-template-columns: 40px 1fr max-content; gap: 10px; align-items: center; }
+.bar-label { color: #666; font-size: 12px; }
+.bar-track { background: #f2f4f7; border-radius: 999px; height: 10px; overflow: hidden; }
+.bar-fill { height: 100%; background: #4f46e5; } /* màu chính */
+.bar-value { font-variant-numeric: tabular-nums; font-size: 12px; color: #333; }
+
+.role { display: grid; gap: 10px; }
+.role-row { display: grid; grid-template-columns: max-content 1fr max-content; gap: 8px; align-items: center; }
+.role-track { background: #f2f4f7; border-radius: 999px; height: 10px; overflow: hidden; }
+.role-fill { height: 100%; }
+.role-fill.user { background: #10b981; }
+.role-fill.emp { background: #f59e0b; }
+
+.table { width: 100%; background: #fff; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,.06);
+  border-collapse: collapse; overflow: hidden;
+  th, td { padding: 10px 12px; border-bottom: 1px solid #eee; }
+  thead th { background: #fafafa; text-align: left; }
+}
+
+@media (max-width: 900px) {
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  .two-cols { grid-template-columns: 1fr; }
+}
+@media (max-width: 520px) {
+  .kpi-grid { grid-template-columns: 1fr; }
+}

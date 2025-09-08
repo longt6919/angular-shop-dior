@@ -28,7 +28,8 @@ orderResponse: OrderResponse ={
   shipping_address: '',
   shipping_date: null,
   payment_method: '',
-  order_details: []=[]
+  order_details: [] = [],
+  delivery_date: null
 }
   totalOriginMoney: number=0;
   couponMoney: number=0;
@@ -77,7 +78,13 @@ orderResponse: OrderResponse ={
         } else {
           this.orderResponse.shipping_date = null;
         }
-
+        //         if (response.delivery_date) {
+        //   const [y, m, d] = String(response.delivery_date).split('-').map(Number);
+        //   this.orderResponse.delivery_date = new Date(y, m - 1, d);
+        // } else {
+        //   this.orderResponse.delivery_date = null;
+        // }
+        this.orderResponse.delivery_date = response.delivery_date ? new Date(response.delivery_date) : null;
         // 3) Chi tiết đơn
         this.orderResponse.order_details = response.order_details || [];
 
