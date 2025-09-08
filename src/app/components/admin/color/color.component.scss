@@ -1,0 +1,4 @@
+.table-sticky-wrap { max-height: calc(100vh - 260px); overflow: auto; }
+.table thead.sticky-top { top: 0; z-index: 1; box-shadow: 0 2px 0 rgba(0,0,0,0.02); }
+.table tbody tr:hover { background: rgba(13,110,253,.04); }
+.card { border-radius: 14px; overflow: hidden; }

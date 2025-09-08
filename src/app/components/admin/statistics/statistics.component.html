@@ -1,10 +1,26 @@
 <div class="container-fluid">
 <div class="toolbar">
-  <label>Năm</label>
-  <select [(ngModel)]="selectedYear" >
+<div class="mb-3">
+<div class="input-group w-auto flex-nowrap">
+  <span class="input-group-text px-3">
+    <i class="fa-regular fa-calendar"></i>
+  </span>
+  <select
+    id="year"
+    name="year"
+    class="form-select flex-grow-1"
+    [(ngModel)]="selectedYear"
+    style="min-width: 140px"
+  >
     <option *ngFor="let y of years" [value]="y">{{ y }}</option>
   </select>
-  <button (click)="loadAll()" class="btn btn-primary">Làm mới</button>
+</div>
+
+  <!-- <small class="text-muted">Chọn năm cần thống kê</small> -->
+</div>
+<button class="btn btn-outline-secondary rounded-0 border-0" (click)="loadAll()" aria-label="Làm mới" title="Làm mới">
+  <i class="fa-solid fa-rotate-right"></i>
+</button>
 </div>
 
 <div *ngIf="loading" class="notice">Đang tải…</div>
@@ -59,7 +75,7 @@
     </div>
 
     <div class="role-row">
-      <span>Nhân viên : </span>
+      <span>Nhân viên</span>
       <div class="role-track">
         <div class="role-fill emp" [style.width]="employeePct + '%'"></div>
       </div>

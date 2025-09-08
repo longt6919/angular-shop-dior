@@ -1,139 +1,176 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-6 offset-md-3">
-      <h3>Thêm sản phẩm mới</h3>
-      <form (ngSubmit)="insertProduct()" enctype="multipart/form-data">
-        <div class="form-group">
-          <label for="name">Tên:</label>
-          <input
-            type="text"
-            id="name"
-            [(ngModel)]="insertProductDTO.name"
-            name="name"
-            class="form-control"
-            required
-          />
+<div class="container my-3">
+  <div class="row justify-content-center">
+    <div class="col-md-10 col-lg-8">
+      <div class="card border-0 shadow-sm rounded-3">
+        <div class="card-header bg-light d-flex align-items-center gap-2">
+          <i class="fa-solid fa-box-open text-primary"></i>
+          <h3 class="card-title h6 m-0 fw-semibold">Thêm sản phẩm mới</h3>
         </div>
 
-        <div class="form-group mb-3">
-          <label for="price">Giá:</label>
-          <input
-            type="text"
-            id="price"
-            [(ngModel)]="insertProductDTO.price"
-            name="price"
-            class="form-control col-md-3"
-            required
-          />
+        <div class="card-body">
+          <form (ngSubmit)="insertProduct()" enctype="multipart/form-data">
+            <!-- Tên -->
+            <div class="form-group mb-3">
+              <label for="name" class="form-label">Tên</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="fa-solid fa-tag"></i></span>
+                <input
+                  type="text"
+                  id="name"
+                  [(ngModel)]="insertProductDTO.name"
+                  name="name"
+                  class="form-control"
+                  required
+                  placeholder="Nhập tên sản phẩm"
+                />
+              </div>
+            </div>
+
+            <!-- Giá -->
+            <div class="form-group mb-3">
+              <label for="price" class="form-label">Giá</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="fa-solid fa-money-bill-1-wave"></i></span>
+                <input
+                  type="text"
+                  id="price"
+                  [(ngModel)]="insertProductDTO.price"
+                  name="price"
+                  class="form-control"
+                  required
+                  placeholder="Ví dụ: 1.250.000"
+                />
+                <span class="input-group-text">đ</span>
+              </div>
+            </div>
+
+            <!-- Mô tả -->
+            <div class="form-group mb-3">
+              <label for="description" class="form-label">Mô tả</label>
+              <textarea
+                id="description"
+                [(ngModel)]="insertProductDTO.description"
+                name="description"
+                class="form-control"
+                rows="3"
+                required
+                placeholder="Mô tả ngắn gọn về sản phẩm"
+              ></textarea>
+            </div>
+
+            <!-- Danh mục -->
+            <div class="form-group mb-3">
+              <label for="category" class="form-label">Danh mục</label>
+              <select
+                id="category"
+                [(ngModel)]="insertProductDTO.category_id"
+                name="category"
+                class="form-control nav-link text-dark px-2 fw-medium"
+                required
+              >
+                <option [ngValue]="0">Chọn</option>
+                <option *ngFor="let category of categories" [ngValue]="category.id">
+                  {{ category.name }}
+                </option>
+              </select>
+            </div>
+
+            <!-- Thương hiệu -->
+            <div class="form-group mb-3">
+              <label for="brand" class="form-label">Thương hiệu</label>
+              <select
+                id="brand"
+                [(ngModel)]="insertProductDTO.brand_id"
+                name="brand"
+                class="form-control"
+                required
+              >
+                <option [ngValue]="0">Chọn</option>
+                <option *ngFor="let brand of brands" [value]="brand.id">
+                  {{ brand.name }}
+                </option>
+              </select>
+            </div>
+
+            <!-- Chất liệu -->
+            <div class="form-group mb-3">
+              <label for="material" class="form-label">Chất liệu</label>
+              <select
+                id="material"
+                [(ngModel)]="insertProductDTO.material_id"
+                name="material"
+                class="form-control"
+                required
+              >
+                <option [ngValue]="0">Chọn</option>
+                <option *ngFor="let material of materials" [value]="material.id">
+                  {{ material.name }}
+                </option>
+              </select>
+            </div>
+
+            <!-- Phong cách -->
+            <div class="form-group mb-3">
+              <label for="style" class="form-label">Phong cách</label>
+              <select
+                id="style"
+                [(ngModel)]="insertProductDTO.style_id"
+                name="style"
+                class="form-control"
+                required
+              >
+                <option [ngValue]="0">Chọn</option>
+                <option *ngFor="let style of styles" [value]="style.id">
+                  {{ style.name }}
+                </option>
+              </select>
+            </div>
+
+            <!-- Xuất xứ -->
+            <div class="form-group mb-3">
+              <label for="orgin" class="form-label">Xuất xứ</label>
+              <select
+                id="orgin"
+                [(ngModel)]="insertProductDTO.origin_id"
+                name="orgin"
+                class="form-control"
+                required
+              >
+                <option [ngValue]="0">Chọn</option>
+                <option *ngFor="let orgin of origins" [value]="orgin.id">
+                  {{ orgin.name }}
+                </option>
+              </select>
+            </div>
+
+            <!-- Hình ảnh -->
+            <div class="form-group mb-3">
+              <label for="images" class="form-label">Hình ảnh (tối đa 5)</label>
+              <input
+                type="file"
+                id="images"
+                name="images"
+                class="form-control"
+                multiple
+                (change)="onFileChange($event)"
+                accept="image/*"
+              />
+              <small class="text-muted">Chọn tối đa 5 ảnh. Định dạng: JPG/PNG/WebP…</small>
+            </div>
+
+            <!-- Actions -->
+            <div class="d-inline-flex gap-2 mt-2">
+              <a routerLink="/admin/products" class="btn btn-outline-secondary">
+                <i class="fa-solid fa-arrow-left me-1"></i> Trở lại
+              </a>
+              <button type="submit" class="btn btn-primary">
+                <i class="fa-solid fa-plus me-1"></i> Thêm
+              </button>
+            </div>
+          </form>
         </div>
 
-        <div class="form-group mb-3">
-          <label for="description">Mô tả:</label>
-          <textarea
-            id="description"
-            [(ngModel)]="insertProductDTO.description"
-            name="description"
-            class="form-control"
-            required
-          ></textarea>
-        </div>
-
-        <div class="form-group mb-3">
-          <label for="category">Danh mục:</label>
-          <select
-            class="nav-link text-dark px-2 fw-medium"
-            id="category"
-            [(ngModel)]="insertProductDTO.category_id"
-            name="category"
-            class="form-control"
-            required
-          >
-            <option [ngValue]="0">Chọn</option>
-            <option *ngFor="let category of categories" [ngValue]="category.id">
-              {{ category.name }}
-            </option>
-          </select>
-        </div>
-
-        <div class="form-group mb-3">
-          <label for="brand">Thương hiệu:</label>
-          <select
-            id="brand"
-            [(ngModel)]="insertProductDTO.brand_id"
-            name="brand"
-            class="form-control"
-            required
-          >
-            <option [ngValue]="0">Chọn</option>
-            <option *ngFor="let brand of brands" [value]="brand.id">
-              {{ brand.name }}
-            </option>
-          </select>
-        </div>
-
-              <div class="form-group mb-3">
-          <label for="brand">Chất liệu:</label>
-          <select
-            id="material"
-            [(ngModel)]="insertProductDTO.material_id"
-            name="material"
-            class="form-control"
-            required
-          >
-            <option [ngValue]="0">Chọn</option>
-            <option *ngFor="let material of materials" [value]="material.id">
-              {{ material.name }}
-            </option>
-          </select>
-        </div>
-
-                   <div class="form-group mb-3">
-          <label for="brand">Phong cách:</label>
-          <select
-            id="style"
-            [(ngModel)]="insertProductDTO.style_id"
-            name="style"
-            class="form-control"
-            required
-          >
-            <option [ngValue]="0">Chọn</option>
-            <option *ngFor="let style of styles" [value]="style.id">
-              {{ style.name }}
-            </option>
-          </select>
-        </div>
-
-        
-                   <div class="form-group mb-3">
-          <label for="brand">Xuất xứ:</label>
-          <select
-            id="orgin"
-            [(ngModel)]="insertProductDTO.origin_id"
-            name="orgin"
-            class="form-control"
-            required
-          >
-            <option [ngValue]="0">Chọn</option>
-            <option *ngFor="let orgin of origins" [value]="orgin.id">
-              {{ orgin.name }}
-            </option>
-          </select>
-        </div>
-
-        <div class="form-group mb-3">
-          <label for="images">Hình ảnh (tối đa 5):</label>
-          <input
-            type="file"
-            id="images"
-            name="images"
-            multiple
-            (change)="onFileChange($event)"
-            accept="image/*"
-          />
-        </div>
-
-        <button type="submit" class="btn btn-primary">Thêm</button>
-      </form>
+      </div>
     </div>
   </div>
 </div>

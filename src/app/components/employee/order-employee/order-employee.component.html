@@ -1,220 +1,232 @@
 <div class="container-custom">
-    <div class="order-page">
+  <div class="order-page">
     <form [formGroup]="orderForm">
-      <div class="row">
-        <div class="col-lg-5 mb-4">
-          <h2 class="mb-4">Thông tin hoá đơn</h2>
-            <div class="mb-3">
-              <input
-                type="text"
-                formControlName="fullname"
-                class="form-control"
-                id="fullname"
-                placeholder="Họ và tên"
-              />
+      <div class="row g-3">
+        <!-- LEFT: Customer / invoice info -->
+        <div class="col-lg-5">
+          <div class="card border-0 shadow-sm rounded-3 h-100">
+            <div class="card-header bg-light">
+              <h2 class="h6 m-0 fw-semibold">Thông tin hoá đơn</h2>
             </div>
-            <div class="mb-3">
-              <input
-                type="text"
-                formControlName="email"
-                class="form-control"
-                id="email"
-                placeholder="Email"
-              />
+            <div class="card-body">
+              <!-- Họ tên -->
+              <div class="mb-3">
+                <label for="fullname" class="form-label">Họ và tên</label>
+                <div class="input-group">
+                  <span class="input-group-text"><i class="fa-regular fa-id-card"></i></span>
+                  <input
+                    type="text"
+                    formControlName="fullname"
+                    class="form-control"
+                    id="fullname"
+                    placeholder="Họ và tên"
+                  />
+                </div>
+              </div>
+
+              <!-- Email -->
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <div class="input-group">
+                  <span class="input-group-text"><i class="fa-regular fa-envelope"></i></span>
+                  <input
+                    type="text"
+                    formControlName="email"
+                    class="form-control"
+                    id="email"
+                    placeholder="Email"
+                  />
+                </div>
+              </div>
+
+              <!-- Số điện thoại -->
+              <div class="mb-3">
+                <label for="phone" class="form-label">Số điện thoại</label>
+                <div class="input-group">
+                  <span class="input-group-text"><i class="fa-solid fa-phone"></i></span>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="phone_number"
+                    id="phone"
+                    placeholder="Số điện thoại"
+                    required
+                  />
+                </div>
+              </div>
+
+              <!-- Địa chỉ -->
+              <div class="mb-3">
+                <label for="address" class="form-label">Địa chỉ</label>
+                <div class="input-group">
+                  <span class="input-group-text"><i class="fa-solid fa-location-dot"></i></span>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="address"
+                    id="address"
+                    placeholder="Địa chỉ"
+                    required
+                  />
+                </div>
+              </div>
+
+              <!-- Địa chỉ nhận -->
+              <div class="mb-3">
+                <label for="shipping_address" class="form-label">Địa chỉ người nhận</label>
+                <div class="input-group">
+                  <span class="input-group-text"><i class="fa-solid fa-house"></i></span>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="shipping_address"
+                    id="shipping_address"
+                    placeholder="Địa chỉ nhận"
+                    required
+                  />
+                </div>
+              </div>
+
+              <!-- Ghi chú -->
+              <div class="mb-3">
+                <label for="note" class="form-label">Ghi chú</label>
+                <textarea
+                  class="form-control"
+                  formControlName="note"
+                  id="note"
+                  placeholder="Ghi chú"
+                  rows="2"
+                ></textarea>
+              </div>
+
+              <!-- Vận chuyển -->
+              <div class="mb-3">
+                <label for="shippingMethod" class="form-label">Hình thức nhận hàng</label>
+                <select class="form-select" id="shippingMethod" formControlName="shipping_method">
+                  <option value="counter">Thanh toán tại quầy</option>
+                </select>
+              </div>
+
+              <!-- Thanh toán -->
+              <div class="mb-0">
+                <label for="paymentMethod" class="form-label">Phương thức thanh toán</label>
+                <select class="form-select" id="paymentMethod" formControlName="payment_method">
+                  <option value="money">Thanh toán tiền mặt</option>
+                  <option value="vnpay">Thanh toán bằng VNPAY</option>
+                </select>
+              </div>
             </div>
-            <div class="mb-3">
-              <input
-                type="text"
-                class="form-control"
-                formControlName="phone_number"
-                placeholder="Số điện thoại"
-                required
-                id="phone"
-                placeholder="Số điện thoại"
-              />
-            </div>
-            <div class="mb-3">
-              <input
-                type="text"
-                class="form-control"
-                formControlName="address"
-                placeholder="Địa chỉ"
-                required
-                id="address"
-                placeholder="Địa chỉ"
-              />
-            </div>
-            <div class="mb-3">
-              <input
-                type="text"
-                class="form-control"
-                formControlName="shipping_address"
-                placeholder="Địa chỉ người nhận"
-                required
-                id="shipping_address"
-                placeholder="Địa chỉ nhận"
-              />
-            </div>
-            <div class="mb-3">
-              <input
-                type="text"
-                class="form-control"
-                formControlName="note"
-                placeholder="Ghi chú"
-                required
-                id="note"
-              />
-            </div>
-            <div class="mb-3">
-              <select
-                class="form-control"
-                id="shippingMethod"
-                formControlName="shipping_method"
-              >
-                <option value="counter">Thanh toán tại quầy</option>
-              </select>
-            </div>
-            <div class="mb-3">
-              <select
-                class="form-control"
-                id="paymentMethod"
-                formControlName="payment_method">
-                <option value="money">Thanh toán tiền mặt</option>
-                <option value="vnpay">Thanh toán bằng VNPAY</option>
-              </select>
-            </div>
+          </div>
         </div>
 
-        <div class="col-lg-7 order-page">
-          <h5 class="text-dark mb-3">Sản phẩm đã đặt</h5>
+        <!-- RIGHT: Cart + Summary -->
+        <div class="col-lg-7">
+          <!-- Sản phẩm -->
+          <div class="card border-0 shadow-sm rounded-3 mb-3">
+            <div class="card-header bg-light">
+              <h5 class="h6 m-0 fw-semibold">Sản phẩm đã đặt</h5>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive mb-2">
+                <table class="table align-middle">
+                  <tbody>
+                    <ng-container *ngFor="let item of cartItems; let i = index">
+                      <tr>
+                        <td>
+                          <div class="d-flex align-items-center product-info">
+                            <img
+                              [src]="item.image_url"
+                              alt="product"
+                              class="product-image me-3 rounded"
+                              width="60"
+                              height="60"
+                              style="object-fit: cover"
+                            />
+                            <div class="d-flex flex-column">
+                              <span class="product-name fw-semibold">{{ item.product_name }}</span>
+                              <small class="text-muted">{{ item.size_name }} · {{ item.color_name }}</small>
+                            </div>
+                          </div>
+                        </td>
 
-          <div class="table-responsive mb-3">
-            <table class="table align-middle">
-              <tbody>
-                <ng-container *ngFor="let item of cartItems; let i = index">
-                  <tr>
-                    <td>
-                      <div class="d-flex align-items-center product-info">
-                        <img
-                          [src]="item.image_url"
-                          alt="product"
-                          class="product-image me-3 rounded"
-                          width="60"
-                        />
-                        <span class="product-name">{{
-                          item.product_name
-                        }}</span>
-                      </div>
-                    </td>
-                    <!-- Số lượng -->
-                    <td>
-                      <div
-                        class="input-group input-group-sm w-auto product-quantity"
-                      >
-                        <button
-                          class="btn btn-outline-secondary"
-                          type="button"
-                          (click)="decreaseQuantity(i)"
-                        >
-                          −
-                        </button>
-                        <input
-                          type="text"
-                          class="form-control text-center"
-                          [value]="item.quantity"
-                          readonly
-                          style="width: 40px"
-                        />
-                        <button
-                          class="btn btn-outline-secondary"
-                          type="button"
-                          (click)="increaseQuantity(i)"
-                        >
-                          +
-                        </button>
-                      </div>
-                    </td>
-                     <td>{{ item.size_name }}</td>
-                     <td>{{ item.color_name }}</td>
-                    <!-- Đơn giá -->
-                    <td>
-                      {{
-                        item.price
-                          | currency : "VND" : "symbol" : "1.0-0"
-                      }}
-                    </td>
-                    <!-- Thành tiền -->
-                    <td>
-                      {{
-                        item.price * item.quantity
-                          | currency : "VND" : "symbol" : "1.0-0"
-                      }}
-                    </td>
-                    <!-- Xóa -->
-                    <td>
-                      <button
-                        class="btn btn-danger btn-sm"
-                        type="button"
-                        (click)="confirmDelete(i)"
-                      >
-                        Xóa
-                      </button>
-                    </td>
-                  </tr>
-                </ng-container>
-              </tbody>
-            </table>
-          </div>
+                        <!-- Số lượng -->
+                        <td>
+                          <div class="input-group input-group-sm w-auto product-quantity">
+                            <button class="btn btn-outline-secondary" type="button" (click)="decreaseQuantity(i)">−</button>
+                            <input type="text" class="form-control text-center" [value]="item.quantity" readonly style="width: 42px" />
+                            <button class="btn btn-outline-secondary" type="button" (click)="increaseQuantity(i)">+</button>
+                          </div>
+                        </td>
 
-          <!-- Tổng tạm tính, giảm giá, tổng cuối -->
-          <div class="text-end mb-3">
-            <div>
-              Tạm tính:
-              <strong>{{ preDiscountTotal | number : "1.0-0" }} đ</strong>
-            </div>
-            <div *ngIf="couponApplied">
-              Giảm giá:
-              <strong class="text-danger"
-                >-{{ couponDiscount | number : "1.0-0" }} đ</strong
-              >
-            </div>
-               <div>
-              Phí vận chuyển:
-              <strong>{{ shippingFee | currency:'VND':'symbol' }} đ</strong>
-            </div>
-            <div class="fw-bold fs-5">
-              Tổng giá:
-              <span class="text-success">{{
-                totalAmount | currency : "VND" : "symbol" : "1.0-0"
-              }}</span>
+                        <!-- Đơn giá -->
+                        <td class="text-end">
+                          {{ item.price | currency : "VND" : "symbol" : "1.0-0" }}
+                        </td>
+
+                        <!-- Thành tiền -->
+                        <td class="text-end">
+                          {{ item.price * item.quantity | currency : "VND" : "symbol" : "1.0-0" }}
+                        </td>
+
+                        <!-- Xoá -->
+                        <td class="text-end">
+                          <button class="btn btn-danger btn-sm" type="button" (click)="confirmDelete(i)">
+                            Xóa
+                          </button>
+                        </td>
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Voucher -->
+              <div class="mb-3">
+                <label for="voucher" class="form-label mb-2">Nhập voucher</label>
+                <div class="input-group">
+                  <input
+                    formControlName="couponCode"
+                    type="text"
+                    id="voucher"
+                    class="form-control"
+                    placeholder="mã voucher..."
+                  />
+                  <button class="btn btn-danger" type="button" (click)="applyCoupon()">
+                    Áp dụng
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
 
-          <!-- Nhập voucher -->
-          <div class="mb-3">
-            <label for="voucher" class="form-label mb-2">Nhập voucher</label>
-            <div class="input-group">
-              <input
-                formControlName="couponCode"
-                type="text"
-                id="voucher"
-                class="form-control"
-                placeholder="mã voucher..."
-              />
-              <button
-                class="btn btn-danger"
-                type="button"
-                (click)="applyCoupon()"
-              >
-                Áp dụng
+          <!-- Tổng kết -->
+          <div class="card border-0 shadow-sm rounded-3 summary-sticky">
+            <div class="card-body">
+              <div class="d-flex justify-content-between py-1">
+                <span class="text-muted">Tạm tính</span>
+                <span class="fw-semibold">{{ preDiscountTotal | number : "1.0-0" }} đ</span>
+              </div>
+              <div class="d-flex justify-content-between py-1" *ngIf="couponApplied">
+                <span class="text-muted">Giảm giá</span>
+                <span class="fw-semibold text-danger">-{{ couponDiscount | number : "1.0-0" }} đ</span>
+              </div>
+              <div class="d-flex justify-content-between py-1">
+                <span class="text-muted">Phí vận chuyển</span>
+                <span class="fw-semibold">{{ shippingFee | currency:'VND':'symbol' }} đ</span>
+              </div>
+              <hr class="my-2" />
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="fw-bold">Tổng giá</span>
+                <span class="h5 m-0 fw-bold text-success">
+                  {{ totalAmount | currency : "VND" : "symbol" : "1.0-0" }}
+                </span>
+              </div>
+
+              <button class="btn btn-primary w-100 mt-3" (click)="placeOrder()">
+                Đặt hàng
               </button>
             </div>
           </div>
-
-          <!-- Đặt hàng -->
-          <button class="btn btn-primary w-100 mt-3" (click)="placeOrder()">
-            Đặt hàng
-          </button>
         </div>
       </div>
     </form>

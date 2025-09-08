@@ -1,87 +1,125 @@
-<h1>Thông tin hóa đơn chi tiết</h1>
-<div class="container">
-  <h1>Hóa Đơn</h1>
-  
-  <div class="row">
-    <div class="col-md-6">
-      <h3>Thông tin</h3>
-      <p><strong>ID hóa đơn:</strong> {{ orderResponse.id }}</p>
-      <p><strong>ID tài khoản:</strong> {{ orderResponse.user_id }}</p>
-      <p><strong>Tên khách hàng:</strong> {{ orderResponse.fullname }}</p>
-      <p><strong>Số điện thoại:</strong> {{ orderResponse.phone_number }}</p>
-      <p><strong>Email:</strong> {{ orderResponse.email }}</p>
-      <p><strong>Địa chỉ:</strong> {{ orderResponse.address }}</p>
-      <p><strong>Ghi chú:</strong> {{ orderResponse.note }}</p>
-      <p><strong>Ngày đặt hàng:</strong> {{ orderResponse.order_date | date:'dd/MM/yyyy'}}</p>
-      <p><strong>Ngày gửi hàng:</strong> {{ orderResponse.shipping_date | date:'dd/MM/yyyy'}}</p>
-      <p><strong>Ngày nhận hàng:</strong> {{ orderResponse.delivery_date | date:'dd/MM/yyyy'}}</p>
-      <p><strong>Hình thức thanh toán:</strong> {{ orderResponse.payment_method }}</p>
+<div class="container my-3">
 
-      <div class="form-group">
-        <label for="statusSelect"><strong>Status:</strong></label>
-<select class="form-control" id="statusSelect" name="status" [(ngModel)]="orderResponse.status">
-  <option value="pending">Chờ xác nhận</option>
-  <option value="processing">Đã xác nhận</option>
-
-  <option value="out_of_stock_pending">Hết hàng (chờ xác nhận)</option>
-  <option value="waiting_for_stock">Chờ sản phẩm</option>
-
-  <option value="shipped">Đang giao hàng</option>
-  <option value="refused_on_delivery">Khách không nhận hàng</option>
-  <option value="delivered">Đã nhận hàng</option>
-
-  <option value="cancelled_out_of_stock">Hủy (Do hết hàng)</option>
-  <option value="cancelled">Hủy đơn</option>
-</select>
-      </div>          
-  </div>  
+  <!-- Tiêu đề + trạng thái -->
+  <div class="card border-0 shadow-sm rounded-3 mb-3">
+    <div class="card-body d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center gap-2">
+        <i class="fa-solid fa-file-invoice-dollar fs-3 text-primary"></i>
+        <h1 class="h5 m-0 fw-bold">Thông tin hóa đơn chi tiết</h1>
+      </div>
+      <span class="badge text-capitalize">{{ orderResponse.status }}</span>
+    </div>
   </div>
-  <h3>Đơn hàng</h3>
-  <table class="table">
-    <thead>
-      <tr>
-        <!-- <th>Image</th> -->
-        <th>Tên sản phẩm</th>
-        <th>Giá</th>
-        <th>Kích thước</th>
-        <th>Màu sắc</th>
-        <th>Số lượng</th>
-        <th>Tổng</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let order_detail of orderResponse.order_details; 
-        let i = index">
-        <!-- <td>
-  <img [src]="order_detail.product.thumbnail" alt="thumbnail" width="100" height="100">
-</td> -->
-        <td>{{ order_detail.product_name }}</td>
-        <td>{{ order_detail.price | currency:'VND':'symbol' }}</td>
-        <td>{{order_detail.size}}</td>
-        <td>{{order_detail.color}}</td>
-        <td>
-          <p>{{order_detail.number_of_products}}</p>          
-        </td>
-        <td>{{order_detail.price*order_detail.number_of_products | number}}</td>
-      </tr>
-    </tbody>
-  </table>  
-  <div class="text-end mt-1">
-<h6>
-  <strong>Tổng giá: </strong>
-  {{ totalOriginMoney | currency:'VND':'symbol' }}
-</h6>
-<h6>
-  <strong>Phí vận chuyển: </strong>
-{{ shippingFee | currency:'VND':'symbol':'1.0-0' }}
-</h6>
-<h6> <strong>Khuyến mãi: </strong>
-  {{ couponMoney | currency:'VND':'symbol' }}</h6>
+
+  <!-- Thông tin hóa đơn (dọc) -->
+  <div class="card border-0 shadow-sm rounded-3 mb-3">
+    <div class="card-header bg-light fw-semibold">Hóa Đơn</div>
+    <div class="card-body">
+      <div class="vstack gap-2">
+        <div><span class="text-muted small">ID hóa đơn</span><div class="fw-semibold">{{ orderResponse.id }}</div></div>
+        <div><span class="text-muted small">ID tài khoản</span><div class="fw-semibold">{{ orderResponse.user_id }}</div></div>
+        <div><span class="text-muted small">Tên khách hàng</span><div class="fw-semibold">{{ orderResponse.fullname }}</div></div>
+        <div><span class="text-muted small">Số điện thoại</span><div class="fw-semibold">{{ orderResponse.phone_number }}</div></div>
+        <div><span class="text-muted small">Email</span><div class="fw-semibold">{{ orderResponse.email }}</div></div>
+        <div><span class="text-muted small">Địa chỉ</span><div class="fw-semibold">{{ orderResponse.address }}</div></div>
+        <div><span class="text-muted small">Ghi chú</span><div class="fw-semibold">{{ orderResponse.note }}</div></div>
+        <div class="d-flex gap-3 flex-wrap">
+          <div>
+            <span class="text-muted small">Ngày đặt hàng</span>
+            <div class="fw-semibold">{{ orderResponse.order_date | date:'dd/MM/yyyy' }}</div>
+          </div>
+          <div>
+            <span class="text-muted small">Ngày gửi hàng</span>
+            <div class="fw-semibold">{{ orderResponse.shipping_date | date:'dd/MM/yyyy' }}</div>
+          </div>
+          <div>
+            <span class="text-muted small">Ngày nhận hàng</span>
+            <div class="fw-semibold">{{ orderResponse.delivery_date | date:'dd/MM/yyyy' }}</div>
+          </div>
+        </div>
+        <div><span class="text-muted small">Hình thức thanh toán</span><div class="fw-semibold">{{ orderResponse.payment_method }}</div></div>
+
+        <!-- Trạng thái (select) -->
+        <div class="mt-2">
+          <label for="statusSelect" class="form-label fw-semibold">Status</label>
+          <select class="form-control" id="statusSelect" name="status" [(ngModel)]="orderResponse.status">
+            <option value="pending">Chờ xác nhận</option>
+            <option value="processing">Đã xác nhận</option>
+
+            <option value="out_of_stock_pending">Hết hàng (chờ xác nhận)</option>
+            <option value="waiting_for_stock">Chờ sản phẩm</option>
+
+            <option value="shipped">Đang giao hàng</option>
+            <option value="refused_on_delivery">Khách không nhận hàng</option>
+            <option value="delivered">Đã nhận hàng</option>
+
+            <option value="cancelled_out_of_stock">Hủy (Do hết hàng)</option>
+            <option value="cancelled">Hủy đơn</option>
+          </select>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="text-end mt-3">
-  <h4><strong>Tổng giá (đã áp dụng voicher):</strong> 
-  {{ orderResponse.total_money | currency:'VND':'symbol' }}</h4>
-</div>
-  <button class="btn btn-primary col-md-2" 
-    (click)="saveOrder()">Save</button>
+
+  <!-- Danh sách sản phẩm (xếp dọc) -->
+  <div class="card border-0 shadow-sm rounded-3 mb-3">
+    <div class="card-header bg-light fw-semibold">Đơn hàng</div>
+    <div class="card-body">
+      <div class="vstack gap-2">
+        <div
+          class="border rounded p-2 d-flex flex-column flex-md-row align-items-md-center justify-content-between"
+          *ngFor="let order_detail of orderResponse.order_details; let i = index"
+        >
+          <div class="me-md-3">
+            <div class="fw-semibold">{{ order_detail.product_name }}</div>
+            <div class="small text-muted">Kích thước: {{ order_detail.size }} · Màu: {{ order_detail.color }}</div>
+          </div>
+
+          <div class="d-flex gap-4 mt-2 mt-md-0">
+            <div class="text-end">
+              <div class="small text-muted">Giá</div>
+              <div class="fw-semibold">{{ order_detail.price | currency:'VND':'symbol' }}</div>
+            </div>
+            <div class="text-center">
+              <div class="small text-muted">Số lượng</div>
+              <div class="fw-semibold">{{ order_detail.number_of_products }}</div>
+            </div>
+            <div class="text-end">
+              <div class="small text-muted">Tổng</div>
+              <div class="fw-bold">{{ order_detail.price*order_detail.number_of_products | number }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tổng hợp (xếp dọc) -->
+  <div class="card border-0 shadow-sm rounded-3 mb-3">
+    <div class="card-body">
+      <div class="d-flex justify-content-between py-1">
+        <span class="text-muted">Tổng giá</span>
+        <span class="fw-semibold">{{ totalOriginMoney | currency:'VND':'symbol' }}</span>
+      </div>
+      <div class="d-flex justify-content-between py-1">
+        <span class="text-muted">Phí vận chuyển</span>
+        <span class="fw-semibold">{{ shippingFee | currency:'VND':'symbol':'1.0-0' }}</span>
+      </div>
+      <div class="d-flex justify-content-between py-1">
+        <span class="text-muted">Khuyến mãi</span>
+        <span class="fw-semibold">{{ couponMoney | currency:'VND':'symbol' }}</span>
+      </div>
+      <hr class="my-2">
+      <div class="d-flex justify-content-between align-items-center">
+        <span class="fw-bold">Tổng giá (đã áp dụng voicher)</span>
+        <span class="h5 m-0 fw-bold text-primary">{{ orderResponse.total_money | currency:'VND':'symbol' }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Nút lưu -->
+  <div class="text-end">
+    <button class="btn btn-primary px-4" (click)="saveOrder()">Save</button>
+  </div>
+
 </div>

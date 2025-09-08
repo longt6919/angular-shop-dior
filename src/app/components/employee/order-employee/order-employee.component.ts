@@ -317,11 +317,11 @@ private updateCartFromCartItems(): void {
               this.router.navigate(['/employee/products']);
             }, 3000);
           },
-          error: (err: HttpErrorResponse) => {
+          error: (err: any) => {
             debugger;
             this.toastService.showToast({
               error: err,
-              defaultMsg: 'Lỗi trong quá trình đặt hàng',
+              defaultMsg: 'Thiếu hàng',
               title: 'Lỗi Đặt Hàng',
             });
           },

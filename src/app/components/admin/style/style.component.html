@@ -1,37 +1,64 @@
-<div class="container">
-    <h1>Phong cách</h1>        
-    <div class="row">
-      <div class="col-md-8 ">
-        <button class="btn btn-success" (click)="insertStyle()">Thêm mới</button>
-      </div>      
+<div class="container my-3">
+  <!-- Heading + Toolbar -->
+  <div class="d-flex align-items-center justify-content-between bg-white border rounded-3 shadow-sm p-3 mb-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="fa-solid fa-circle-half-stroke fs-3 text-primary"></i>
+      <h1 class="h5 m-0 fw-bold">Phong cách</h1>
     </div>
-    <table class="table">
-      <thead class="table-light">
-        <tr>
-          <th>ID</th>
-          <th>Name</th>          
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Use Angular's *ngFor directive to loop through categorys array -->
-        <tr *ngFor="let style of styles">
-          <td>{{ style.id }}</td>
-          <td>{{ style.name }}</td>          
-          <td>
-            <div style="display: flex; gap: 10px;">
-              <button class="btn btn-primary" 
-                  (click)="updateStyle(style.id)">
-                Cập nhật
-              </button>
-        <button class="btn" 
-                [ngClass]="style.is_active ? 'btn-danger' : 'btn-success'" 
-                (click)="toggleStyleStatus(style)">
-          {{ style.is_active ? 'Block' : 'Unblock' }}
-        </button>
-              </div>
-          </td>          
-        </tr>
-      </tbody>
-    </table>    
+    <button class="btn btn-success rounded-pill px-3" (click)="insertStyle()">
+      <i class="fa-solid fa-plus me-1"></i> Thêm mới
+    </button>
   </div>
+
+  <!-- Table -->
+  <div class="card border-0 shadow-sm rounded-3">
+    <div class="card-body p-0">
+      <div class="table-responsive table-sticky-wrap">
+        <table class="table table-hover align-middle m-0">
+          <thead class="table-light sticky-top">
+            <tr>
+              <th class="text-nowrap">ID</th>
+              <th class="text-nowrap">Name</th>
+              <th class="text-nowrap">Trạng thái</th>
+              <th class="text-nowrap text-center">Actions</th>
+            </tr>
+          </thead>
+
+          <tbody *ngIf="styles?.length; else emptyStyles">
+            <tr *ngFor="let style of styles">
+              <td class="text-muted fw-semibold">{{ style.id }}</td>
+              <td class="fw-semibold">{{ style.name }}</td>
+              <td>
+                <span class="badge text-capitalize"
+                      [ngClass]="style.is_active ? 'badge-soft-success' : 'badge-soft-danger'">
+                  {{ style.is_active ? 'Đang hoạt động' : 'Đã khóa' }}
+                </span>
+              </td>
+              <td class="text-center">
+                <div class="d-inline-flex align-items-center gap-2">
+                  <button class="btn btn-outline-primary btn-sm" (click)="updateStyle(style.id)">
+                    <i class="fa-regular fa-pen-to-square me-1"></i> Cập nhật
+                  </button>
+                  <button class="btn btn-sm"
+                          [ngClass]="style.is_active ? 'btn-outline-danger' : 'btn-outline-success'"
+                          (click)="toggleStyleStatus(style)">
+                    <i class="fa-solid" [ngClass]="style.is_active ? 'fa-lock' : 'fa-unlock'"></i>
+                    <span class="ms-1">{{ style.is_active ? 'Block' : 'Unblock' }}</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Empty state -->
+      <ng-template #emptyStyles>
+        <div class="p-5 text-center text-muted">
+          <i class="fa-regular fa-images d-block mb-2" style="font-size:40px;"></i>
+          Chưa có phong cách nào. Hãy bấm <strong>Thêm mới</strong>.
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

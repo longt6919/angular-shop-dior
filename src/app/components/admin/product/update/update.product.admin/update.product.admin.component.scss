@@ -1,29 +1,57 @@
 .thumbnail-container {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin: 16px 0;
 }
 
 .thumbnail-item {
-    width: 120px;
-    height: 120px;
-    margin-right: 5px;
-    /* Thêm khoảng cách ngang giữa các ảnh */
+  position: relative;
+  width: 110px;
+  height: 110px;
+  border: 2px solid #e9ecef;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #f8f9fa;
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  cursor: pointer;
 }
 
-.thumbnail-item:last-child {
-    margin-right: 0;
-    /* Xóa khoảng cách ngang ở ảnh cuối cùng */
-}
-
-.thumbnail-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.thumbnail-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,.08);
+  border-color: #dee2e6;
 }
 
 .thumbnail-item.active {
-    border: 4px solid green;
+  border: 3px solid #198754; /* xanh lá như bản cũ (green) nhưng theo Bootstrap */
+  box-shadow: 0 0 0 3px rgba(25,135,84,.15);
+}
+
+.thumbnail-item img,
+.thumbnail-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* nút xoá nổi góc */
+.remove-image {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  padding: 4px 6px;
+  line-height: 1;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.1);
+  color: #dc3545;
+}
+
+.remove-image:hover {
+  background: #fff;
+  color: #bb2d3b;
+  border-color: rgba(0,0,0,.2);
 }

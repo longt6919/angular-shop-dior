@@ -46,3 +46,45 @@
 @media (max-width: 520px) {
   .kpi-grid { grid-template-columns: 1fr; }
 }
+/* Khối tổng thể (tuỳ chọn) */
+.panel-section { max-width: 760px; }
+
+/* Mỗi hàng: 3 cột cố định: Nhãn | Track | Giá trị */
+.role-row{
+  display: grid;
+  grid-template-columns: 140px 1fr 180px; /* chỉnh 140 / 180 theo ý bạn */
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+/* Nhãn trái và giá trị phải cho gọn */
+.role-row > span:first-child{ 
+  text-align: right; 
+  font-weight: 500;
+  white-space: nowrap;
+}
+.role-row > span:last-child{ 
+  text-align: left; 
+  white-space: nowrap;
+}
+
+/* Track luôn full cột giữa */
+.role-track{
+  width: 100%;
+  height: 10px;
+  background: #e9ecef;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+/* Thanh fill */
+.role-fill{
+  height: 100%;
+  border-radius: inherit;
+  transition: width .3s ease;
+}
+
+/* Màu ví dụ (tuỳ chọn) */
+.role-fill.user{ background: #6d92dd; }  /* khách hàng */
+.role-fill.emp{  background: #09b364; }  /* nhân viên  */

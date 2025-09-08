@@ -1,37 +1,58 @@
-<div class="container">
-    <h1>Màu sắc</h1>        
-    <div class="row">
-      <div class="col-md-8 ">
-        <button class="btn btn-success" (click)="insertColor()">Thêm mới</button>
-      </div>      
+<div class="container my-3">
+  <!-- Heading + Toolbar -->
+  <div class="d-flex align-items-center justify-content-between bg-white border rounded-3 shadow-sm p-3 mb-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="fa-solid fa-palette fs-3 text-primary"></i>
+      <h1 class="h5 m-0 fw-bold">Màu sắc</h1>
     </div>
-    <table class="table">
-      <thead class="table-light">
-        <tr>
-          <th>ID</th>
-          <th>Name</th>          
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Use Angular's *ngFor directive to loop through categorys array -->
-        <tr *ngFor="let color of colors">
-          <td>{{ color.id }}</td>
-          <td>{{ color.name }}</td>          
-          <td>
-            <div style="display: flex; gap: 10px;">
-              <button class="btn btn-primary" 
-                  (click)="updateColor(color.id)">
-                Cập nhật
-              </button>
-              </div>
-          </td>          
-        </tr>
-      </tbody>
-    </table>    
-        <div class="d-flex justify-content-center">
-      <nav aria-label="Page navigation">
-        <ul class="pagination">
+    <button class="btn btn-success rounded-pill px-3" (click)="insertColor()">
+      <i class="fa-solid fa-plus me-1"></i> Thêm mới
+    </button>
+  </div>
+
+  <!-- Table -->
+  <div class="card border-0 shadow-sm rounded-3">
+    <div class="card-body p-0">
+      <div class="table-responsive table-sticky-wrap">
+        <table class="table table-hover align-middle m-0">
+          <thead class="table-light sticky-top">
+            <tr>
+              <th class="text-nowrap">ID</th>
+              <th class="text-nowrap">Name</th>
+              <th class="text-nowrap text-center">Actions</th>
+            </tr>
+          </thead>
+
+          <tbody *ngIf="colors?.length; else emptyColors">
+            <!-- Use Angular's *ngFor directive to loop through colors array -->
+            <tr *ngFor="let color of colors">
+              <td class="text-muted fw-semibold">{{ color.id }}</td>
+              <td class="fw-semibold text-truncate" style="max-width: 360px" [title]="color.name">
+                {{ color.name }}
+              </td>
+              <td class="text-center">
+                <button class="btn btn-outline-primary btn-sm" (click)="updateColor(color.id)">
+                  <i class="fa-regular fa-pen-to-square me-1"></i> Cập nhật
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Empty state -->
+      <ng-template #emptyColors>
+        <div class="p-5 text-center text-muted">
+          <i class="fa-regular fa-square d-block mb-2" style="font-size:40px;"></i>
+          Chưa có màu sắc nào. Hãy bấm <strong>Thêm mới</strong>.
+        </div>
+      </ng-template>
+    </div>
+
+    <!-- Pagination -->
+    <div class="card-footer bg-white">
+      <nav aria-label="Page navigation" class="d-flex justify-content-center">
+        <ul class="pagination mb-0">
           <li class="page-item" *ngIf="currentPage > 0">
             <a class="page-link" (click)="onPageChange(0)">First</a>
           </li>
@@ -40,11 +61,13 @@
               <i class="fa fa-chevron-left"></i>
             </a>
           </li>
+
           <ng-container *ngFor="let page of visiblePages">
-              <li class="page-item" [ngClass]="{'active': page === currentPage + 1}">
-                <a class="page-link" (click)="onPageChange(page - 1)">{{ page }}</a>
-              </li>
-            </ng-container>
+            <li class="page-item" [ngClass]="{'active': page === currentPage + 1}">
+              <a class="page-link" (click)="onPageChange(page - 1)">{{ page }}</a>
+            </li>
+          </ng-container>
+
           <li class="page-item" *ngIf="currentPage < totalPages - 1">
             <a class="page-link" (click)="onPageChange(currentPage + 1)">
               <i class="fa fa-chevron-right"></i>
@@ -57,3 +80,4 @@
       </nav>
     </div>
   </div>
+</div>

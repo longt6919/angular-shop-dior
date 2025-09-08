@@ -1,71 +1,120 @@
-<div class="container">
-    <h1>Danh mục sản phẩm</h1>
-    <!--Đoạn này có 1 ô searchbox bên trái, 1 combobox bên phải  -->
-    <div class="row mb-3">
-      <div class="col-md-8">
-        <input type="text" class="form-control search-input" placeholder="Tìm sản phẩm" [(ngModel)]="keyword">
-      </div>
-      <div class="col-md-4">
-        <button class="btn btn-primary"  (click)="searchProducts()"> 
-            <i class="fa-solid fa-magnifying-glass"></i> Tìm kiếm</button>
+<div class="container my-3">
+  <!-- Heading + Toolbar -->
+  <div class="d-flex align-items-center justify-content-between bg-white border rounded-3 shadow-sm p-3 mb-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="fa-solid fa-box-open fs-3 text-primary"></i>
+      <h1 class="h5 m-0 fw-bold">Danh mục sản phẩm</h1>
+    </div>
+    <button class="btn btn-success rounded-pill px-3" (click)="insertProduct()">
+      <i class="fa-solid fa-plus me-1"></i> Thêm sản phẩm mới
+    </button>
+  </div>
+
+  <!-- Search -->
+  <div class="card border-0 shadow-sm rounded-3 mb-3">
+    <div class="card-body">
+      <div class="row g-2 align-items-center">
+        <div class="col-md-8">
+          <div class="input-group">
+            <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Tìm sản phẩm"
+              [(ngModel)]="keyword"
+            />
+          </div>
+        </div>
+        <div class="col-md-4 text-md-end">
+          <button class="btn btn-primary" (click)="searchProducts()">
+            <i class="fa-solid fa-magnifying-glass me-1"></i> Tìm kiếm
+          </button>
+        </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-8 ">
-        <button class="btn btn-success" (click)="insertProduct()">
-            <i class="fa-solid fa-plus"></i> Thêm sản phẩm mới</button>
-      </div>      
+  </div>
+
+  <!-- Table -->
+  <div class="card border-0 shadow-sm rounded-3">
+    <div class="card-body p-0">
+      <div class="table-responsive table-sticky-wrap">
+        <table class="table table-hover align-middle m-0">
+          <thead class="table-light sticky-top">
+            <tr>
+              <th class="text-nowrap">ID</th>
+              <th class="text-nowrap">Tên</th>
+              <th class="text-nowrap text-end">Giá</th>
+              <th class="text-nowrap">Ảnh</th>
+              <th class="text-nowrap">Mô tả</th>
+              <th class="text-nowrap text-center">Hành động</th>
+            </tr>
+          </thead>
+
+          <tbody *ngIf="products?.length; else emptyProducts">
+            <tr *ngFor="let product of products">
+              <td class="text-muted fw-semibold">{{ product.id }}</td>
+
+              <td class="fw-semibold text-truncate" style="max-width: 240px" [title]="product.name">
+                {{ product.name }}
+              </td>
+
+              <td class="text-end">
+                {{ product.price | currency:'VND':'symbol':'1.0-0' }}
+              </td>
+
+              <td>
+                <img
+                  [src]="product.url"
+                  alt="Thumbnail"
+                  class="rounded rounded-square"
+                  width="64"
+                  height="64"
+                />
+              </td>
+
+              <td class="text-truncate" style="max-width: 360px" [title]="product.description">
+                {{ product.description }}
+              </td>
+
+              <td class="text-center">
+                <div class="d-inline-flex align-items-center gap-2">
+                  <button class="btn btn-outline-primary btn-sm" (click)="updateQuantity(product.id)">
+                    <i class="fa-solid fa-cubes-stacked me-1"></i> Quantity
+                  </button>
+
+                  <button class="btn btn-outline-secondary btn-sm" (click)="updateProduct(product.id)">
+                    <i class="fa-regular fa-pen-to-square me-1"></i> Update
+                  </button>
+
+                  <!-- Toggle active -->
+                  <button
+                    class="btn btn-sm"
+                    [ngClass]="product.is_active ? 'btn-outline-danger' : 'btn-outline-success'"
+                    (click)="toggleProductStatus(product)"
+                  >
+                    <i class="fa-solid" [ngClass]="product.is_active ? 'fa-lock' : 'fa-unlock'"></i>
+                    <span class="ms-1">{{ product.is_active ? 'Block' : 'Unblock' }}</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Empty state -->
+      <ng-template #emptyProducts>
+        <div class="p-5 text-center text-muted">
+          <i class="fa-regular fa-box-open d-block mb-2" style="font-size:40px;"></i>
+          Chưa có sản phẩm nào. Hãy bấm <strong>Thêm sản phẩm mới</strong>.
+        </div>
+      </ng-template>
     </div>
-    
-    <table class="table">
-      <thead class="table-light">
-        <tr>
-          <th>ID</th>
-          <th>Tên</th>
-          <th>Giá</th>
-          <th>Ảnh</th>
-          <th>Mô tả</th>
-          <th>Hành động</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Use Angular's *ngFor directive to loop through products array -->
-        <tr *ngFor="let product of products">
-          <td>{{ product.id }}</td>
-          <td>{{ product.name }}</td>
-          <td>{{ product.price }}</td>
-          <td>
-            <img src="{{ product.url }}" 
-              class="rounded-square" alt="Thumbnail"
-              width="100" height="100">
-          </td>
-          <td>{{ product.description }}</td>
-          <td>
-            <div style="display: flex; gap: 10px;">
-                <button class="btn btn-primary" 
-                  (click)="updateQuantity(product.id)">
-                Quantity
-              </button>
-              <button class="btn btn-secondary" 
-                  (click)="updateProduct(product.id)">
-                Update
-              </button>
-              <!-- <button class="btn btn-danger" 
-                (click)="deleteProduct(product)">Delete
-              </button>             -->
-                      <button class="btn" 
-                [ngClass]="product.is_active ? 'btn-danger' : 'btn-success'" 
-                (click)="toggleProductStatus(product)">
-          {{ product.is_active ? 'Block' : 'Unblock' }}
-        </button>
-              </div>
-          </td>          
-        </tr>
-      </tbody>
-    </table>
-    <div class="d-flex justify-content-center">
-      <nav aria-label="Page navigation">
-        <ul class="pagination">
+
+    <!-- Pagination -->
+    <div class="card-footer bg-white">
+      <nav aria-label="Page navigation" class="d-flex justify-content-center">
+        <ul class="pagination mb-0">
           <li class="page-item" *ngIf="currentPage > 0">
             <a class="page-link" (click)="onPageChange(0)">First</a>
           </li>
@@ -74,11 +123,13 @@
               <i class="fa fa-chevron-left"></i>
             </a>
           </li>
+
           <ng-container *ngFor="let page of visiblePages">
-              <li class="page-item" [ngClass]="{'active': page === currentPage + 1}">
-                <a class="page-link" (click)="onPageChange(page - 1)">{{ page }}</a>
-              </li>
-            </ng-container>
+            <li class="page-item" [ngClass]="{'active': page === currentPage + 1}">
+              <a class="page-link" (click)="onPageChange(page - 1)">{{ page }}</a>
+            </li>
+          </ng-container>
+
           <li class="page-item" *ngIf="currentPage < totalPages - 1">
             <a class="page-link" (click)="onPageChange(currentPage + 1)">
               <i class="fa fa-chevron-right"></i>
@@ -91,3 +142,4 @@
       </nav>
     </div>
   </div>
+</div>

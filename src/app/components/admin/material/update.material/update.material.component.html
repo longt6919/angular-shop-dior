@@ -1,20 +1,47 @@
 <div *ngIf="updatedMaterial">      
-    <!-- Form cập nhật thông tin sản phẩm -->
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 offset-md-3">
-          <h3>Cập nhật chất liệu</h3>
-          <form (ngSubmit)="updateMaterial()">
-            <div class="form-group mb-3">
-              <label for="name">Tên chất liệu:</label>
-              <input type="text" id="name" 
-                [(ngModel)]="updatedMaterial.name" 
-                name="name" class="form-control" required>
-            </div>     
-            <a routerLink="/admin/materials" class="me-3">Trở lại</a>                            
-            <button type="submit" class="btn btn-primary">Cập nhật</button>
-          </form>
-        </div>
+  <div class="container my-3">
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6">
+        <div class="card border-0 shadow-sm rounded-3">
+          <div class="card-header bg-light d-flex align-items-center gap-2">
+            <i class="fa-solid fa-feather text-primary"></i>
+            <h3 class="card-title h6 m-0 fw-semibold">Cập nhật chất liệu</h3>
+          </div>
+
+          <div class="card-body">
+            <!-- Form cập nhật thông tin sản phẩm -->
+            <form (ngSubmit)="updateMaterial()">
+              <div class="form-group mb-3">
+                <label for="name" class="form-label">Tên chất liệu</label>
+                <div class="input-group">
+                  <span class="input-group-text">
+                    <i class="fa-solid fa-tag"></i>
+                  </span>
+                  <input
+                    type="text"
+                    id="name"
+                    [(ngModel)]="updatedMaterial.name"
+                    name="name"
+                    class="form-control"
+                    required
+                    placeholder="Nhập tên chất liệu"
+                  />
+                </div>
+              </div>
+
+              <div class="d-inline-flex gap-2">
+                <a routerLink="/admin/materials" class="btn btn-outline-secondary">
+                  <i class="fa-solid fa-arrow-left me-1"></i> Trở lại
+                </a>
+                <button type="submit" class="btn btn-primary">
+                  <i class="fa-regular fa-floppy-disk me-1"></i> Cập nhật
+                </button>
+              </div>
+            </form>
+          </div>
+
+        </div>        
       </div>
     </div>
   </div>
+</div>

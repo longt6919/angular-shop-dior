@@ -41,14 +41,30 @@ orderResponse: OrderResponse ={
     private router: Router,
     private toastService: ToastService
   ) { }
+  
 
   ngOnInit(): void {
         this.getOrderDetails();
   }
-    private calcShipping(method?: string): { fee: number; label: string } {
+   private readonly SHIPPING_FEES: Record<'express' | 'normal', number> = {
+    express: 70_000,
+    normal: 35_000,
+  };
+
+  private shippingLabelFor(method?: string): string {
     const m = (method || '').toLowerCase();
-    if (m === 'express') return { fee: 70_000, label: 'Giao hàng Nhanh' };
-    return { fee: 0, label: 'Thanh toán tại quầy' }; // default
+    if (m === 'express') return 'Giao hàng Nhanh';
+    if (m === 'normal')  return 'Giao hàng Tiết Kiệm';
+    // fallback (nếu BE lưu giá trị khác)
+    return 'Không xác định';
+  }
+
+  // 2) Sửa calcShipping để hỗ trợ normal
+  private calcShipping(method?: string): { fee: number; label: string } {
+    const m = (method || '').toLowerCase() as 'express' | 'normal';
+    const fee = this.SHIPPING_FEES[m] ?? 0;
+    const label = this.shippingLabelFor(method);
+    return { fee, label };
   }
   
 
