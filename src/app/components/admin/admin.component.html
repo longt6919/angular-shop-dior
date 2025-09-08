@@ -1,84 +1,82 @@
-<div class="container-fluid">
-    <header class="header bg-success text-white d-flex justify-content-between">
-      <h1 class="header-title">ADMIN MANAGER</h1>
-      <!-- Logout Button -->
-      <button class="btn btn-danger btn-sm" (click)="logout()">Logout <i class="fa-solid fa-arrow-right-from-bracket"></i></button>
-    </header>
-    <div class="row">
-      <nav id="sidebar" class="col-md-2 col-lg-2 d-md-block bg-light sidebar">
-        <div class="position-sticky">
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" 
-                (click)="showAdminComponent('orders')">
-                <i class="fab fa-first-order icon"></i>Hóa đơn
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" 
-                (click)="showAdminComponent('categories')">
-                <i class="fa-solid fa-list icon"></i>Danh mục
-              </a>
-            </li>
-               <li class="nav-item">
-              <a class="nav-link" 
-                (click)="showAdminComponent('brands')">
-                <i class="fa-solid fa-b icon"></i>Thương hiệu
-              </a>
-            </li>
-                  <li class="nav-item">
-              <a class="nav-link" 
-                (click)="showAdminComponent('styles')">
-                <i class="fa-solid fa-circle-half-stroke icon"></i>Phong cách
-              </a>
-            </li>
-                      <li class="nav-item">
-              <a class="nav-link" 
-                (click)="showAdminComponent('materials')">
-                <i class="fab fa-canadian-maple-leaf icon"></i>Chất liệu
-              </a>
-            </li>
-                <li class="nav-item">
-              <a class="nav-link" 
-                (click)="showAdminComponent('origins')">
-             <i class="fa-solid fa-globe icon"></i>  Xuất xứ
-              </a>
-            </li>
-                    <li class="nav-item">
-              <a class="nav-link" 
-                (click)="showAdminComponent('colors')">
-             <i class="fa-solid fa-palette icon"></i>  Màu sắc
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" 
-                (click)="showAdminComponent('products')">
-                <i class="fab fa-codepen icon"></i>Sản phẩm
-              </a>
-            </li>
-               <li class="nav-item">
-              <a class="nav-link" 
-                (click)="showAdminComponent('users')">
-                <i class="fa-solid fa-users icon"></i>  Khách hàng
-              </a>
-            </li>
-                  <li class="nav-item">
-              <a class="nav-link" 
-                (click)="showAdminComponent('employees')">
-             <i class="fa-solid fa-address-card icon"></i>  Nhân viên
-              </a>
-            </li>
-                     <li class="nav-item">
-              <a class="nav-link" 
-                (click)="showAdminComponent('statisticals')">
-             <i class="fa-solid fa-chart-simple icon"></i>  Thống kê
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-      <div class="col-md-10 col-lg-10 overflow-auto">
-            <router-outlet></router-outlet>
+<div class="container-fluid p-0">
+<header class="header bg-success text-white d-flex align-items-center justify-content-between sticky-top shadow-sm px-3">
+  <div class="d-flex align-items-center gap-2">
+    <i class="fa-solid fa-gears fs-4"></i>
+    <h1 class="header-title m-0 fs-4 fw-bold">Admin Manager</h1>
+  </div>
+  <button class="btn btn-outline-light btn-sm rounded-pill px-3" (click)="logout()">
+    <i class="fa-solid fa-arrow-right-from-bracket me-1"></i> Logout
+  </button>
+</header>
+
+
+  <div class="row g-0">
+    <nav id="sidebar" class="col-md-2 col-lg-2 d-md-block sidebar">
+      <div class="position-sticky sidebar-inner">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" (click)="showAdminComponent('orders')">
+              <i class="fab fa-first-order icon me-2"></i> Hóa đơn
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="showAdminComponent('categories')">
+              <i class="fa-solid fa-list icon me-2"></i> Danh mục
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="showAdminComponent('brands')">
+              <i class="fa-solid fa-b icon me-2"></i> Thương hiệu
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="showAdminComponent('styles')">
+              <i class="fa-solid fa-circle-half-stroke icon me-2"></i> Phong cách
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="showAdminComponent('materials')">
+              <i class="fab fa-canadian-maple-leaf icon me-2"></i> Chất liệu
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="showAdminComponent('origins')">
+              <i class="fa-solid fa-globe icon me-2"></i> Xuất xứ
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="showAdminComponent('colors')">
+              <i class="fa-solid fa-palette icon me-2"></i> Màu sắc
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="showAdminComponent('products')">
+              <i class="fab fa-codepen icon me-2"></i> Sản phẩm
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="showAdminComponent('users')">
+              <i class="fa-solid fa-users icon me-2"></i> Khách hàng
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="showAdminComponent('employees')">
+              <i class="fa-solid fa-address-card icon me-2"></i> Nhân viên
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="showAdminComponent('statisticals')">
+              <i class="fa-solid fa-chart-simple icon me-2"></i> Thống kê
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="col-md-10 col-lg-10 content-wrapper">
+      <div class="content-shell shadow-sm">
+        <router-outlet></router-outlet>
       </div>
     </div>
   </div>
+</div>

@@ -1,87 +1,173 @@
-<h1>Thông tin hóa đơn chi tiết</h1>
-<div class="container">
-  <h1>Hóa Đơn</h1>
-  
-  <div class="row">
-    <div class="col-md-6">
-      <h3>Thông tin</h3>
-      <p><strong>ID hóa đơn:</strong> {{ orderResponse.id }}</p>
-      <p><strong>ID tài khoản:</strong> {{ orderResponse.user_id }}</p>
-      <p><strong>Tên khách hàng:</strong> {{ orderResponse.fullname }}</p>
-      <p><strong>Số điện thoại:</strong> {{ orderResponse.phone_number }}</p>
-      <p><strong>Email:</strong> {{ orderResponse.email }}</p>
-      <p><strong>Địa chỉ:</strong> {{ orderResponse.address }}</p>
-      <p><strong>Ghi chú:</strong> {{ orderResponse.note }}</p>
-      <p><strong>Ngày đặt hàng:</strong> {{ orderResponse.order_date | date:'dd/MM/yyyy'}}</p>
-      <p><strong>Ngày gửi hàng:</strong> {{ orderResponse.shipping_date | date:'dd/MM/yyyy'}}</p>
-      <p><strong>Ngày nhận hàng:</strong> {{ orderResponse.delivery_date | date:'dd/MM/yyyy'}}</p>
-      <p><strong>Hình thức thanh toán:</strong> {{ orderResponse.payment_method }}</p>
+<div class="container my-3">
 
-      <div class="form-group">
-        <label for="statusSelect"><strong>Status:</strong></label>
-<select class="form-control" id="statusSelect" name="status" [(ngModel)]="orderResponse.status">
-  <option value="pending">Chờ xác nhận</option>
-  <option value="processing">Đã xác nhận</option>
+  <!-- Heading -->
+  <div class="d-flex align-items-center justify-content-between bg-white border rounded-3 shadow-sm p-3 mb-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="fa-solid fa-file-invoice-dollar fs-3 text-primary"></i>
+      <h1 class="h5 m-0 fw-bold">Thông tin hóa đơn chi tiết</h1>
+    </div>
+<span class="badge text-capitalize"
+  [ngClass]="{
+    'bg-secondary': orderResponse.status === 'pending',
+    'bg-primary': orderResponse.status === 'processing',
 
-  <option value="out_of_stock_pending">Hết hàng (chờ xác nhận)</option>
-  <option value="waiting_for_stock">Chờ sản phẩm</option>
+    'bg-info':
+      orderResponse.status === 'shipped' ||
+      orderResponse.status === 'shipping' ||
+      orderResponse.status === 'waiting_for_stock',
+    'bg-warning': orderResponse.status === 'out_of_stock_pending',
+    'text-dark':
+      orderResponse.status === 'shipped' ||
+      orderResponse.status === 'shipping' ||
+      orderResponse.status === 'waiting_for_stock' ||
+      orderResponse.status === 'out_of_stock_pending',
 
-  <option value="shipped">Đang giao hàng</option>
-  <option value="refused_on_delivery">Khách không nhận hàng</option>
-  <option value="delivered">Đã nhận hàng</option>
-
-  <option value="cancelled_out_of_stock">Hủy (Do hết hàng)</option>
-  <option value="cancelled">Hủy đơn</option>
-</select>
-      </div>          
-  </div>  
+    'bg-success': orderResponse.status === 'delivered',
+    'bg-danger':
+      orderResponse.status === 'cancelled' ||
+      orderResponse.status === 'cancelled_out_of_stock',
+    'bg-dark': orderResponse.status === 'refused_on_delivery'
+  }">
+  {{ orderResponse.status }}
+</span>
   </div>
-  <h3>Đơn hàng</h3>
-  <table class="table">
-    <thead>
-      <tr>
-        <!-- <th>Image</th> -->
-        <th>Tên sản phẩm</th>
-        <th>Giá</th>
-        <th>Kích thước</th>
-        <th>Màu sắc</th>
-        <th>Số lượng</th>
-        <th>Tổng</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let order_detail of orderResponse.order_details; 
-        let i = index">
-        <!-- <td>
-  <img [src]="order_detail.product.thumbnail" alt="thumbnail" width="100" height="100">
-</td> -->
-        <td>{{ order_detail.product_name }}</td>
-        <td>{{ order_detail.price | currency:'VND':'symbol' }}</td>
-        <td>{{order_detail.size}}</td>
-        <td>{{order_detail.color}}</td>
-        <td>
-          <p>{{order_detail.number_of_products}}</p>          
-        </td>
-        <td>{{order_detail.price*order_detail.number_of_products | number}}</td>
-      </tr>
-    </tbody>
-  </table>  
-  <div class="text-end mt-1">
-<h6>
-  <strong>Tổng giá: </strong>
-  {{ totalOriginMoney | currency:'VND':'symbol' }}
-</h6>
-<h6>
-  <strong>Phí vận chuyển: </strong>
-{{ shippingFee | currency:'VND':'symbol':'1.0-0' }}
-</h6>
-<h6> <strong>Khuyến mãi: </strong>
-  {{ couponMoney | currency:'VND':'symbol' }}</h6>
+
+  <!-- Thông tin hóa đơn -->
+  <div class="card border-0 shadow-sm rounded-3 mb-3">
+    <div class="card-header bg-light fw-semibold">Hóa đơn</div>
+    <div class="card-body">
+      <div class="row g-2">
+        <div class="col-sm-6">
+          <div class="small text-muted">ID hóa đơn</div>
+          <div class="fw-semibold">{{ orderResponse.id }}</div>
+        </div>
+        <div class="col-sm-6">
+          <div class="small text-muted">ID tài khoản</div>
+          <div class="fw-semibold">{{ orderResponse.user_id }}</div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="small text-muted">Tên khách hàng</div>
+          <div class="fw-semibold">{{ orderResponse.fullname }}</div>
+        </div>
+        <div class="col-sm-6">
+          <div class="small text-muted">Số điện thoại</div>
+          <div class="fw-semibold">{{ orderResponse.phone_number }}</div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="small text-muted">Email</div>
+          <div class="fw-semibold">{{ orderResponse.email }}</div>
+        </div>
+        <div class="col-sm-6">
+          <div class="small text-muted">Địa chỉ</div>
+          <div class="fw-semibold">{{ orderResponse.address }}</div>
+        </div>
+
+        <div class="col-12">
+          <div class="small text-muted">Ghi chú</div>
+          <div class="fw-semibold">{{ orderResponse.note }}</div>
+        </div>
+
+        <div class="col-sm-4">
+          <div class="small text-muted">Ngày đặt hàng</div>
+          <div class="fw-semibold">{{ orderResponse.order_date | date:'dd/MM/yyyy' }}</div>
+        </div>
+        <div class="col-sm-4">
+          <div class="small text-muted">Ngày gửi hàng</div>
+          <div class="fw-semibold">{{ orderResponse.shipping_date | date:'dd/MM/yyyy' }}</div>
+        </div>
+        <div class="col-sm-4">
+          <div class="small text-muted">Ngày nhận hàng</div>
+          <div class="fw-semibold">{{ orderResponse.delivery_date | date:'dd/MM/yyyy' }}</div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="small text-muted">Hình thức thanh toán</div>
+          <div class="fw-semibold">{{ orderResponse.payment_method }}</div>
+        </div>
+
+        <div class="col-sm-6">
+          <label for="statusSelect" class="form-label fw-semibold mb-1">Trạng thái</label>
+          <select class="form-select" id="statusSelect" name="status" [(ngModel)]="orderResponse.status">
+            <option value="pending">Chờ xác nhận</option>
+            <option value="processing">Đã xác nhận</option>
+
+            <option value="out_of_stock_pending">Hết hàng (chờ xác nhận)</option>
+            <option value="waiting_for_stock">Chờ sản phẩm</option>
+
+            <option value="shipped">Đang giao hàng</option>
+            <option value="refused_on_delivery">Khách không nhận hàng</option>
+            <option value="delivered">Đã nhận hàng</option>
+
+            <option value="cancelled_out_of_stock">Hủy (Do hết hàng)</option>
+            <option value="cancelled">Hủy đơn</option>
+          </select>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="text-end mt-3">
-  <h4><strong>Tổng giá (đã áp dụng voicher):</strong> 
-  {{ orderResponse.total_money | currency:'VND':'symbol' }}</h4>
-</div>
-  <button class="btn btn-primary col-md-2" 
-    (click)="saveOrder()">Save</button>
+
+  <!-- Bảng đơn hàng -->
+  <div class="card border-0 shadow-sm rounded-3 mb-3">
+    <div class="card-header bg-light fw-semibold">Đơn hàng</div>
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle m-0">
+          <thead class="table-light sticky-top">
+            <tr>
+              <!-- <th>Image</th> -->
+              <th class="text-nowrap">Tên sản phẩm</th>
+              <th class="text-nowrap text-end">Giá</th>
+              <th class="text-nowrap">Kích thước</th>
+              <th class="text-nowrap">Màu sắc</th>
+              <th class="text-nowrap text-center">Số lượng</th>
+              <th class="text-nowrap text-end">Tổng</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let order_detail of orderResponse.order_details; let i = index">
+              <!--
+              <td>
+                <img [src]="order_detail.product.thumbnail" alt="thumbnail" width="64" height="64" class="rounded">
+              </td>
+              -->
+              <td>{{ order_detail.product_name }}</td>
+              <td class="text-end">{{ order_detail.price | currency:'VND':'symbol' }}</td>
+              <td>{{ order_detail.size }}</td>
+              <td>{{ order_detail.color }}</td>
+              <td class="text-center">{{ order_detail.number_of_products }}</td>
+              <td class="text-end">{{ order_detail.price * order_detail.number_of_products | number }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tổng tiền -->
+  <div class="bg-white border rounded-3 shadow-sm p-3 mb-3">
+    <div class="d-flex justify-content-between py-1">
+      <span class="text-muted">Tổng giá</span>
+      <span class="fw-semibold">{{ totalOriginMoney | currency:'VND':'symbol' }}</span>
+    </div>
+    <div class="d-flex justify-content-between py-1">
+      <span class="text-muted">Phí vận chuyển</span>
+      <span class="fw-semibold">{{ shippingFee | currency:'VND':'symbol':'1.0-0' }}</span>
+    </div>
+    <div class="d-flex justify-content-between py-1">
+      <span class="text-muted">Khuyến mãi</span>
+      <span class="fw-semibold">{{ couponMoney | currency:'VND':'symbol' }}</span>
+    </div>
+    <hr class="my-2">
+    <div class="d-flex justify-content-between align-items-center">
+      <span class="fw-bold">Tổng giá (đã áp dụng voicher)</span>
+      <span class="h5 m-0 fw-bold text-primary">{{ orderResponse.total_money | currency:'VND':'symbol' }}</span>
+    </div>
+  </div>
+
+  <div class="text-end">
+    <button class="btn btn-primary px-4" (click)="saveOrder()">Save</button>
+  </div>
+
 </div>

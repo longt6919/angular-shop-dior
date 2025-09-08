@@ -1,0 +1,45 @@
+.order-detail-page .page-heading {
+  position: sticky; top: 0; z-index: 1029;
+}
+
+/* Item thông tin */
+.info-item .label {
+  font-size: .85rem;
+  color: #6c757d;
+  margin-bottom: .125rem;
+}
+.info-item .value {
+  font-weight: 600;
+}
+
+/* Badge trạng thái (viên thuốc) */
+.status-badge {
+  font-size: .8rem;
+  padding: .45rem .7rem;
+  border-radius: 999px;
+}
+
+/* Bảng sản phẩm */
+.table-sticky-wrap {
+  max-height: calc(100vh - 360px); /* điều chỉnh nếu header/summary cao hơn */
+  overflow: auto;
+}
+.table thead.sticky-top {
+  top: 0;
+  z-index: 1;
+  box-shadow: 0 2px 0 rgba(0,0,0,0.02);
+}
+.table tbody tr:hover {
+  background: rgba(13,110,253,.04);
+}
+
+/* Truncate helper (kết hợp max-width inline ở HTML) */
+.text-truncate {
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+/* Số tiền canh phải & monospace nhẹ để dễ so sánh */
+.money { font-variant-numeric: tabular-nums; }
+
+/* Card bo tròn đẹp */
+.card { border-radius: 14px; overflow: hidden; }

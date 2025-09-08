@@ -1,36 +1,43 @@
-<div class="container-fluid">
-    <header class="header bg-success text-white d-flex justify-content-between">
-      <h1 class="header-title">Nhân viên</h1>
-      <!-- Logout Button -->
-      <button class="btn btn-danger btn-sm" (click)="logout()">Logout <i class="fa-solid fa-arrow-right-from-bracket"></i></button>
-    </header>
-    <div class="row">
-      <nav id="sidebar" class="col-md-2 col-lg-2 d-md-block bg-light sidebar">
-        <div class="position-sticky">
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" 
-                (click)="showEmployeeComponent('list-orders')">
-                <i class="fab fa-first-order icon"></i>Hóa đơn
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link"
-                (click)="showEmployeeComponent('products')">
-                <i class="fa-solid fa-list icon"></i>Sản phẩm
-              </a>
-            </li>
-               <li class="nav-item">
-              <a class="nav-link"
-                (click)="showEmployeeComponent('orders')">
-                <i class="fa-solid fa-cart-shopping icon"></i>Bán hàng
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-      <div class="col-md-10 col-lg-10 overflow-auto">
-            <router-outlet></router-outlet>
+<div class="container-fluid p-0">
+  <!-- Header -->
+  <header class="header bg-success text-white d-flex align-items-center justify-content-between sticky-top shadow-sm px-3">
+    <div class="d-flex align-items-center gap-2">
+      <i class="fa-solid fa-id-badge fs-4"></i>
+      <h1 class="header-title m-0 fs-4 fw-bold">Nhân viên</h1>
+    </div>
+    <button class="btn btn-outline-light btn-sm rounded-pill px-3" (click)="logout()">
+      <i class="fa-solid fa-arrow-right-from-bracket me-1"></i> Logout
+    </button>
+  </header>
+
+  <!-- Sidebar + Content -->
+  <div class="row g-0">
+    <nav id="sidebar" class="col-md-2 col-lg-2 d-md-block sidebar">
+      <div class="position-sticky sidebar-inner">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" (click)="showEmployeeComponent('list-orders')">
+              <i class="fab fa-first-order icon me-2"></i> Hóa đơn
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="showEmployeeComponent('products')">
+              <i class="fa-solid fa-box-open icon me-2"></i> Sản phẩm
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="showEmployeeComponent('orders')">
+              <i class="fa-solid fa-cart-shopping icon me-2"></i> Bán hàng
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="col-md-10 col-lg-10 content-wrapper">
+      <div class="content-shell shadow-sm">
+        <router-outlet></router-outlet>
       </div>
     </div>
   </div>
+</div>
