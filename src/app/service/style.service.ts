@@ -6,12 +6,14 @@ import { Style } from "../models/style";
 import { UpdateStyleDTO } from "../dtos/style/update.style.dto";
 import { InsertStyleDTO } from "../dtos/style/insert.style.dto";
 import { HttpUtilService } from "./http.util.service";
+import {environment} from "../environments/environment";
 
-@Injectable({ 
+
+@Injectable({
   providedIn: 'root'
 })
 export class StyleService {
-     private apiGetStyles  = `http://localhost:8080/api/v1/styles`;
+     private apiGetStyles  = `${environment.apiBaseUrl}/api/v1/styles`;
 
   constructor(private http: HttpClient,
                     private httpUtilService: HttpUtilService,
@@ -22,14 +24,14 @@ export class StyleService {
   getStyles(page: number, limit: number):Observable<Style[]> {
     const params = new HttpParams()
       .set('page', page.toString())
-      .set('limit', limit.toString());     
-      return this.http.get<Style[]>(this.apiGetStyles, { params });           
+      .set('limit', limit.toString());
+      return this.http.get<Style[]>(this.apiGetStyles, { params });
   }
     getStylesByAdmin(page: number, limit: number):Observable<Style[]> {
     const params = new HttpParams()
       .set('page', page.toString())
-      .set('limit', limit.toString());     
-      return this.http.get<Style[]>(`${this.apiGetStyles}/all/admin`, { params });           
+      .set('limit', limit.toString());
+      return this.http.get<Style[]>(`${this.apiGetStyles}/all/admin`, { params });
   }
   getDetailStyle(id:number): Observable<Style>{
     return this.http.get<Style>(`${this.apiGetStyles}/${id}`);

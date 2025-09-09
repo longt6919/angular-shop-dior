@@ -1,13 +1,14 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import {environment} from "../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class AuthService {
-  private apiBaseUrl = `http://localhost:8080/api/v1`;
+  private apiBaseUrl = `${environment.apiBaseUrl}/api/v1`;
 
   constructor(private http: HttpClient) { }
 
@@ -15,7 +16,7 @@ export class AuthService {
   authenticate(loginType: 'facebook' | 'google'): Observable<string> {
     debugger
     return this.http.get(
-      `${this.apiBaseUrl}/users/auth/social-login?login_type=${loginType}`, 
+      `${this.apiBaseUrl}/users/auth/social-login?login_type=${loginType}`,
       { responseType: 'text' }
     );
   }

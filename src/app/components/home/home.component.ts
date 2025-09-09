@@ -4,6 +4,7 @@ import { Category } from 'src/app/models/category';
 import { Product } from 'src/app/models/product';
 import { CategoryService } from 'src/app/service/category.service';
 import { ProductService } from 'src/app/service/product.service';
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-home',
@@ -35,7 +36,7 @@ export class HomeComponent implements OnInit {
     this.getProducts(this.keyword,
        this.selectedCategoryId,
         this.currentPage,
-         this.itemsPerPage); 
+         this.itemsPerPage);
          this.onProductClick;
 
 
@@ -59,7 +60,7 @@ export class HomeComponent implements OnInit {
          this.itemsPerPage);   }
 });
   }
-  
+
 
    getCategorys(page: number, limit: number) {
     this.categoryService.getCategories(page, limit).subscribe({
@@ -86,7 +87,7 @@ export class HomeComponent implements OnInit {
         debugger
         response.products.forEach((product: Product)=>{
           debugger
-          product.url=`http://localhost:8080/api/v1/products/images/${product.thumbnail}`;
+          product.url=`${environment.apiBaseUrl}/api/v1/products/images/${product.thumbnail}`;
         });
         this.products = response.products;
         this.totalPages = response.totalPages;
@@ -107,7 +108,7 @@ export class HomeComponent implements OnInit {
     this.currentPage =page;
     this.getProducts(this.keyword, this.selectedCategoryId, this.currentPage, this.itemsPerPage);
   }
-  
+
 generateVisiblePageArray(currentPage: number, totalPages: number): number[] {
   const maxVisible = 5;
   if (totalPages <= 0) return []; // không có sản phẩm thì không hiện gì
@@ -125,14 +126,14 @@ generateVisiblePageArray(currentPage: number, totalPages: number): number[] {
   onProductClick(productId: number){
     this.router.navigate(['products',productId]);
   }
- 
+
 loadProductByCategory() {
   this.productService.getProductsByCategoryId(this.categoryId, this.currentPage, this.itemsPerPage).subscribe({
     next: (response: any) => {
       // Lấy mảng sản phẩm (chuẩn Spring Data Page là 'content')
       const products = response.content || [];
       products.forEach((product: Product) => {
-        product.url = `http://localhost:8080/api/v1/products/images/${product.thumbnail}`;
+        product.url = `${environment.apiBaseUrl}/api/v1/products/images/${product.thumbnail}`;
       });
       this.products = products;
       this.totalPages = response.totalPages;
@@ -149,7 +150,7 @@ loadProductByStyle() {
       // Lấy mảng sản phẩm (chuẩn Spring Data Page là 'content')
       const products = response.content || [];
       products.forEach((product: Product) => {
-        product.url = `http://localhost:8080/api/v1/products/images/${product.thumbnail}`;
+        product.url = `${environment.apiBaseUrl}/api/v1/products/images/${product.thumbnail}`;
       });
       this.products = products;
       this.totalPages = response.totalPages;
@@ -166,7 +167,7 @@ loadProductByBrand() {
       // Lấy mảng sản phẩm (chuẩn Spring Data Page là 'content')
       const products = response.content || [];
       products.forEach((product: Product) => {
-        product.url = `http://localhost:8080/api/v1/products/images/${product.thumbnail}`;
+        product.url = `${environment.apiBaseUrl}/api/v1/products/images/${product.thumbnail}`;
       });
       this.products = products;
       this.totalPages = response.totalPages;
@@ -183,7 +184,7 @@ searchByKeyword() {
       // Lấy mảng sản phẩm (chuẩn Spring Data Page là 'content')
       const products = response.content || [];
       products.forEach((product: Product) => {
-        product.url = `http://localhost:8080/api/v1/products/images/${product.thumbnail}`;
+        product.url = `${environment.apiBaseUrl}/api/v1/products/images/${product.thumbnail}`;
       });
       this.products = products;
       this.totalPages = response.totalPages;

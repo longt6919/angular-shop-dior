@@ -5,12 +5,13 @@ import { Brand } from "../models/brand";
 import { UpdateBrandDTO } from "../dtos/brand/update.brand.dto";
 import { InsertBrandDTO } from "../dtos/brand/insert.brand.dto";
 import { HttpUtilService } from "./http.util.service";
+import {environment} from "../environments/environment";
 
-@Injectable({ 
+@Injectable({
   providedIn: 'root'
 })
 export class BrandService {
-     private apiGetBrands  = `http://localhost:8080/api/v1/brand`;
+     private apiGetBrands  = `${environment.apiBaseUrl}/api/v1/brand`;
         private apiConfig={
     headers:this.httpUtilService.createHeaders(),
   }
@@ -20,14 +21,14 @@ export class BrandService {
   getBrands(page: number, limit: number):Observable<Brand[]> {
     const params = new HttpParams()
       .set('page', page.toString())
-      .set('limit', limit.toString());     
-      return this.http.get<Brand[]>(this.apiGetBrands, { params });           
+      .set('limit', limit.toString());
+      return this.http.get<Brand[]>(this.apiGetBrands, { params });
   }
     getBrandsByAdmin(page: number, limit: number):Observable<Brand[]> {
     const params = new HttpParams()
       .set('page', page.toString())
-      .set('limit', limit.toString());     
-      return this.http.get<Brand[]>(`${this.apiGetBrands}/all/admin`, { params });           
+      .set('limit', limit.toString());
+      return this.http.get<Brand[]>(`${this.apiGetBrands}/all/admin`, { params });
   }
   getDetailBrand(id:number): Observable<Brand>{
     return this.http.get<Brand>(`${this.apiGetBrands}/${id}`);

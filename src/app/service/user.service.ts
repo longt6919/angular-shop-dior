@@ -8,15 +8,16 @@ import { UserResponse } from '../responses/user/user.response';
 import { UpdateUserDTO } from '../dtos/users/update.user.dto';
 import { User } from '../models/user';
 import { UpdateEmployeeDTO } from '../dtos/users/update.employee.dto';
+import {environment} from "../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-    private apiUser =`http://localhost:8080/api/v1/users`;
-  private apiRegister =`http://localhost:8080/api/v1/users/register`;
-  private apiLogin =`http://localhost:8080/api/v1/users/login`;
-   private apiUserDetail =`http://localhost:8080/api/v1/users/details`;
+    private apiUser =`${environment.apiBaseUrl}/api/v1/users`;
+  private apiRegister =`${environment.apiBaseUrl}/api/v1/users/register`;
+  private apiLogin =`${environment.apiBaseUrl}/api/v1/users/login`;
+   private apiUserDetail =`${environment.apiBaseUrl}/api/v1/users/details`;
      localStorage?:Storage;
 
        private apiConfig={
@@ -32,7 +33,7 @@ export class UserService {
     login(loginDTO:LoginDTO):Observable<any>{
   return this.http.post(this.apiLogin, loginDTO,this.apiConfig)
 }
-  getUserDetail(token: string): Observable<UserResponse> { 
+  getUserDetail(token: string): Observable<UserResponse> {
     return this.http.post<UserResponse>(this.apiUserDetail,null, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -40,7 +41,7 @@ export class UserService {
       })
     })
   }
-  getEmployeeDetail(id: number): Observable<User> { 
+  getEmployeeDetail(id: number): Observable<User> {
     return this.http.get<User>(`${this.apiUser}/${id}`)
   }
    updateEmployee(id:number,user:UpdateEmployeeDTO):Observable<UpdateEmployeeDTO>{
@@ -106,7 +107,7 @@ getUsers(params: { page: number, limit: number, keyword: string }): Observable<a
     const url = `${this.apiUser}/reset-password/${userId}`;
          return this.http.put(url, null, {
     ...this.apiConfig,
-    responseType: 'text' as 'json' 
+    responseType: 'text' as 'json'
   });
   }
 
@@ -118,4 +119,3 @@ getUsers(params: { page: number, limit: number, keyword: string }): Observable<a
   });
   }
 }
-  

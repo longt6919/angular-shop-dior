@@ -6,12 +6,13 @@ import { ApiResponse } from "../responses/api.response";
 import { InsertProductDTO } from "../dtos/product/insert.product.dto";
 import { UpdateProductDTO } from "../dtos/product/update.product.dto";
 import { HttpUtilService } from "./http.util.service";
+import {environment} from "../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-    private apiGetProducts =`http://localhost:8080/api/v1/products`
+    private apiGetProducts =`${environment.apiBaseUrl}/api/v1/products`
      private apiConfig={
     headers:this.httpUtilService.createHeaders(),
   }

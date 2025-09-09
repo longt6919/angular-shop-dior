@@ -9,6 +9,7 @@ import { CartService } from 'src/app/service/cart.service';
 import { ProductService } from 'src/app/service/product.service';
 import { CartItemView } from 'src/app/models/cart.item.view';
 import { ToastService } from 'src/app/service/toast.service';
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-detail-product',
@@ -16,7 +17,7 @@ import { ToastService } from 'src/app/service/toast.service';
   styleUrls: ['./detail-product.component.scss']
 })
 export class DetailProductComponent implements OnInit {
-  
+
   product?: Product;
   productId: number = 0;
   currentImageIndex: number = 0;
@@ -48,7 +49,7 @@ export class DetailProductComponent implements OnInit {
             // Map full image URLs
             if (response.product_images) {
               response.product_images.forEach((productImages: ProductImage) => {
-                productImages.image_url = `http://localhost:8080/api/v1/products/images/${productImages.image_url}`;
+                productImages.image_url = `${environment.apiBaseUrl}/api/v1/products/images/${productImages.image_url}`;
               });
             }
             this.product = response;
@@ -227,7 +228,7 @@ private getAvailableNow(): number {
   // increaseQuantity() {
   //   this.quantity++;
   // }
-  
+
 
   buyNow(): void {
     this.router.navigate(['/orders']);

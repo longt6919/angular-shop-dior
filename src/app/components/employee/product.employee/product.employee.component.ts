@@ -7,6 +7,7 @@ import { ApiResponse } from 'src/app/responses/api.response';
 import { CategoryService } from 'src/app/service/category.service';
 import { ProductService } from 'src/app/service/product.service';
 import { ToastService } from 'src/app/service/toast.service';
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-product.employee',
@@ -35,7 +36,7 @@ export class ProductEmployeeComponent implements OnInit {
  this.getProducts(this.keyword,
   this.selectedCategoryId,
   this.currentPage,this.itemsPerpage
- ); 
+ );
   }
   searchProducts(){
     this.currentPage =0;
@@ -50,7 +51,7 @@ export class ProductEmployeeComponent implements OnInit {
       next:(response: any)=>{
         response.products.forEach((product: Product)=>{
           if(product){
-            product.url =`http://localhost:8080/api/v1/products/images/${product.thumbnail}`;
+            product.url =`${environment.apiBaseUrl}/api/v1/products/images/${product.thumbnail}`;
           }
         });
         this.products = response.products;
@@ -68,7 +69,7 @@ export class ProductEmployeeComponent implements OnInit {
     localStorage.setItem('currentProductAdminPage',String(this.currentPage));
     this.getProducts(this.keyword,this.selectedCategoryId,this.currentPage,this.itemsPerpage);
   }
-  
+
   generateVisiblePageArray(curentPage: number, totalPages: number):number[]{
     const maxVisiblePages = 5;
     const halfVisiblePages = Math.floor(maxVisiblePages/2);

@@ -15,6 +15,7 @@ import { OriginService } from 'src/app/service/origin.service';
 import { ProductService } from 'src/app/service/product.service';
 import { StyleService } from 'src/app/service/style.service';
 import { ToastService } from 'src/app/service/toast.service';
+import {environment} from "../../../../../environments/environment";
 
 @Component({
   selector: 'app-update.product.admin',
@@ -25,14 +26,14 @@ export class UpdateProductAdminComponent implements OnInit {
   productId: number;
   product: Product;
   updatedProduct: Product;
-  categories: Category[] = []; 
+  categories: Category[] = [];
   currentImageIndex: number = 0;
   images: File[] = [];
   brands: Brand[]=[];
   materials: Material[]=[];
   styles: Style[]=[];
   origins: Origin[]=[];
-  constructor(    
+  constructor(
     private productService: ProductService,
     private route: ActivatedRoute,
     private router: Router,
@@ -41,11 +42,11 @@ export class UpdateProductAdminComponent implements OnInit {
       private brandService: BrandService,
       private materialService: MaterialService,
       private styleService: StyleService,
-      private originService: OriginService    ) 
-    {    
+      private originService: OriginService    )
+    {
     this.productId = 0;
     this.product = {} as Product;
-    this.updatedProduct = {} as Product;   
+    this.updatedProduct = {} as Product;
   }
 
   ngOnInit(): void {
@@ -121,18 +122,18 @@ export class UpdateProductAdminComponent implements OnInit {
     this.productService.getDetailProduct(this.productId).subscribe({
       next: (product: Product) => {
         this.product = product;
-        this.updatedProduct = { ...product };                
+        this.updatedProduct = { ...product };
         this.updatedProduct.product_images.forEach((product_image:ProductImage) => {
-          product_image.image_url = `http://localhost:8080/api/v1/products/images/${product_image.image_url}?v=${Date.now()}`;
+          product_image.image_url = `${environment.apiBaseUrl}/api/v1/products/images/${product_image.image_url}?v=${Date.now()}`;
         });
       },
       complete: () => {
-        
+
       },
       error: (error: any) => {
-        
+
       }
-    });     
+    });
   }
     updateProduct() {
     const updateProductDTO: UpdateProductDTO = {
@@ -146,17 +147,17 @@ export class UpdateProductAdminComponent implements OnInit {
       origin_id: this.updatedProduct.origin_id,
     };
     this.productService.updateProduct(this.product.id, updateProductDTO).subscribe({
-      next: (response: any) => {  
+      next: (response: any) => {
         debugger
         this.toastService.showToast({
              error: null,
                 defaultMsg: 'Sửa sản phẩm thành công',
                 title: 'Thành công',
-        })        
+        })
       },
       complete: () => {
         debugger;
-        this.router.navigate(['/admin/products']);        
+        this.router.navigate(['/admin/products']);
       },
       error: (error) => {
               this.toastService.showToast({
@@ -165,18 +166,18 @@ export class UpdateProductAdminComponent implements OnInit {
                 title: 'Thất bại',
               });
       }
-    });  
+    });
   }
     showImage(index: number): void {
     debugger
-    if (this.product && this.product.product_images && 
+    if (this.product && this.product.product_images &&
         this.product.product_images.length > 0) {
-      // Đảm bảo index nằm trong khoảng hợp lệ        
+      // Đảm bảo index nằm trong khoảng hợp lệ
       if (index < 0) {
         index = 0;
       } else if (index >= this.product.product_images.length) {
         index = this.product.product_images.length - 1;
-      }        
+      }
       // Gán index hiện tại và cập nhật ảnh hiển thị
       this.currentImageIndex = index;
     }
@@ -185,7 +186,7 @@ export class UpdateProductAdminComponent implements OnInit {
     debugger
     // Gọi khi một thumbnail được bấm
     this.currentImageIndex = index; // Cập nhật currentImageIndex
-  }  
+  }
   nextImage(): void {
     debugger
     this.showImage(this.currentImageIndex + 1);
@@ -203,7 +204,7 @@ export class UpdateProductAdminComponent implements OnInit {
     return;
   }
 
-  const fileArray: File[] = Array.from(files); 
+  const fileArray: File[] = Array.from(files);
   const formData = new FormData();
 
   for (const file of fileArray) {
@@ -227,9 +228,9 @@ export class UpdateProductAdminComponent implements OnInit {
     if (confirm('Are you sure you want to remove this image?')) {
       this.productService.deleteProductImage(productImage.id).subscribe({
         next:(productImage: ProductImage) => {
-        
+
         this.getProductDetails();
-        },        
+        },
         error: (error) => {
               this.toastService.showToast({
                 error: error,
@@ -240,7 +241,7 @@ export class UpdateProductAdminComponent implements OnInit {
           console.error('Error deleting images:', error);
         }
       });
-    }   
+    }
   }
 
 }

@@ -4,19 +4,20 @@ import { Observable } from "rxjs";
 import { Material } from "../models/material";
 import { UpdateMaterialDTO } from "../dtos/material/update.material.dto";
 import { InsertMaterialDTO } from "../dtos/material/insert.material.dto";
+import {environment} from "../environments/environment";
 
-@Injectable({ 
+@Injectable({
   providedIn: 'root'
 })
 export class MaterialService {
-     private apiMaterials  = `http://localhost:8080/api/v1/material`;
+     private apiMaterials  = `${environment.apiBaseUrl}/api/v1/material`;
 
   constructor(private http: HttpClient) { }
   getMaterials(page: number, limit: number):Observable<Material[]> {
     const params = new HttpParams()
       .set('page', page.toString())
-      .set('limit', limit.toString());     
-      return this.http.get<Material[]>(this.apiMaterials, { params });           
+      .set('limit', limit.toString());
+      return this.http.get<Material[]>(this.apiMaterials, { params });
   }
   getDetailMaterial(id:number): Observable<Material>{
     return this.http.get<Material>(`${this.apiMaterials}/${id}`);

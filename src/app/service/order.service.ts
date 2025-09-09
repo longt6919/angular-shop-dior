@@ -11,7 +11,7 @@ import { OrderListResponse } from '../responses/order.list.response';
   providedIn: 'root'
 })
 export class OrderService {
- private apiUrl = `http://localhost:8080/api/v1/orders`;
+ private apiUrl = `${environment.apiBaseUrl}/api/v1/orders`;
   constructor(private http: HttpClient) { }
 
   placeOrder(orderData:OrderDTO): Observable<any>{

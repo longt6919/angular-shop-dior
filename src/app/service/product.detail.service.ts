@@ -4,10 +4,11 @@ import { ProductDetails } from "../models/product.detail";
 import { Observable } from "rxjs";
 import { ProductDetailListResponse } from "../responses/product/product.detail.list.response";
 import { UpdateProductDetailDTO } from "../dtos/update.product.detail.dto";
+import {environment} from "../environments/environment";
 
 @Injectable({ providedIn: 'root' })
 export class ProductDetailService {
-  private baseUrl = 'http://localhost:8080/api/v1/productDetail';
+  private baseUrl = `${environment.apiBaseUrl}/api/v1/productDetail`;
 
 
   constructor(private http: HttpClient) {}
@@ -34,24 +35,24 @@ getProductDetailsByIdProduct(
 plusQuantity(productDetailId: number, updateProductDetailDTO: UpdateProductDetailDTO):Observable<any> {
     const token = localStorage.getItem('token');
   return this.http.put(`${this.baseUrl}/update/${productDetailId}`,
-   updateProductDetailDTO, 
+   updateProductDetailDTO,
       {
       headers: { Authorization: `Bearer ${token}` },
       responseType: 'text' as 'json'
     }
     );
-    
+
 }
 minusQuantity(productDetailId: number, updateProductDetailDTO: UpdateProductDetailDTO):Observable<any> {
     const token = localStorage.getItem('token');
   return this.http.put(`${this.baseUrl}/update/minus/${productDetailId}`,
-   updateProductDetailDTO, 
+   updateProductDetailDTO,
       {
       headers: { Authorization: `Bearer ${token}` },
       responseType: 'text' as 'json'
     }
     );
-    
+
 }
 
 

@@ -7,7 +7,7 @@ import { Observable } from "rxjs";
     providedIn:'root'
 })
 export class RoleService{
-    private apiGetRoles =`http://localhost:8080/api/v1/roles`;
+    private apiGetRoles =`${environment.apiBaseUrl}/api/v1/roles`;
     constructor(private http: HttpClient){}
         getRoles():Observable<any>{
             return this.http.get<any[]>(this.apiGetRoles);

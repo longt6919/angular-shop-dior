@@ -5,31 +5,32 @@ import { Observable } from "rxjs";
 import { HttpUtilService } from "./http.util.service";
 import { UpdateCategoryDTO } from "../dtos/category/UpdateCategoryDTO";
 import { InsertCategoryDTO } from "../dtos/category/insert.category.dto";
+import {environment} from "../environments/environment";
 
-@Injectable({ 
+@Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
-     private apiGetCategories  = `http://localhost:8080/api/v1/categories`;
+     private apiGetCategories  = `${environment.apiBaseUrl}/api/v1/categories`;
         private apiConfig={
     headers:this.httpUtilService.createHeaders(),
   }
 
   constructor(private http: HttpClient,
             private httpUtilService: HttpUtilService,
-    
+
   ) { }
   getCategories(page: number, limit: number):Observable<Category[]> {
     const params = new HttpParams()
       .set('page', page.toString())
-      .set('limit', limit.toString());     
-      return this.http.get<Category[]>(this.apiGetCategories, { params });           
+      .set('limit', limit.toString());
+      return this.http.get<Category[]>(this.apiGetCategories, { params });
   }
     getCategoriesByAdmin(page: number, limit: number):Observable<Category[]> {
     const params = new HttpParams()
       .set('page', page.toString())
-      .set('limit', limit.toString());     
-      return this.http.get<Category[]>(`${this.apiGetCategories}/all/admin`, { params });           
+      .set('limit', limit.toString());
+      return this.http.get<Category[]>(`${this.apiGetCategories}/all/admin`, { params });
   }
   getDetailCategory(id:number): Observable<Category>{
     return this.http.get<Category>(`${this.apiGetCategories}/${id}`);

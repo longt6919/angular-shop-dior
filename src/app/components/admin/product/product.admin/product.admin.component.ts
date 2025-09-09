@@ -7,6 +7,7 @@ import { ApiResponse } from 'src/app/responses/api.response';
 import { ProductResponse } from 'src/app/responses/product/product.response';
 import { ProductService } from 'src/app/service/product.service';
 import { ToastService } from 'src/app/service/toast.service';
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-product-admin',
@@ -36,7 +37,7 @@ export class ProductAdminComponent implements OnInit {
  this.getProducts(this.keyword,
   this.selectedCategoryId,
   this.currentPage,this.itemsPerpage
- ); 
+ );
   }
   searchProducts(){
     this.currentPage =0;
@@ -48,7 +49,7 @@ export class ProductAdminComponent implements OnInit {
       next:(response: any)=>{
         response.products.forEach((product: Product)=>{
           if(product){
-            product.url =`http://localhost:8080/api/v1/products/images/${product.thumbnail}`;
+            product.url =`${environment.apiBaseUrl}/api/v1/products/images/${product.thumbnail}`;
           }
         });
         this.products = response.products;
@@ -66,7 +67,7 @@ export class ProductAdminComponent implements OnInit {
     localStorage.setItem('currentProductAdminPage',String(this.currentPage));
     this.getProducts(this.keyword,this.selectedCategoryId,this.currentPage,this.itemsPerpage);
   }
-  
+
   generateVisiblePageArray(curentPage: number, totalPages: number):number[]{
     const maxVisiblePages = 5;
     const halfVisiblePages = Math.floor(maxVisiblePages/2);
@@ -105,7 +106,7 @@ export class ProductAdminComponent implements OnInit {
 this.getProducts(this.keyword, this.selectedCategoryId, this.currentPage, this.itemsPerpage);
           },
           complete: () => {
-            debugger;          
+            debugger;
           },
           error: (error: HttpErrorResponse) => {
             this.toastService.showToast({
@@ -114,7 +115,7 @@ this.getProducts(this.keyword, this.selectedCategoryId, this.currentPage, this.i
               title: 'Lỗi Xóa'
             });
           }
-        });  
+        });
     }
   }
 
@@ -125,13 +126,13 @@ this.getProducts(this.keyword, this.selectedCategoryId, this.currentPage, this.i
       } else {
         confirmation = window.confirm('Bạn có muốn triển khai sản phẩm này ?');
       }
-      
+
       if (confirmation) {
         const params = {
           productId: product.id,
           enable: !product.is_active
         };
-    
+
         this.productService.toggleProductStatus(params).subscribe({
           next: (apiResponse: any) => {
             console.error('Block/unblock product successfully');
@@ -152,7 +153,7 @@ this.getProducts(this.keyword, this.selectedCategoryId, this.currentPage, this.i
             });
           }
         });
-      }      
+      }
     }
 
 

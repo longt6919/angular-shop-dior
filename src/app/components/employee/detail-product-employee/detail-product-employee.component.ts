@@ -9,6 +9,7 @@ import { Size } from 'src/app/models/size';
 import { CartService } from 'src/app/service/cart.service';
 import { ProductService } from 'src/app/service/product.service';
 import { ToastService } from 'src/app/service/toast.service';
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-detail-product-employee',
@@ -17,19 +18,19 @@ import { ToastService } from 'src/app/service/toast.service';
 })
 export class DetailProductEmployeeComponent implements OnInit {
 
- 
+
    product?: Product;
    productId: number = 0;
    currentImageIndex: number = 0;
    quantity: number = 1;
- 
+
    productDetail: ProductDetails[] = [];
    sizes: Size[] = [];
    selectedSizeId: number = 0;
    colors: Color[] = [];
    selectedColorId: number = 0;
    colorError: boolean | undefined;
- 
+
    constructor(
      private productService: ProductService,
      private cartService: CartService,
@@ -37,11 +38,11 @@ export class DetailProductEmployeeComponent implements OnInit {
      private route: ActivatedRoute,
      private toastService: ToastService
    ) {}
- 
+
    ngOnInit() {
      const idParam = this.route.snapshot.paramMap.get('id');
      this.productId = idParam ? +idParam : 0;
- 
+
      if (this.productId > 0) {
        this.productService.getDetailProduct(this.productId)
          .subscribe({
@@ -49,15 +50,15 @@ export class DetailProductEmployeeComponent implements OnInit {
              // Map full image URLs
              if (response.product_images) {
                response.product_images.forEach((productImages: ProductImage) => {
-                 productImages.image_url = `http://localhost:8080/api/v1/products/images/${productImages.image_url}`;
+                 productImages.image_url = `${environment.apiBaseUrl}/api/v1/products/images/${productImages.image_url}`;
                });
              }
              this.product = response;
- 
+
              // Use returned product_details (already filtered quantity > 0)
              this.productDetail = response.product_details
               .filter((detail: ProductDetails) => detail.quantity > 0);
- 
+
              // Build unique sizes with names (cast id to number)
              this.sizes = Array.from(
                new Map(
@@ -67,12 +68,12 @@ export class DetailProductEmployeeComponent implements OnInit {
                  ])
                ).values()
              );
- 
+
              if (this.sizes.length) {
                this.selectedSizeId = this.sizes[0].id;
                this.onSizeChange();
              }
- 
+
              this.showImage(0);
            },
            error: (error: any) => console.error('Error fetching detail:', error)
@@ -81,7 +82,7 @@ export class DetailProductEmployeeComponent implements OnInit {
        console.log('Invalid productId:', idParam);
      }
    }
- 
+
  onSizeChange() {
    this.colors = Array.from(
      new Map(
@@ -92,33 +93,33 @@ export class DetailProductEmployeeComponent implements OnInit {
    );
    this.selectedColorId = this.colors.length ? this.colors[0].id : 0;
  }
- 
- 
- 
- 
+
+
+
+
    showImage(index: number): void {
      if (this.product?.product_images?.length) {
        if (index < 0) index = 0;
        else if (index >= this.product.product_images.length)
          index = this.product.product_images.length - 1;
- 
+
        this.currentImageIndex = index;
      }
    }
- 
+
    thumbnailClick(index: number) {
      this.showImage(index);
    }
- 
+
    nextImage(): void {
      this.showImage(this.currentImageIndex + 1);
    }
- 
+
    previousImage(): void {
      this.showImage(this.currentImageIndex - 1);
    }
- 
- 
+
+
  addToCart(): void {
    // BẮT BUỘC chọn màu
    if (!this.selectedColorId) {
@@ -126,12 +127,12 @@ export class DetailProductEmployeeComponent implements OnInit {
      return;
    }
    this.colorError = false;
- 
+
    if (!this.product) {
      console.error('Cannot add to cart, product invalid');
      return;
    }
- 
+
    // Tìm đúng biến thể theo (size_id, color_id)
    const detail = this.productDetail.find(
      d => d.size_id === this.selectedSizeId && d.color_id === this.selectedColorId
@@ -140,14 +141,14 @@ export class DetailProductEmployeeComponent implements OnInit {
      console.error('Không tìm thấy biến thể này!');
      return;
    }
- 
+
    // ⬇️ THÊM MỚI: không cho vượt tồn theo dữ liệu hiện có + số đang có trong giỏ
    const key = `${this.product.id}-${this.selectedSizeId}-${this.selectedColorId}`;
    const existing = this.cartService.getCart().get(key);
    const currentInCart = existing?.quantity ?? 0;
    const availableNow = Math.max(0, (detail.quantity ?? 0) - currentInCart);
    const toAdd = Math.min(this.quantity, availableNow);
- 
+
    if (toAdd <= 0) {
      this.toastService.showToast({
        error: null,
@@ -156,7 +157,7 @@ export class DetailProductEmployeeComponent implements OnInit {
      });
      return;
    }
- 
+
    // Chuẩn bị object cho giỏ hàng
    const cartItem: CartItemView = {
      product_detail_id: detail.product_detail_id,
@@ -170,10 +171,10 @@ export class DetailProductEmployeeComponent implements OnInit {
      price: this.product.price,
      quantity: toAdd
    };
- 
+
    // Gọi CartService (bên đó sẽ gọi BE getAvailable để clamp lần cuối)
    this.cartService.addToCart(cartItem);
- 
+
    // Toast sau khi thêm thành công
    this.toastService.showToast({
      error: null,
@@ -186,16 +187,16 @@ export class DetailProductEmployeeComponent implements OnInit {
      d => d.size_id === this.selectedSizeId && d.color_id === this.selectedColorId
    );
    if (!detail) return 0; // chưa chọn biến thể hoặc không tồn tại
- 
+
    const key = `${this.product?.id}-${this.selectedSizeId}-${this.selectedColorId}`;
    const currentInCart = this.cartService.getCart().get(key)?.quantity ?? 0;
- 
+
    const available = (detail.quantity ?? 0) - currentInCart;
    return Math.max(0, available);
  }
- 
- 
- 
+
+
+
    decreaseQuantity() {
      if (this.quantity > 1) this.quantity--;
    }
@@ -211,7 +212,7 @@ export class DetailProductEmployeeComponent implements OnInit {
      });
      return;
    }
- 
+
    if (this.quantity < max) {
      this.quantity++;
    } else {
@@ -224,14 +225,14 @@ export class DetailProductEmployeeComponent implements OnInit {
      });
    }
  }
- 
+
    // increaseQuantity() {
    //   this.quantity++;
    // }
-   
- 
+
+
    buyNow(): void {
      this.router.navigate(['/employee/orders']);
    }
- 
+
 }

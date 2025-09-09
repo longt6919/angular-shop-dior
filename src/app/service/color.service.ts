@@ -5,12 +5,13 @@ import { Color } from "../models/color";
 import { UpdateColorDTO } from "../dtos/color/update.color.dto";
 import { InsertColorlDTO } from "../dtos/color/insert.color.dto";
 import { PageResponse } from "../responses/page.response";
+import {environment} from "../environments/environment";
 
-@Injectable({ 
+@Injectable({
   providedIn: 'root'
 })
 export class ColorService {
-     private apiGetColor  = `http://localhost:8080/api/v1/color`;
+     private apiGetColor  = `${environment.apiBaseUrl}/api/v1/color`;
 
   constructor(private http: HttpClient) { }
   getColors():Observable<Color[]> {
@@ -19,8 +20,8 @@ export class ColorService {
   getAdminColors(page: number, limit: number):Observable<PageResponse<Color>> {
       const params = new HttpParams()
         .set('page', page.toString())
-        .set('limit', limit.toString());     
-        return this.http.get<PageResponse<Color>>(this.apiGetColor, { params });           
+        .set('limit', limit.toString());
+        return this.http.get<PageResponse<Color>>(this.apiGetColor, { params });
   }
   getDetailColor(id:number): Observable<Color>{
     return this.http.get<Color>(`${this.apiGetColor}/${id}`);
