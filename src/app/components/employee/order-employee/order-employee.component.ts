@@ -321,7 +321,7 @@ private updateCartFromCartItems(): void {
             debugger;
             this.toastService.showToast({
               error: err,
-              defaultMsg: 'Thiếu hàng',
+              defaultMsg: 'Không thể đặt hàng',
               title: 'Lỗi Đặt Hàng',
             });
           },

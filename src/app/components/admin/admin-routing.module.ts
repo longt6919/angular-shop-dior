@@ -31,6 +31,7 @@ import { UpdateEmployeeComponent } from "./employee/update.employee/update.emplo
 import { InsertEmployeeComponent } from "./employee/insert.employee/insert.employee.component";
 import { AdminGuardFn } from "src/app/guards/admin.guard";
 import { StatisticsComponent } from "./statistics/statistics.component";
+import { CouponComponent } from "./coupon/coupon.component";
 
 const routes: Routes =[
     {
@@ -88,7 +89,11 @@ const routes: Routes =[
                        {
                 path:'styles',
                 component: StyleComponent,canActivate:[AdminGuardFn]
-            },    
+            }, 
+                         {
+                path:'coupons',
+                component: CouponComponent,canActivate:[AdminGuardFn]
+            },       
             {
                 path: 'styles/update/:id',
                 component: UpdateStyleComponent,canActivate:[AdminGuardFn]

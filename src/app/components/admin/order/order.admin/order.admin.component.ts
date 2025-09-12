@@ -13,7 +13,7 @@ export class OrderAdminComponent implements OnInit {
 
   orders: OrderResponse[]=[];
   currentPage: number =0;
-  itemsPerPage: number =10;
+  itemsPerPage: number =12;
   pages: number[] = [];
   totalPages: number =0;
   keyword: string ="";
@@ -33,7 +33,7 @@ export class OrderAdminComponent implements OnInit {
   }
   searchOrders() {
   this.currentPage =0;
-    this.itemsPerPage =10;
+    this.itemsPerPage =12;
       this.getAllOrders(this.keyword.trim(),this.currentPage,this.itemsPerPage);
 }
 
