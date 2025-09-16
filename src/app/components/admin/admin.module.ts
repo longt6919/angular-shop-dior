@@ -33,6 +33,8 @@ import { InsertEmployeeComponent } from './employee/insert.employee/insert.emplo
 import { UpdateEmployeeComponent } from './employee/update.employee/update.employee.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { CouponComponent } from './coupon/coupon.component';
+import { BillComponent } from './bill/bill.component';
+import { DetailBillComponent } from './detail-bill/detail-bill.component';
 
 @NgModule({
     declarations: [
@@ -67,6 +69,8 @@ import { CouponComponent } from './coupon/coupon.component';
         UpdateEmployeeComponent,
         StatisticsComponent,
         CouponComponent,
+        BillComponent,
+        DetailBillComponent,
     ],
     imports:[
         AdminRoutingModule,

@@ -37,6 +37,39 @@ getAllOrders(
     .set('limit', limit.toString());
   return this.http.get<OrderListResponse>(`${this.apiUrl}/get-orders-by-keyword`, { params });
 }
+getAllBills(
+  keyword: string,
+  page: number,
+  limit: number
+): Observable<OrderListResponse> {
+  const params = new HttpParams()
+    .set('keyword', keyword)
+    .set('page', page.toString())
+    .set('limit', limit.toString());
+  return this.http.get<OrderListResponse>(`${this.apiUrl}/get-bills-by-keyword`, { params });
+}
+getAllBillsToCounter(
+  keyword: string,
+  page: number,
+  limit: number
+): Observable<OrderListResponse> {
+  const params = new HttpParams()
+    .set('keyword', keyword)
+    .set('page', page.toString())
+    .set('limit', limit.toString());
+  return this.http.get<OrderListResponse>(`${this.apiUrl}/counter/get-bills-by-keyword`, { params });
+}
+getAllBillsOnline(
+  keyword: string,
+  page: number,
+  limit: number
+): Observable<OrderListResponse> {
+  const params = new HttpParams()
+    .set('keyword', keyword)
+    .set('page', page.toString())
+    .set('limit', limit.toString());
+  return this.http.get<OrderListResponse>(`${this.apiUrl}/online/get-bills-by-keyword`, { params });
+}
 
 updateOrder(orderId: number,orderData: OrderDTO): Observable<any>{
   const url =  `${this.apiUrl}/${orderId}`;

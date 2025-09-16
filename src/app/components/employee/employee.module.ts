@@ -8,6 +8,10 @@ import { DetailProductEmployeeComponent } from './detail-product-employee/detail
 import { OrderEmployeeComponent } from './order-employee/order-employee.component';
 import { ListOrdersEmployeeComponent } from './list-orders-employee/list-orders-employee.component';
 import { DetailOrderEmployeeComponent } from './detail-order-employee/detail-order-employee.component';
+import { BillCounterComponent } from './bill-counter/bill-counter.component';
+import { DetailBillCounterComponent } from './detail-bill-counter/detail-bill-counter.component';
+import { BillOnlineComponent } from './bill-online/bill-online.component';
+import { DetailBillOnlineComponent } from './detail-bill-online/detail-bill-online.component';
 
 
 @NgModule({
@@ -17,7 +21,11 @@ import { DetailOrderEmployeeComponent } from './detail-order-employee/detail-ord
         DetailProductEmployeeComponent,
         OrderEmployeeComponent,
         ListOrdersEmployeeComponent,
-        DetailOrderEmployeeComponent
+        DetailOrderEmployeeComponent,
+        BillCounterComponent,
+        DetailBillCounterComponent,
+        BillOnlineComponent,
+        DetailBillOnlineComponent
     ],
     imports:[
         EmployeeRoutingModule,

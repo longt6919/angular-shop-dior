@@ -26,6 +26,7 @@ import { OrderHistoryDetailComponent } from './components/order-history-detail/o
 import { ContacComponent } from './components/contac/contac.component';
 import { IntroducesComponent } from './components/introduces/introduces.component';
 import { FavoriteComponent } from './components/favorite/favorite.component';
+import { PromoModalComponent } from './components/promo-modal/promo-modal.component';
 
 
 
@@ -49,6 +50,7 @@ import { FavoriteComponent } from './components/favorite/favorite.component';
        ContacComponent,
        IntroducesComponent,
        FavoriteComponent,
+       PromoModalComponent,
   ],
   imports: [
         BrowserModule,

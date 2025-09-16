@@ -60,6 +60,8 @@ if(componentName =='orders'){
   this.router.navigate(['/admin/employees']);
     }else if (componentName == 'statisticals') {
   this.router.navigate(['/admin/statisticals']);
+    }else if (componentName == 'bills') {
+  this.router.navigate(['/admin/bills']);
     }
     
 }

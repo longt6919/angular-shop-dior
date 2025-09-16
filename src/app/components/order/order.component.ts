@@ -110,7 +110,7 @@ private recalculateCoupon(): void {
     return;
   }
   // base = subtotal + shipping (áp coupon SAU khi cộng ship)
-  const base = Math.max(0, this.preDiscountTotal) + this.getShippingFee();
+  const base = Math.max(0, this.preDiscountTotal) + this.getShippingFee(); 
 
   this.couponService.calculateCouponValue(couponCode, base).subscribe({
     next: (apiResponse: ApiResponse) => {

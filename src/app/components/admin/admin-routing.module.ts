@@ -32,6 +32,8 @@ import { InsertEmployeeComponent } from "./employee/insert.employee/insert.emplo
 import { AdminGuardFn } from "src/app/guards/admin.guard";
 import { StatisticsComponent } from "./statistics/statistics.component";
 import { CouponComponent } from "./coupon/coupon.component";
+import { BillComponent } from "./bill/bill.component";
+import { DetailBillComponent } from "./detail-bill/detail-bill.component";
 
 const routes: Routes =[
     {
@@ -156,6 +158,14 @@ const routes: Routes =[
                 path: 'statisticals',
                 component: StatisticsComponent,canActivate:[AdminGuardFn]
     },  
+               {
+                path: 'bills',
+                component: BillComponent,canActivate:[AdminGuardFn]
+    },  
+                 {
+                path: 'bills/:id',
+                component: DetailBillComponent,canActivate:[AdminGuardFn]
+            },
             
         ]
     }
