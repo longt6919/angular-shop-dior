@@ -220,3 +220,21 @@
 .vcol-label { margin-top: 6px; } /* giữ label nằm dưới */
 .vcol  { height: 98%; } 
 
+/* Fix cứng chiều ngang thanh cột */
+.vchart .bar {
+  width: 50px;        /* cố định 14px */
+  margin: 0 auto;     /* căn giữa đề phòng */
+}
+
+/* Căn giữa cột trong ô và bám đáy */
+.bar-box{
+  height: 100%;
+  display: flex;
+  align-items: flex-end;   /* bám đáy */
+  justify-content: center; /* căn giữa ngang */
+}
+
+/* (tuỳ chọn) giảm khoảng cách giữa các cột nếu muốn */
+.vcols { gap: 5px; }
+
+

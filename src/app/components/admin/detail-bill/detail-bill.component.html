@@ -58,8 +58,6 @@
   </div>
 </div>
 
-        <!-- Trạng thái (select) -->
-    <div>
 <div>
   <span class="text-muted small">Trạng thái</span>
   <div class="fw-semibold" [ngSwitch]="orderResponse.status">
@@ -76,7 +74,6 @@
     <span *ngSwitchDefault>{{ orderResponse.status | titlecase }}</span>
   </div>
 </div>
-          </div>
       </div>
     </div>
   </div>
