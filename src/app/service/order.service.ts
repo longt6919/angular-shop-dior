@@ -4,8 +4,8 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ApiResponse } from '../responses/api.response';
 import { OrderDTO } from '../dtos/order/order.dto';
-import { OrderResponse } from '../responses/order.response';
-import { OrderListResponse } from '../responses/order.list.response';
+import { OrderResponse } from '../responses/order/order.response';
+import { OrderListResponse } from '../responses/order/order.list.response';
 
 @Injectable({
   providedIn: 'root'

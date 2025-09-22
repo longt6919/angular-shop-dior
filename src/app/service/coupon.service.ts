@@ -6,6 +6,8 @@ import { HttpUtilService } from "./http.util.service";
 import { CouponDTO } from "../dtos/coupon/coupon.dto";
 import { Coupon } from "../models/coupon";
 import { CouponConditionDTO } from "../dtos/coupon/coupon.condition.dto";
+import { InsertCouponDTO } from "../dtos/coupon/insert.coupon.dto";
+import { PageResponse } from "../responses/page.response";
 
 @Injectable({
     providedIn: 'root'
@@ -23,26 +25,24 @@ export class CouponService{
         const params = new HttpParams().set('couponCode',couponCode).set('totalAmount',totalAmount.toString());
         return this.http.get<ApiResponse>(url,{params});
     }
-
   toggleCouponStatus(params: { couponId: number, enable: boolean }): Observable<any> {
     const url = `${this.apiCoupon}/block/${params.couponId}/${params.enable ? '1' : '0'}`;
      return this.http.put(url, null, {
     ...this.apiConfig,
-    responseType: 'text' as 'json' // 👈 thêm dòng này nếu backend trả string
+    responseType: 'text' as 'json' // thêm dòng này nếu backend trả string
   });
   }
-getListCoupon(page: number, limit: number) {
+getListCoupon(page: number, limit: number):Observable<PageResponse<Coupon>> {
   const params = new HttpParams()
     .set('page', String(page))
     .set('limit', String(limit)); 
-  return this.http.get<any>(this.apiCoupon, { params });
+  return this.http.get<PageResponse<Coupon>>(this.apiCoupon, { params });
 }
-
-  insertCoupon(couponDTO: CouponDTO): Observable<any> {
+  insertCoupon(insertCouponDTO: InsertCouponDTO): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http.post(
       `${this.apiCoupon}`,
-      couponDTO,
+      insertCouponDTO,
       {
         headers: {
           Authorization: `Bearer ${token}`
@@ -50,27 +50,16 @@ getListCoupon(page: number, limit: number) {
       }
     );
   }
-   getDetailCoupon(couponId: number):Observable<Coupon>{
-        const token = localStorage.getItem('token');
-      return this.http.get<Coupon>(`${this.apiCoupon}/${couponId}`,
-           {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      }
-      );
-    }
-      insertCouponCondication(couponConditionDTO: CouponConditionDTO,couponId: number): Observable<any> {
-    const token = localStorage.getItem('token');
-    return this.http.post(
-      `${this.apiCoupon}/conditions/${couponId}`,
-      couponConditionDTO,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      }
-    );
+    getCouponConditionByIdCoupon(couponId:number):Observable<any>{
+    const url =`${this.apiCoupon}/${couponId}/conditions`;
+    return this.http.get(url);
   }
+// coupon.service.ts
+updateCondition(couponId: number, conditionId: number, dto: any) {
+  const url = `${this.apiCoupon}/${couponId}/conditions/${conditionId}`;
+  return this.http.put(url, dto, this.apiConfig);
+}
+
+
 
 }

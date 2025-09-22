@@ -12,6 +12,7 @@ import { BillCounterComponent } from './bill-counter/bill-counter.component';
 import { DetailBillCounterComponent } from './detail-bill-counter/detail-bill-counter.component';
 import { BillOnlineComponent } from './bill-online/bill-online.component';
 import { DetailBillOnlineComponent } from './detail-bill-online/detail-bill-online.component';
+import { QuantityComponent } from './product.employee/quantity/quantity.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { DetailBillOnlineComponent } from './detail-bill-online/detail-bill-onli
         BillCounterComponent,
         DetailBillCounterComponent,
         BillOnlineComponent,
-        DetailBillOnlineComponent
+        DetailBillOnlineComponent,
+        QuantityComponent
     ],
     imports:[
         EmployeeRoutingModule,

@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Coupon } from 'src/app/models/coupon';
+import { CouponConditionResponse } from 'src/app/responses/coupon/coupon-condition.response';
 import { CouponService } from 'src/app/service/coupon.service';
 import { ToastService } from 'src/app/service/toast.service';
 
@@ -12,19 +13,27 @@ import { ToastService } from 'src/app/service/toast.service';
 })
 export class CouponComponent implements OnInit {
  coupons:Coupon[]=[];
-  constructor(
+  currentPage: number =0;
+  itemsPerpage: number =12;
+  pages: number[] =[];
+  totalPages: number =0;
+  visiblePages: number[]=[];  constructor(
     private couponService: CouponService,
     private router:Router,
     private toastService:ToastService
   ) { }
 
   ngOnInit(): void {
-    this.getCoupons(0,5);
+    this.currentPage =Number(localStorage.getItem('currentCouponAdminPage')) || 0;
+    this.getCoupons(0,12);
   }
   getCoupons(page:number,limit:number){
     this.couponService.getListCoupon(page,limit).subscribe({
-      next:(coupons:Coupon[])=>{
-        this.coupons = coupons;
+      next:(response:any)=>{
+        this.coupons = response.content;
+         this.totalPages = response.totalPages;     
+      this.currentPage = response.number;       
+      this.visiblePages = this.generateVisiblePageArray(this.currentPage, this.totalPages);
       },
       complete:()=>{},
       error:(error: any)=>{
@@ -84,11 +93,16 @@ export class CouponComponent implements OnInit {
     return new Array(endPage - startPage +1).fill(0)
     .map((_,index)=>startPage +index);
   }
-updateStyle(styleId: number) {
-this.router.navigate(['/admin/styles/update',styleId]);
-}
-insertStyle() {
-      this.router.navigate(['/admin/styles/insert']);
+   onPageChange(page: number){
+    this.currentPage = page < 0?0:page;
+    localStorage.setItem('currentCouponAdminPage',String(this.currentPage));
+    this.getCoupons(this.currentPage,this.itemsPerpage);
+  }
+updateDetail(){
+    this.router.navigate(['/admin/coupons/update']);
+  }
+insertCoupon() {
+      this.router.navigate(['/admin/coupons/insert']);
 }
   }
 

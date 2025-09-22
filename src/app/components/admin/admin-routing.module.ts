@@ -34,6 +34,8 @@ import { StatisticsComponent } from "./statistics/statistics.component";
 import { CouponComponent } from "./coupon/coupon.component";
 import { BillComponent } from "./bill/bill.component";
 import { DetailBillComponent } from "./detail-bill/detail-bill.component";
+import { InsertCouponComponent } from "./coupon/insert.coupon/insert.coupon.component";
+import { UpdateCouponComponent } from "./coupon/update.coupon/update.coupon.component";
 
 const routes: Routes =[
     {
@@ -88,27 +90,35 @@ const routes: Routes =[
                 path: 'brand/insert',
                 component: InsertBrandComponent,canActivate:[AdminGuardFn]
             },
-                       {
-                path:'styles',
-                component: StyleComponent,canActivate:[AdminGuardFn]
-            }, 
                          {
                 path:'coupons',
                 component: CouponComponent,canActivate:[AdminGuardFn]
+            },
+            {
+                path: 'coupons/insert',
+                component: InsertCouponComponent,canActivate:[AdminGuardFn]
+            },
+               {
+                path: 'coupons/update',
+                component: UpdateCouponComponent,canActivate:[AdminGuardFn]
+            }, 
+                                 {
+                path:'styles',
+                component: StyleComponent,canActivate:[AdminGuardFn]
             },       
             {
                 path: 'styles/update/:id',
                 component: UpdateStyleComponent,canActivate:[AdminGuardFn]
             },
-                    {
+            {
                 path: 'styles/insert',
                 component: InsertStyleComponent,canActivate:[AdminGuardFn]
             },
-                         {
+            {
                 path:'materials',
                 component: MaterialComponent,canActivate:[AdminGuardFn]
             },  
-                  {
+            {
                 path: 'materials/update/:id',
                 component: UpdateMaterialComponent,canActivate:[AdminGuardFn]
             },

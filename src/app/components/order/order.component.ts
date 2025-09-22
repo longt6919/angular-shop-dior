@@ -29,7 +29,7 @@ cartItems: CartItemView[] = [];  preDiscountTotal: number = 0;
   totalAmount: number = 0;
   couponDiscount: number = 0;
   couponApplied: boolean = false;
-   cart: Map<string, CartItemView> = new Map(); 
+  cart: Map<string, CartItemView> = new Map(); 
 shippingFee: number = 0;
 
   orderData: OrderDTO = {
@@ -227,7 +227,7 @@ private updateCartFromCartItems(): void {
   placeOrder() {
     this.loading = true;
     debugger;
-      if (this.totalAmount === 0) {
+      if (this.totalAmount <= 70000) {
     this.loading = false;
     this.toastService.showToast({
       error: 'Bạn chưa có sản phẩm nào trong giỏ hàng',

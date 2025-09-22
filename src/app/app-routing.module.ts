@@ -20,6 +20,7 @@ import { IntroducesComponent } from "./components/introduces/introduces.componen
 import { EmployeeComponent } from "./components/employee/employee.component";
 import { EmployeeGuardFn } from "./guards/employee.guard";
 import { FavoriteComponent } from "./components/favorite/favorite.component";
+import { PromoModalComponent } from "./components/promo-modal/promo-modal.component";
 
 const routes: Routes =[
     {path: '', component: HomeComponent},
@@ -38,6 +39,8 @@ const routes: Routes =[
             {path:'contact', component: ContacComponent},
                         {path:'introduces', component: IntroducesComponent},
                                                 {path:'favorites', component: FavoriteComponent,canActivate:[AuthGuardFn]},
+     {path:'promo', component: PromoModalComponent,canActivate:[AuthGuardFn]},
+
 ];
 
 @NgModule({

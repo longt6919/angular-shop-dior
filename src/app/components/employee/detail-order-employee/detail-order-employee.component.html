@@ -37,7 +37,7 @@
             <div class="fw-semibold">{{ orderResponse.delivery_date | date:'dd/MM/yyyy' }}</div>
           </div>
         </div>
-                <div>
+<div>
   <span class="text-muted small">Hình thức thanh toán</span>
   <div class="fw-semibold" [ngSwitch]="(orderResponse.payment_method || '').toLowerCase()">
     <span *ngSwitchCase="'cod'">Thanh toán khi nhận hàng</span>
@@ -46,7 +46,6 @@
     <span *ngSwitchDefault>{{ orderResponse.payment_method }}</span>
   </div>
 </div>
-
   <div class="small text-muted">Phương thức vận chuyển</div>
   <div class="fw-semibold" [ngSwitch]="(orderResponse.shipping_method || '').toLowerCase()">
     <span *ngSwitchCase="'counter'">Tại quầy</span>
@@ -63,7 +62,6 @@
 
             <option value="out_of_stock_pending">Hết hàng (chờ xác nhận)</option>
             <option value="waiting_for_stock">Chờ hàng về</option>
-
             <option value="shipped">Đang giao hàng</option>
             <option value="refused_on_delivery">Khách không nhận hàng</option>
             <option value="delivered">Đã nhận hàng</option>
@@ -136,5 +134,4 @@
   <div class="text-end">
     <button class="btn btn-primary px-4" (click)="saveOrder()">Save</button>
   </div>
-
 </div>

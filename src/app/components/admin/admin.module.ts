@@ -35,6 +35,8 @@ import { StatisticsComponent } from './statistics/statistics.component';
 import { CouponComponent } from './coupon/coupon.component';
 import { BillComponent } from './bill/bill.component';
 import { DetailBillComponent } from './detail-bill/detail-bill.component';
+import { InsertCouponComponent } from './coupon/insert.coupon/insert.coupon.component';
+import { UpdateCouponComponent } from './coupon/update.coupon/update.coupon.component';
 
 @NgModule({
     declarations: [
@@ -71,6 +73,8 @@ import { DetailBillComponent } from './detail-bill/detail-bill.component';
         CouponComponent,
         BillComponent,
         DetailBillComponent,
+        InsertCouponComponent,
+        UpdateCouponComponent,
     ],
     imports:[
         AdminRoutingModule,

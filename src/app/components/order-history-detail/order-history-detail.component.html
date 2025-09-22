@@ -63,6 +63,7 @@
     <p class="mb-1"><strong>Ngày Nhận Hàng:</strong> {{orderResponse.delivery_date | date:'dd/MM/yyyy'}}</p>
     <p class="mb-1"><strong>Vận chuyển:</strong> {{ shippingLabel || orderResponse.shipping_method }}</p>
     <p class="mb-1"><strong>Địa chỉ giao:</strong> {{ orderResponse.shipping_address }}</p>
+        <p class="mb-1"><strong>Ghi chú:</strong> {{ orderResponse.note }}</p>
   </div>
 </div>
 
