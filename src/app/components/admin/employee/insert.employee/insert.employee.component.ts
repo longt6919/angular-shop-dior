@@ -67,9 +67,9 @@ this.userService.register(registerDTO).subscribe({
   next: (apiResponse: any)=>{
     debugger
     const confirmation = window
-            .confirm('Đăng ký thành công, mời bạn đăng nhập. Bấm "OK" để chuyển đến trang đăng nhập.');
+            .confirm('Đăng ký thành công');
           if (confirmation) {
-            this.router.navigate(['/login']);
+            this.router.navigate(['/admin/employees']);
           }
   },
   complete:() =>{

@@ -25,7 +25,8 @@ import { TokenService } from 'src/app/service/token.service';
 export class OrderComponent implements OnInit {
 
   orderForm!: FormGroup;
-cartItems: CartItemView[] = [];  preDiscountTotal: number = 0;
+cartItems: CartItemView[] = [];  
+preDiscountTotal: number = 0;
   totalAmount: number = 0;
   couponDiscount: number = 0;
   couponApplied: boolean = false;
@@ -271,7 +272,6 @@ private updateCartFromCartItems(): void {
               // Bước 2: Tách vnp_TxnRef từ URL vừa trả về
               const vnp_TxnRef =
                 new URL(paymentUrl).searchParams.get('vnp_TxnRef') || '';
-
               // Bước 3: Gọi placeOrder kèm theo vnp_TxnRef
               this.orderService
                 .placeOrder({

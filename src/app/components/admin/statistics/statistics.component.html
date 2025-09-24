@@ -39,10 +39,6 @@
     <div class="kpi-title">Tổng người dùng</div>
     <div class="kpi-value">{{ totalUsers | number }}</div>
   </div>
-  <div class="kpi">
-    <div class="kpi-title">% Nhân viên</div>
-    <div class="kpi-value">{{ employeePct }}%</div>
-  </div>
 </div>
 
 <!-- Panels -->
@@ -88,7 +84,7 @@
       <div class="role-track">
         <div class="role-fill user" [style.width]="userPct + '%'"></div>
       </div>
-      <span>{{ userCount | number }} ({{ userPct }}%)</span>
+      <span>{{ userCount | number }} </span>
     </div>
 
     <div class="role-row">
@@ -96,7 +92,7 @@
       <div class="role-track">
         <div class="role-fill emp" [style.width]="employeePct + '%'"></div>
       </div>
-      <span>{{ employeeCount | number }} ({{ employeePct }}%)</span>
+      <span>{{ employeeCount | number }} </span>
     </div>
   </div>
 </div>

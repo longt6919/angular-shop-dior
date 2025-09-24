@@ -9,6 +9,5 @@ export interface CartItemView {
   color_name: string;
   price: number;
   quantity: number;
-
   maxQty?: number
 }

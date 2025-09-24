@@ -31,7 +31,7 @@ export class ProductEmployeeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.currentPage =Number(localStorage.getItem('currentProductDetailEmployeePage')) || 0;
+    this.currentPage =Number(localStorage.getItem('currentProductEmployeePage')) || 0;
  this.getProducts(this.keyword,
   this.selectedCategoryId,
   this.currentPage,this.itemsPerpage
@@ -68,7 +68,7 @@ export class ProductEmployeeComponent implements OnInit {
   }
   onPageChange(page: number){
     this.currentPage = page < 0?0:page;
-    localStorage.setItem('currentProductDetailEmployeePage',String(this.currentPage));
+    localStorage.setItem('currentProductEmployeePage',String(this.currentPage));
     this.getProducts(this.keyword,this.selectedCategoryId,this.currentPage,this.itemsPerpage);
   }
   
